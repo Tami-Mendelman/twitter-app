@@ -1,4 +1,3 @@
-import "dotenv/config";
 import { connectDB } from "./config/database.js";
 
 const startApp = async (): Promise<void> => {
@@ -6,9 +5,7 @@ const startApp = async (): Promise<void> => {
     console.log("MongoDB connected successfully");
 };
 
-const handleStartupError = (error: unknown): void => {
+startApp().catch((error: unknown) => {
     console.error("Application startup failed:", error);
     process.exitCode = 1;
-};
-
-startApp().catch(handleStartupError);
+});

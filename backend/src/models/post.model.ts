@@ -1,8 +1,10 @@
 import { model, Schema } from "mongoose";
-import type { PostFields } from "../types/models.types.js";
+import type { Post } from "../types/models.types.js";
 import { isValidMediaUrl } from "../functions/post.functions.js";
 
-const postSchema = new Schema<PostFields>(
+const MAX_TEXT_LENGTH = 200;
+
+const postSchema = new Schema<Post>(
     {
         name: {
             type: String,
@@ -18,7 +20,7 @@ const postSchema = new Schema<PostFields>(
         text: {
             type: String,
             required: true,
-            maxlength: 200,
+            maxlength: MAX_TEXT_LENGTH,
         },
         media: {
             type: String,
@@ -44,7 +46,7 @@ const postSchema = new Schema<PostFields>(
 
 postSchema.index({ name: 1 }, { name: "name_1" });
 
-export const PostModel = model<PostFields>(
+export const PostModel = model<Post>(
     "Post",
     postSchema,
     "posts",

@@ -1,7 +1,7 @@
 import { model, Schema } from "mongoose";
-import type { UserFields } from "../types/models.types.js";
+import type { User } from "../types/models.types.js";
 
-const userSchema = new Schema<UserFields>(
+const userSchema = new Schema<User>(
     {
         username: {
             type: String,
@@ -23,10 +23,10 @@ const userSchema = new Schema<UserFields>(
 
 userSchema.index(
     { username: 1 },
-    { unique: true, name: "username_1" },
+    { unique: true, name: "username_1_unique" },
 );
 
-export const UserModel = model<UserFields>(
+export const UserModel = model<User>(
     "User",
     userSchema,
     "users",
