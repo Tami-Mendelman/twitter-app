@@ -1,0 +1,25 @@
+import { Navigate, Route, Routes } from 'react-router-dom';
+import Navbar from './components/Navbar';
+import {
+  CreatePostPage,
+  CreateUserPage,
+  EditPostPage,
+  FeedPage,
+  UsersPage,
+} from './pages';
+
+
+
+const App = () => (
+<> <Navbar /> <Routes>
+<Route path="/" element={<Navigate to="/posts" replace />} />
+<Route path="/posts" element={<FeedPage />} />
+<Route path="/users" element={<UsersPage />} />
+<Route path="/users/new" element={<CreateUserPage />} />
+<Route path="/posts/new" element={<CreatePostPage />} />
+<Route path="/posts/:postId/edit" element={<EditPostPage />} />
+<Route path="*" element={<Navigate to="/posts" replace />} /> </Routes>
+</>
+);
+
+export default App;
