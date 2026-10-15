@@ -8,3 +8,10 @@ export type Post = {
     likes?: number;
     createdAt: Date;
 };
+
+export type CreatePost = Pick<Post, "name" | "text"> & {
+    userId: string;
+    media?: string;
+};
+
+export type PostChanges = Partial<Pick<Post, "name" | "text" | "media">>;

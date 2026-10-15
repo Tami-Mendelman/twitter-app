@@ -1,15 +1,15 @@
-{"compilerOptions": {
+{
+  "compilerOptions": {
     "module": "nodenext",
     "target": "esnext",
     "types": ["node"],
-
     "noUncheckedIndexedAccess": true,
     "exactOptionalPropertyTypes": true,
-
     "verbatimModuleSyntax": true,
     "isolatedModules": true,
     "noUncheckedSideEffectImports": true,
     "moduleDetection": "force",
-    "skipLibCheck": true,
-  }
+    "skipLibCheck": true
+  },
+  "include": ["src/**/*.ts"]
 }

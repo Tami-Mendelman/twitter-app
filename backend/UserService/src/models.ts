@@ -1,5 +1,5 @@
 import { model, Schema } from "mongoose";
-import type { User } from "../types/user/user.type.js";
+import type { User } from "@twitter-app/shared/type/user.types.js";
 
 const userSchema = new Schema<User>(
     {
@@ -26,8 +26,4 @@ userSchema.index(
     { unique: true, name: "username_1_unique" },
 );
 
-export const UserModel = model<User>(
-    "User",
-    userSchema,
-    "users",
-);
+export const UserModel = model<User>("User", userSchema, "users");

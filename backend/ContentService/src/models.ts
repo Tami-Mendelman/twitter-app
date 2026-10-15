@@ -1,6 +1,7 @@
 import { model, Schema } from "mongoose";
-import { MAX_TEXT_LENGTH } from "../consts/post.consts.js";
-import type { Post } from "../types/content/post.type.js";
+import { MAX_TEXT_LENGTH } from "./post/post.consts.js";
+import { isValidMediaUrl } from "./post/post.functions.js";
+import type { Post } from "@twitter-app/shared/type/post.types.js";
 
 const postSchema = new Schema<Post>(
     {
@@ -9,6 +10,7 @@ const postSchema = new Schema<Post>(
             required: true,
             trim: true,
             minlength: 1,
+            index: true,
         },
         userId: {
             type: Schema.Types.ObjectId,
@@ -40,10 +42,4 @@ const postSchema = new Schema<Post>(
     },
 );
 
-postSchema.index({ name: 1 }, { name: "name_1" });
-
-export const PostModel = model<Post>(
-    "Post",
-    postSchema,
-    "posts",
-);
+export const PostModel = model<Post>("Post", postSchema, "posts");
