@@ -13,9 +13,6 @@ const CreatePostPage = () => {
     register,
     handleFormSubmit,
     errors,
-    users,
-    isUsersPending,
-    usersError,
     isPending,
     error,
     isSuccess,
@@ -31,36 +28,6 @@ const CreatePostPage = () => {
       </header>
 
       <form className={classes.Form} onSubmit={handleFormSubmit}>
-        <label className={classes.Field}>
-          {tForm("USER")}
-          <select
-            className={classes.Input}
-            {...register("userId", { required: tForm("SELECT_USER") })}
-            disabled={isUsersPending || Boolean(usersError)}
-          >
-            <option value="">{tForm("SELECT_USER")}</option>
-            {users.map((user) => (
-              <option key={user._id} value={user._id}>
-                {user.displayName} (@{user.username})
-              </option>
-            ))}
-          </select>
-          {errors.userId ? (
-            <span className={classes.ValidationError}>
-              {errors.userId.message}
-            </span>
-          ) : null}
-          {isUsersPending ? <span>{tForm("LOADING_USERS")}</span> : null}
-          {usersError ? (
-            <span className={classes.ValidationError}>
-              {tForm("LOAD_USERS_ERROR", { message: usersError.message })}
-            </span>
-          ) : null}
-          {!isUsersPending && !usersError && !users.length ? (
-            <span>{tForm("NO_USERS")}</span>
-          ) : null}
-        </label>
-
         <label className={classes.Field}>
           {tForm("NAME")}
           <input
@@ -110,9 +77,7 @@ const CreatePostPage = () => {
         <button
           className={classes.Button}
           type="submit"
-          disabled={
-            isPending || isUsersPending || Boolean(usersError) || !users.length
-          }
+          disabled={isPending}
         >
           {isPending ? t("SUBMITTING") : t("SUBMIT")}
         </button>

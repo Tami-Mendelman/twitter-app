@@ -57,11 +57,6 @@
     "CANCEL": "ביטול"
   },
   "POST_FORM": {
-    "USER": "משתמש",
-    "SELECT_USER": "בחירת משתמש",
-    "LOADING_USERS": "המשתמשים נטענים...",
-    "LOAD_USERS_ERROR": "טעינת המשתמשים נכשלה: {{message}}",
-    "NO_USERS": "אין משתמשים זמינים. יש ליצור משתמש תחילה.",
     "NAME": "שם הפוסט",
     "NAME_REQUIRED": "נדרש להזין שם לפוסט",
     "CONTENT": "תוכן",

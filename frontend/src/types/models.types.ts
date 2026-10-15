@@ -26,6 +26,8 @@ export type CreatePostPayload = {
   media?: string;
 };
 
+export type CreatePostFormValues = Omit<CreatePostPayload, 'userId'>;
+
 export type UpdatePostPayload = Partial<
   Pick<Post, 'name' | 'text' | 'media'>
 >;

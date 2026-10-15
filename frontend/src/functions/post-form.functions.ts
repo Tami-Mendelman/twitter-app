@@ -1,13 +1,28 @@
 import axios from 'axios';
-import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
+import type { AxiosError } from 'axios';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useForm } from 'react-hook-form';
+import trim from 'lodash/fp/trim.js';
 import { createPost } from './post.functions';
-import { getAllUsers } from './user.functions';
-import type { CreatePostPayload } from '../types/models.types';
+import { useAuth } from '../components/auth-context';
+import type {
+  CreatePostFormValues,
+  CreatePostPayload,
+} from '../types/models.types';
+
+const getResponseErrorMessage = (
+  error: AxiosError<{ message?: string }>,
+): string => {
+  const responseMessage = error.response?.data?.message
+    ? trim(error.response.data.message)
+    : '';
+
+  return responseMessage || error.message;
+};
 
 const getCreatePostError = (error: Error): string =>
   axios.isAxiosError<{ message?: string }>(error)
-    ? error.response?.data?.message?.trim() || error.message
+    ? getResponseErrorMessage(error)
     : error.message;
 
 
@@ -15,23 +30,25 @@ const normalizeCreatePostPayload = (
   payload: CreatePostPayload,
 ): CreatePostPayload => ({
   ...payload,
-  media: payload.media?.trim() || undefined,
+  media: payload.media ? trim(payload.media) || undefined : undefined,
 });
 
-    export const useCreatePostForm = () => {
-  const queryClient = useQueryClient();
+const requireUserId = (userId: string | undefined): string => {
+  if (!userId) throw new Error('A signed-in user is required to create a post');
 
-  const usersQuery = useQuery({
-    queryKey: ['users'],
-    queryFn: getAllUsers,
-  });
+  return userId;
+};
+
+export const useCreatePostForm = () => {
+  const { user } = useAuth();
+  const queryClient = useQueryClient();
 
   const {
     register,
     handleSubmit,
     reset,
     formState: { errors },
-  } = useForm<CreatePostPayload>();
+  } = useForm<CreatePostFormValues>();
 
   const handleCreatePostSuccess = async (): Promise<void> => {
     reset();
@@ -44,9 +61,15 @@ const normalizeCreatePostPayload = (
   });
 
   
-const submitPost = (payload: CreatePostPayload): void => {
-  mutation.mutate(normalizeCreatePostPayload(payload));
-};
+  const submitPost = (formValues: CreatePostFormValues): void => {
+    const userId = requireUserId(user?._id);
+    const payload = normalizeCreatePostPayload({
+      ...formValues,
+      userId,
+    });
+
+    mutation.mutate(payload);
+  };
 
   const handleFormSubmit = handleSubmit(submitPost);
 
@@ -54,9 +77,6 @@ const submitPost = (payload: CreatePostPayload): void => {
     register,
     handleFormSubmit,
     errors,
-    users: usersQuery.data ?? [],
-    isUsersPending: usersQuery.isPending,
-    usersError: usersQuery.error,
     isPending: mutation.isPending,
     error: mutation.error ? getCreatePostError(mutation.error) : null,
     isSuccess: mutation.isSuccess,

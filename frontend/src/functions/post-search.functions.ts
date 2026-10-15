@@ -1,14 +1,30 @@
-import { filter, toLower, trim } from 'lodash/fp';
-import type { Post  } from '../types/models.types';
+import filter from 'lodash/fp/filter.js';
+import flow from 'lodash/fp/flow.js';
+import startsWith from 'lodash/fp/startsWith.js';
+import toLower from 'lodash/fp/toLower.js';
+import trim from 'lodash/fp/trim.js';
+import type { Post } from '../types/models.types';
 
+const normalizePostName = flow(trim, toLower);
 
-const matchesPostName = (searchTerm: string) => (post: Post): boolean =>
-  toLower(post.name).includes(toLower(trim(searchTerm)));
+const createPostNameMatcher = (searchTerm: string) => {
+  const matchesPostName = (post: Post): boolean => {
+    const normalizedPostName = normalizePostName(post.name);
+
+    return startsWith(searchTerm, normalizedPostName);
+  };
+
+  return matchesPostName;
+};
 
 export const searchPostsByName = (
   searchTerm: string,
   posts: Post[],
-): Post[] =>
-  trim(searchTerm)
-    ? filter(matchesPostName(searchTerm))(posts)
-    : posts;
+): Post[] => {
+  const normalizedSearchTerm = normalizePostName(searchTerm);
+  const hasSearchTerm = Boolean(normalizedSearchTerm);
+  const matchesPostName = createPostNameMatcher(normalizedSearchTerm);
+  const filteredPosts = filter(matchesPostName, posts);
+
+  return hasSearchTerm ? filteredPosts : posts;
+};
