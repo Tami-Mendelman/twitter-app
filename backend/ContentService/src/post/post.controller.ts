@@ -6,7 +6,7 @@ import {
     getPostByIdManager,
     updatePostManager,
 } from "./post.manager.js";
-import type { CreatePost, PostChanges } from "./post.types.js";
+import type { CreatePost, PostChanges } from "@twitter-app/shared/type/post.types.js";
 
 type CreatePostHandler = RequestHandler<
     Record<string, string>,

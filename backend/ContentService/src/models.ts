@@ -1,7 +1,7 @@
 import { model, Schema } from "mongoose";
 import { MAX_TEXT_LENGTH } from "./post/post.consts.js";
 import { isValidMediaUrl } from "./post/post.functions.js";
-import type { Post } from "./post/post.types.js";
+import type { Post } from "@twitter-app/shared/type/post.types.js";
 
 const postSchema = new Schema<Post>(
     {

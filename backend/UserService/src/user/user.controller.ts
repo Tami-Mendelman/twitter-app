@@ -4,7 +4,7 @@ import {
     getAllUsersManager,
     getUserByIdManager,
 } from "./user.manager.js";
-import type { User } from "./user.types.js";
+import type { User } from "@twitter-app/shared/type/user.types.js";
 
 type CreateUserHandler = RequestHandler<
     Record<string, string>,

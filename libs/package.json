@@ -1,0 +1,16 @@
+{
+  "name": "@twitter-app/shared",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    "./rpc.functions.js": "./rpc.functions.ts",
+    "./user.RPCservice.js": "./user.RPCservice.ts",
+    "./type/user.types.js": "./type/user.types.ts",
+    "./type/post.types.js": "./type/post.types.ts"
+  },
+  "dependencies": {
+    "jayson": "^5.0.0",
+    "mongoose": "^9.11.2"
+  }
+}

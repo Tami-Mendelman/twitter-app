@@ -1,5 +1,5 @@
 import { model, Schema } from "mongoose";
-import type { User } from "./user/user.types.js";
+import type { User } from "@twitter-app/shared/type/user.types.js";
 
 const userSchema = new Schema<User>(
     {

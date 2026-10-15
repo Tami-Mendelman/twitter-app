@@ -6,7 +6,7 @@ import {
     updatePost,
 } from "./post.repository.js";
 import { getUserByIdRpc } from "../rpc.client.js";
-import type { CreatePost, PostChanges } from "./post.types.js";
+import type { CreatePost, PostChanges } from "@twitter-app/shared/type/post.types.js";
 
 export const createPostManager = async (post: CreatePost) => {
     const userExists = await getUserByIdRpc(post.userId);

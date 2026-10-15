@@ -3,7 +3,7 @@ import {
     getAllUsers,
     getUserById,
 } from "./user.repository.js";
-import type { User } from "./user.types.js";
+import type { User } from "@twitter-app/shared/type/user.types.js";
 
 export const createUserManager = async (user: User) =>
     createUser(user);

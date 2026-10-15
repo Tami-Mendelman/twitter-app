@@ -1,5 +1,5 @@
 import jayson from "jayson/promise/index.js";
-import { rpcServerRequest } from "../../libs/rpc.functions.js";
+import { rpcServerRequest } from "@twitter-app/shared/rpc.functions.js";
 import { getUserByIdRpcManager } from "./user/user.manager.js";
 import { OBJECT_ID_PATTERN } from "./user/user.consts.js";
 import type { RequestParamsLike } from "jayson/promise/index.js";

@@ -1,6 +1,6 @@
 import { Types } from "mongoose";
 import { PostModel } from "../models.js";
-import type { CreatePost, PostChanges } from "./post.types.js";
+import type { CreatePost, PostChanges } from "@twitter-app/shared/type/post.types.js";
 
 export const createPost = async (post: CreatePost) =>
     PostModel.create({
