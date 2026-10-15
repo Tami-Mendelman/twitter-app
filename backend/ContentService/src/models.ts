@@ -25,7 +25,8 @@ const postSchema = new Schema<Post>(
         media: {
             type: String,
             validate: {
-                validator: isValidMediaUrl,
+                validator: (value: string) =>
+                    /^https?:\/\/[^\s/$.?#].[^\s]*$/i.test(value),
                 message: "Media must be a valid HTTP or HTTPS URL",
             },
         },
@@ -34,13 +35,10 @@ const postSchema = new Schema<Post>(
             default: 0,
             min: 0,
         },
-        createdAt: {
-            type: Date,
-            default: Date.now,
-        },
     },
     {
         versionKey: false,
+        timestamps: { createdAt: true, updatedAt: false },
     },
 );
 
