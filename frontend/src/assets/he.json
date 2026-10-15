@@ -3,7 +3,9 @@
     "POSTS": "פוסטים",
     "USERS": "משתמשים",
     "CREATE_USER": "יצירת משתמש",
-    "CREATE_POST": "יצירת פוסט"
+    "CREATE_POST": "יצירת פוסט",
+    "SIGNED_IN_AS": "מחובר בתור {{displayName}}",
+    "LOGOUT": "התנתקות"
   },
   "FEED_PAGE": {
     "TITLE": "שיבוט טוויטר",
@@ -83,5 +85,27 @@
   },
   "PLACEHOLDER_PAGE": {
     "MESSAGE": "הדף הזה יפותח בהמשך."
+  },
+  "AUTH_FORM": {
+    "LOGIN_TITLE": "התחברות",
+    "REGISTER_TITLE": "הרשמה",
+    "USERNAME": "שם משתמש",
+    "USERNAME_REQUIRED": "נדרש להזין שם משתמש",
+    "USERNAME_MAX_LENGTH": "שם המשתמש לא יכול לעלות על 30 תווים",
+    "USERNAME_EXISTS": "שם המשתמש כבר קיים",
+    "INVALID_CREDENTIALS": "שם המשתמש לא נמצא. אפשר להירשם כדי ליצור חשבון.",
+    "DISPLAY_NAME": "שם לתצוגה",
+    "DISPLAY_NAME_REQUIRED": "נדרש להזין שם לתצוגה",
+    "DISPLAY_NAME_MAX_LENGTH": "שם התצוגה לא יכול לעלות על 80 תווים",
+    "LOGIN_SUBMIT": "התחברות",
+    "LOGIN_PENDING": "מתחבר...",
+    "REGISTER_SUBMIT": "יצירת חשבון",
+    "REGISTER_PENDING": "יוצר חשבון...",
+    "NO_ACCOUNT": "אין לך חשבון?",
+    "REGISTER_LINK": "להרשמה",
+    "HAVE_ACCOUNT": "כבר יש לך חשבון?",
+    "LOGIN_LINK": "להתחברות",
+    "SESSION_LOADING": "בודק את ההתחברות...",
+    "SESSION_ERROR": "לא ניתן לאמת את ההתחברות: {{message}}"
   }
 }

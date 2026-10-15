@@ -25,4 +25,17 @@ padding: '2vw 1%',
 },
 },
 },
+Identity: {
+color: '#fff',
+padding: '0.75vw 1%',
+},
+Logout: {
+padding: '0.75vw 1%',
+border: '1px solid #8996a3',
+borderRadius: '6px',
+backgroundColor: 'transparent',
+color: '#fff',
+cursor: 'pointer',
+font: 'inherit',
+},
 });

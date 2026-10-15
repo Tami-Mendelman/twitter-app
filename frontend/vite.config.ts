@@ -16,6 +16,10 @@ export default defineConfig(({ mode }) => {
           target: env.VITE_USER_SERVICE_URL || 'http://localhost:3001',
           changeOrigin: true,
         },
+        '/api/auth': {
+          target: env.VITE_USER_SERVICE_URL || 'http://localhost:3001',
+          changeOrigin: true,
+        },
       },
     },
   }

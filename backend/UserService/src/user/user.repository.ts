@@ -9,3 +9,6 @@ export const getAllUsers = async () =>
 
 export const getUserById = async (userId: string) =>
     UserModel.findById(userId).lean();
+
+export const getUserByUsername = async (username: string) =>
+    UserModel.findOne({ username }).lean();

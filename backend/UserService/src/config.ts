@@ -9,9 +9,14 @@ loadEnvironment({
 });
 
 const mongodbUri = process.env.MONGODB_URI;
+const jwtSecret = process.env.JWT_SECRET;
 
 if (!mongodbUri) {
     throw new Error("MONGODB_URI is not defined");
+}
+
+if (!jwtSecret || jwtSecret.length < 32) {
+    throw new Error("JWT_SECRET must contain at least 32 characters");
 }
 
 const getPort = (
@@ -30,5 +35,6 @@ const getPort = (
 
 export const config = {
     mongodbUri,
+    jwtSecret,
     port: getPort("USER_SERVICE_PORT", 3001),
 };
