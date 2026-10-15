@@ -1,8 +1,6 @@
 import { model, Schema } from "mongoose";
-import type { Post } from "../types/models.types.js";
-import { isValidMediaUrl } from "../functions/post.functions.js";
-
-const MAX_TEXT_LENGTH = 200;
+import { MAX_TEXT_LENGTH } from "../consts/post.consts.js";
+import type { Post } from "../types/content/post.type.js";
 
 const postSchema = new Schema<Post>(
     {
@@ -25,7 +23,8 @@ const postSchema = new Schema<Post>(
         media: {
             type: String,
             validate: {
-                validator: isValidMediaUrl,
+                validator: (value: string) =>
+                    /^https?:\/\/[^\s/$.?#].[^\s]*$/i.test(value),
                 message: "Media must be a valid HTTP or HTTPS URL",
             },
         },
@@ -34,13 +33,10 @@ const postSchema = new Schema<Post>(
             default: 0,
             min: 0,
         },
-        createdAt: {
-            type: Date,
-            default: Date.now,
-        },
     },
     {
         versionKey: false,
+        timestamps: true,
     },
 );
 

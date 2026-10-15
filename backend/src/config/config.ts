@@ -1,11 +1,9 @@
 import "dotenv/config";
 
-const mongodbUri = process.env.MONGODB_URI;
-
-if (!mongodbUri) {
-    throw new Error("MONGODB_URI is not defined");
-}
+const { MONGODB_URI } = process.env;
 
 export const config = {
-    mongodbUri,
+    db: {
+        mongoUri: MONGODB_URI,
+    },
 };

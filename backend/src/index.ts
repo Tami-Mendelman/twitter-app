@@ -1,8 +1,9 @@
 import { connectDB } from "./config/database.js";
 
 const startApp = async (): Promise<void> => {
-    await connectDB();
-    console.log("MongoDB connected successfully");
+    if (await connectDB()) {
+        console.log("MongoDB connected successfully");
+    }
 };
 
 startApp().catch((error: unknown) => {
