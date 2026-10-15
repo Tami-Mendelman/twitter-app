@@ -10,10 +10,9 @@ const Navbar = () => {
 
   return (
     <nav className={classes.Navbar}>
-      <NavLink to="/posts" end>{t('POSTS')}</NavLink>
-      <NavLink to="/users" end>{t('USERS')}</NavLink>
-      <NavLink to="/users/new">{t('CREATE_USER')}</NavLink>
+      <NavLink to="/posts" end>{t('FEED')}</NavLink>
       <NavLink to="/posts/new">{t('CREATE_POST')}</NavLink>
+      <NavLink to="/profile">{t('MY_PROFILE')}</NavLink>
       {user ? (
         <span className={classes.Identity}>
           {t('SIGNED_IN_AS', { displayName: user.displayName })}
