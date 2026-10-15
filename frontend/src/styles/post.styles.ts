@@ -1,0 +1,103 @@
+import { createUseStyles } from 'react-jss';
+
+export const usePostStyles = createUseStyles({
+  Card: {
+    padding: '1.5rem',
+    backgroundColor: '#fff',
+    border: '1px solid #dfe3e8',
+    borderRadius: '12px',
+    overflowWrap: 'anywhere',
+  },
+  Author: {
+    margin: 0,
+    color: '#17202a',
+    fontSize: '1rem',
+    fontWeight: 700,
+  },
+  Username: {
+    marginTop: '0.25rem',
+    color: '#657786',
+    fontSize: '0.875rem',
+  },
+  Name: {
+    margin: '1rem 0 0.5rem',
+    fontSize: '1.125rem',
+    fontWeight: 700,
+  },
+  Text: {
+    margin: 0,
+    color: '#35434f',
+    lineHeight: 1.6,
+    whiteSpace: 'pre-wrap',
+  },
+  Media: {
+    display: 'inline-block',
+    marginTop: '1rem',
+    color: '#1769aa',
+    overflowWrap: 'anywhere',
+  },
+  Footer: {
+    display: 'flex',
+    flexWrap: 'wrap',
+    gap: '0.5rem',
+    marginTop: '1rem',
+    paddingTop: '0.75rem',
+    borderTop: '1px solid #edf0f2',
+    color: '#657786',
+    fontSize: '0.875rem',
+  },
+  
+  Form: {
+    display: 'flex',
+    flexDirection: 'column',
+    gap: '1rem',
+    width: '100%',
+    maxWidth: '720px',
+    margin: '0 auto',
+    padding: '1.5rem',
+    backgroundColor: '#fff',
+    border: '1px solid #dfe3e8',
+    borderRadius: '12px',
+  },
+  Field: {
+    display: 'flex',
+    flexDirection: 'column',
+    gap: '0.5rem',
+    color: '#17202a',
+    fontWeight: 600,
+  },
+  Input: {
+    width: '100%',
+    padding: '0.75rem',
+    border: '1px solid #cbd2d9',
+    borderRadius: '6px',
+    font: 'inherit',
+  },
+  Textarea: {
+    width: '100%',
+    minHeight: '120px',
+    padding: '0.75rem',
+    border: '1px solid #cbd2d9',
+    borderRadius: '6px',
+    font: 'inherit',
+    resize: 'vertical',
+  },
+  Button: {
+    padding: '0.75rem 1rem',
+    border: 0,
+    borderRadius: '6px',
+    backgroundColor: '#1769aa',
+    color: '#fff',
+    cursor: 'pointer',
+    '&:disabled': {
+      opacity: 0.6,
+      cursor: 'not-allowed',
+    },
+  },
+  ValidationError: {
+    margin: 0,
+    color: '#b42318',
+    fontSize: '0.875rem',
+    fontWeight: 400,
+  },
+});
