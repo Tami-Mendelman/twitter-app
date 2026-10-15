@@ -3,8 +3,11 @@ import { Link, useParams } from "react-router-dom";
 import { useEditPostForm } from "../functions/edit-post-form.functions";
 import { useFeedStyles } from "../styles/feed.styles";
 import { usePostStyles } from "../styles/post.styles";
+import { useTranslation } from "react-i18next";
 
 const EditPostPage = () => {
+  const { t } = useTranslation("translation", { keyPrefix: "EDIT_POST_PAGE" });
+  const { t: tForm } = useTranslation("translation", { keyPrefix: "POST_FORM" });
   const { postId = "" } = useParams();
   const pageClasses = useFeedStyles();
   const classes = usePostStyles();
@@ -33,23 +36,23 @@ const EditPostPage = () => {
   return (
     <main className={pageClasses.Page}>
       <header className={pageClasses.Header}>
-        <h1 className={pageClasses.Title}>Edit Post</h1>
-        <p className={pageClasses.Subtitle}>Update your post</p>
+        <h1 className={pageClasses.Title}>{t("TITLE")}</h1>
+        <p className={pageClasses.Subtitle}>{t("SUBTITLE")}</p>
       </header>
 
       {isPending && !post ? (
-        <p className={pageClasses.Message}>Loading post...</p>
+        <p className={pageClasses.Message}>{t("LOADING")}</p>
       ) : isPostError ? (
         <p className={`${pageClasses.Message} ${pageClasses.Error}`}>
-          Failed to load post: {isPostError.message}
+          {t("LOAD_ERROR", { message: isPostError.message })}
         </p>
       ) : post ? (
         <form className={classes.Form} onSubmit={handleFormSubmit}>
           <label className={classes.Field}>
-            Post name
+            {tForm("NAME")}
             <input
               className={classes.Input}
-              {...register("name", { required: "Post name is required" })}
+              {...register("name", { required: tForm("NAME_REQUIRED") })}
             />
             {errors.name ? (
               <span className={classes.ValidationError}>
@@ -57,18 +60,18 @@ const EditPostPage = () => {
               </span>
             ) : null}
           </label>
-          <p>{textLength}/200 characters</p>
+          <p>{tForm("CHARACTER_COUNT", { count: textLength })}</p>
 
           <label className={classes.Field}>
-            Content
+            {tForm("CONTENT")}
             <textarea
               className={classes.Textarea}
               maxLength={200}
               {...register("text", {
-                required: "Post content is required",
+                required: tForm("CONTENT_REQUIRED"),
                 maxLength: {
                   value: 200,
-                  message: "Post content cannot exceed 200 characters",
+                  message: tForm("CONTENT_MAX_LENGTH"),
                 },
               })}
             />
@@ -80,7 +83,7 @@ const EditPostPage = () => {
           </label>
 
           <label className={classes.Field}>
-            Media URL (optional)
+            {tForm("MEDIA_URL")}
             <input
               className={classes.Input}
               type="url"
@@ -89,16 +92,18 @@ const EditPostPage = () => {
           </label>
 
           {error ? (
-            <p className={pageClasses.Error}>Failed to update post: {error}</p>
+            <p className={pageClasses.Error}>
+              {t("UPDATE_ERROR", { message: error })}
+            </p>
           ) : null}
 
-          {isSuccess ? <p role="status">Post updated successfully.</p> : null}
+          {isSuccess ? <p role="status">{t("UPDATED")}</p> : null}
 
           <button className={classes.Button} type="submit" disabled={isPending}>
-            {isPending ? "Saving..." : "Save Changes"}
+            {isPending ? t("SAVING") : t("SAVE")}
           </button>
 
-          <Link to="/posts">Cancel</Link>
+          <Link to="/posts">{t("CANCEL")}</Link>
         </form>
       ) : null}
     </main>

@@ -1,13 +1,20 @@
+import { useTranslation } from 'react-i18next';
+
 type PlaceholderPageProps = {
-title: string;
+  title: string;
 };
 
-const PlaceholderPage = ({ title }: PlaceholderPageProps) => (
+const PlaceholderPage = ({ title }: PlaceholderPageProps) => {
+  const { t } = useTranslation('translation', {
+    keyPrefix: 'PLACEHOLDER_PAGE',
+  });
 
-  <main>
-    <h1>{title}</h1>
-    <p>This page will be implemented next.</p>
-  </main>
-);
+  return (
+    <main>
+      <h1>{title}</h1>
+      <p>{t('MESSAGE')}</p>
+    </main>
+  );
+};
 
 export default PlaceholderPage;

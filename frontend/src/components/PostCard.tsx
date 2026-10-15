@@ -1,6 +1,7 @@
 import type { Post, User } from '../types/models.types';
 import { usePostStyles } from '../styles/post.styles';
 import { Link } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 
 type PostCardProps = {
   post: Post;
@@ -8,16 +9,17 @@ type PostCardProps = {
 };
 
 const PostCard = ({ post, author }: PostCardProps) => {
+  const { t } = useTranslation('translation', { keyPrefix: 'POST_CARD' });
   const classes = usePostStyles();
 
   return (
     <article className={classes.Card}>
       <p className={classes.Author}>
-        {author?.displayName ?? 'Unknown user'}
+        {author?.displayName ?? t('UNKNOWN_USER')}
       </p>
 
       <p className={classes.Username}>
-        {author ? `@${author.username}` : 'User unavailable'}
+        {author ? `@${author.username}` : t('USER_UNAVAILABLE')}
       </p>
 
       <h2 className={classes.Name}>{post.name}</h2>
@@ -31,18 +33,18 @@ const PostCard = ({ post, author }: PostCardProps) => {
           target="_blank"
           rel="noopener noreferrer"
         >
-          View media
+          {t('VIEW_MEDIA')}
         </a>
       ) : null}
 
       <div className={classes.Footer}>
         <span>
           {post.createdAt
-            ? new Date(post.createdAt).toLocaleString()
-            : 'Date unavailable'}
+            ? new Date(post.createdAt).toLocaleString('he-IL')
+            : t('DATE_UNAVAILABLE')}
         </span>
-        <span>{post.likes ?? 0} likes</span>
-        <Link to={`/posts/${post._id}/edit`}>Edit</Link>
+        <span>{t('LIKES', { count: post.likes ?? 0 })}</span>
+        <Link to={`/posts/${post._id}/edit`}>{t('EDIT')}</Link>
       </div>
     </article>
   );

@@ -1,6 +1,7 @@
 import type { Post, User } from "../types/models.types";
 import { getUserById } from "../functions/user.functions";
 import { useFeedStyles } from "../styles/feed.styles";
+import { useTranslation } from "react-i18next";
 import PostCard from "./PostCard";
 
 type FeedContentProps = {
@@ -18,16 +19,17 @@ const FeedContent = ({
   error,
   searchTerm,
 }: FeedContentProps) => {
+  const { t } = useTranslation("translation", { keyPrefix: "FEED_CONTENT" });
   const classes = useFeedStyles();
 
   if (isPending) {
-    return <p className={classes.Message}>Loading posts...</p>;
+    return <p className={classes.Message}>{t("LOADING")}</p>;
   }
 
   if (error) {
     return (
       <p className={`${classes.Message} ${classes.Error}`}>
-        Failed to load the feed: {error.message}
+        {t("LOAD_ERROR", { message: error.message })}
       </p>
     );
   }
@@ -35,13 +37,13 @@ const FeedContent = ({
   if (!posts?.length) {
     return (
       <p className={classes.Message}>
-        {searchTerm.trim() ? "No posts match your search." : "No posts yet."}
+        {searchTerm.trim() ? t("NO_SEARCH_RESULTS") : t("NO_POSTS")}
       </p>
     );
   }
 
   return (
-    <section className={classes.Feed} aria-label="Posts feed">
+    <section className={classes.Feed} aria-label={t("POSTS_FEED_LABEL")}>
       {posts.map((post) => (
         <PostCard
           key={post._id}

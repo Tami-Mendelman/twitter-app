@@ -1,8 +1,11 @@
 import { useCreatePostForm } from "../functions/post-form.functions";
 import { useFeedStyles } from "../styles/feed.styles";
 import { usePostStyles } from "../styles/post.styles";
+import { useTranslation } from "react-i18next";
 
 const CreatePostPage = () => {
+  const { t } = useTranslation("translation", { keyPrefix: "CREATE_POST_PAGE" });
+  const { t: tForm } = useTranslation("translation", { keyPrefix: "POST_FORM" });
   const pageClasses = useFeedStyles();
   const classes = usePostStyles();
 
@@ -21,21 +24,21 @@ const CreatePostPage = () => {
   return (
     <main className={pageClasses.Page}>
       <header className={pageClasses.Header}>
-        <h1 className={pageClasses.Title}>Create Post</h1>
+        <h1 className={pageClasses.Title}>{t("TITLE")}</h1>
         <p className={pageClasses.Subtitle}>
-          Share something with your community
+          {t("SUBTITLE")}
         </p>
       </header>
 
       <form className={classes.Form} onSubmit={handleFormSubmit}>
         <label className={classes.Field}>
-          User
+          {tForm("USER")}
           <select
             className={classes.Input}
-            {...register("userId", { required: "Please select a user" })}
+            {...register("userId", { required: tForm("SELECT_USER") })}
             disabled={isUsersPending || Boolean(usersError)}
           >
-            <option value="">Select a user</option>
+            <option value="">{tForm("SELECT_USER")}</option>
             {users.map((user) => (
               <option key={user._id} value={user._id}>
                 {user.displayName} (@{user.username})
@@ -47,22 +50,22 @@ const CreatePostPage = () => {
               {errors.userId.message}
             </span>
           ) : null}
-          {isUsersPending ? <span>Loading users...</span> : null}
+          {isUsersPending ? <span>{tForm("LOADING_USERS")}</span> : null}
           {usersError ? (
             <span className={classes.ValidationError}>
-              Failed to load users: {usersError.message}
+              {tForm("LOAD_USERS_ERROR", { message: usersError.message })}
             </span>
           ) : null}
           {!isUsersPending && !usersError && !users.length ? (
-            <span>No users available. Create a user first.</span>
+            <span>{tForm("NO_USERS")}</span>
           ) : null}
         </label>
 
         <label className={classes.Field}>
-          Post name
+          {tForm("NAME")}
           <input
             className={classes.Input}
-            {...register("name", { required: "Post name is required" })}
+            {...register("name", { required: tForm("NAME_REQUIRED") })}
           />
           {errors.name ? (
             <span className={classes.ValidationError}>
@@ -72,15 +75,15 @@ const CreatePostPage = () => {
         </label>
 
         <label className={classes.Field}>
-          Content
+          {tForm("CONTENT")}
           <textarea
             className={classes.Textarea}
             maxLength={200}
             {...register("text", {
-              required: "Post content is required",
+              required: tForm("CONTENT_REQUIRED"),
               maxLength: {
                 value: 200,
-                message: "Post content cannot exceed 200 characters",
+                message: tForm("CONTENT_MAX_LENGTH"),
               },
             })}
           />
@@ -92,15 +95,17 @@ const CreatePostPage = () => {
         </label>
 
         <label className={classes.Field}>
-          Media URL (optional)
+          {tForm("MEDIA_URL")}
           <input className={classes.Input} type="url" {...register("media")} />
         </label>
 
         {error ? (
-          <p className={pageClasses.Error}>Failed to create post: {error}</p>
+          <p className={pageClasses.Error}>
+            {t("CREATE_ERROR", { message: error })}
+          </p>
         ) : null}
 
-        {isSuccess ? <p role="status">Post created successfully.</p> : null}
+        {isSuccess ? <p role="status">{t("CREATED")}</p> : null}
 
         <button
           className={classes.Button}
@@ -109,7 +114,7 @@ const CreatePostPage = () => {
             isPending || isUsersPending || Boolean(usersError) || !users.length
           }
         >
-          {isPending ? "Creating post..." : "Create Post"}
+          {isPending ? t("SUBMITTING") : t("SUBMIT")}
         </button>
       </form>
     </main>

@@ -1,8 +1,10 @@
 import { useCreateUserForm } from '../functions/user-form.functions';
 import { useUsersStyles } from '../styles/users.styles';
 import { useFeedStyles } from '../styles/feed.styles';
+import { useTranslation } from 'react-i18next';
 
 const CreateUserPage = () => {
+  const { t } = useTranslation('translation', { keyPrefix: 'CREATE_USER_PAGE' });
   const classes = useUsersStyles();
   const pageClasses = useFeedStyles();
 
@@ -18,22 +20,22 @@ const CreateUserPage = () => {
   return (
     <main className={pageClasses.Page}>
       <header className={pageClasses.Header}>
-        <h1 className={pageClasses.Title}>Create User</h1>
+        <h1 className={pageClasses.Title}>{t('TITLE')}</h1>
         <p className={pageClasses.Subtitle}>
-          Register a new user
+          {t('SUBTITLE')}
         </p>
       </header>
 
       <form className={classes.Form} onSubmit={handleFormSubmit}>
         <label className={classes.Field}>
-          Username
+          {t('USERNAME')}
           <input
             className={classes.Input}
             {...register('username', {
-              required: 'Username is required',
+              required: t('USERNAME_REQUIRED'),
               minLength: {
                 value: 1,
-                message: 'Username cannot be empty',
+                message: t('USERNAME_EMPTY'),
               },
             })}
           />
@@ -45,14 +47,14 @@ const CreateUserPage = () => {
         </label>
 
         <label className={classes.Field}>
-          Display name
+          {t('DISPLAY_NAME')}
           <input
             className={classes.Input}
             {...register('displayName', {
-              required: 'Display name is required',
+              required: t('DISPLAY_NAME_REQUIRED'),
               minLength: {
                 value: 1,
-                message: 'Display name cannot be empty',
+                message: t('DISPLAY_NAME_EMPTY'),
               },
             })}
           />
@@ -65,12 +67,12 @@ const CreateUserPage = () => {
 
         {error ? (
           <p className={pageClasses.Error}>
-            Failed to create user: {error}
+            {t('CREATE_ERROR', { message: error })}
           </p>
         ) : null}
 
         {isSuccess ? (
-          <p role="status">User created successfully.</p>
+          <p role="status">{t('CREATED')}</p>
         ) : null}
 
         <button
@@ -78,7 +80,7 @@ const CreateUserPage = () => {
           type="submit"
           disabled={isPending}
         >
-          {isPending ? 'Creating user...' : 'Create User'}
+          {isPending ? t('SUBMITTING') : t('SUBMIT')}
         </button>
       </form>
     </main>

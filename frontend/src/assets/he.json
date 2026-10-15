@@ -1,0 +1,87 @@
+{
+  "NAVBAR": {
+    "POSTS": "פוסטים",
+    "USERS": "משתמשים",
+    "CREATE_USER": "יצירת משתמש",
+    "CREATE_POST": "יצירת פוסט"
+  },
+  "FEED_PAGE": {
+    "TITLE": "שיבוט טוויטר",
+    "SUBTITLE": "הפוסטים האחרונים מהקהילה שלך",
+    "SEARCH_PLACEHOLDER": "חיפוש פוסטים לפי שם...",
+    "SEARCH_LABEL": "חיפוש פוסטים לפי שם"
+  },
+  "FEED_CONTENT": {
+    "LOADING": "הפוסטים נטענים...",
+    "LOAD_ERROR": "טעינת הפיד נכשלה: {{message}}",
+    "NO_SEARCH_RESULTS": "לא נמצאו פוסטים התואמים לחיפוש.",
+    "NO_POSTS": "עדיין אין פוסטים.",
+    "POSTS_FEED_LABEL": "פיד הפוסטים"
+  },
+  "POST_CARD": {
+    "UNKNOWN_USER": "משתמש לא ידוע",
+    "USER_UNAVAILABLE": "המשתמש אינו זמין",
+    "VIEW_MEDIA": "הצגת מדיה",
+    "DATE_UNAVAILABLE": "התאריך אינו זמין",
+    "LIKES": "{{count}} לייקים",
+    "EDIT": "עריכה"
+  },
+  "USERS_PAGE": {
+    "TITLE": "משתמשים",
+    "SUBTITLE": "כל המשתמשים הרשומים",
+    "LOADING": "המשתמשים נטענים...",
+    "LOAD_ERROR": "טעינת המשתמשים נכשלה: {{message}}",
+    "EMPTY": "לא נמצאו משתמשים.",
+    "USERS_LIST_LABEL": "רשימת המשתמשים"
+  },
+  "CREATE_POST_PAGE": {
+    "TITLE": "יצירת פוסט",
+    "SUBTITLE": "שתף משהו עם הקהילה שלך",
+    "CREATE_ERROR": "יצירת הפוסט נכשלה: {{message}}",
+    "CREATED": "הפוסט נוצר בהצלחה.",
+    "SUBMITTING": "הפוסט נוצר...",
+    "SUBMIT": "יצירת פוסט"
+  },
+  "EDIT_POST_PAGE": {
+    "TITLE": "עריכת פוסט",
+    "SUBTITLE": "עדכון הפוסט שלך",
+    "LOADING": "הפוסט נטען...",
+    "LOAD_ERROR": "טעינת הפוסט נכשלה: {{message}}",
+    "UPDATE_ERROR": "עדכון הפוסט נכשל: {{message}}",
+    "UPDATED": "הפוסט עודכן בהצלחה.",
+    "SAVING": "שומר...",
+    "SAVE": "שמירת השינויים",
+    "CANCEL": "ביטול"
+  },
+  "POST_FORM": {
+    "USER": "משתמש",
+    "SELECT_USER": "בחירת משתמש",
+    "LOADING_USERS": "המשתמשים נטענים...",
+    "LOAD_USERS_ERROR": "טעינת המשתמשים נכשלה: {{message}}",
+    "NO_USERS": "אין משתמשים זמינים. יש ליצור משתמש תחילה.",
+    "NAME": "שם הפוסט",
+    "NAME_REQUIRED": "נדרש להזין שם לפוסט",
+    "CONTENT": "תוכן",
+    "CONTENT_REQUIRED": "נדרש להזין תוכן לפוסט",
+    "CONTENT_MAX_LENGTH": "תוכן הפוסט לא יכול לעלות על 200 תווים",
+    "CHARACTER_COUNT": "{{count}}/200 תווים",
+    "MEDIA_URL": "כתובת מדיה (אופציונלי)"
+  },
+  "CREATE_USER_PAGE": {
+    "TITLE": "יצירת משתמש",
+    "SUBTITLE": "רישום משתמש חדש",
+    "USERNAME": "שם משתמש",
+    "USERNAME_REQUIRED": "נדרש להזין שם משתמש",
+    "USERNAME_EMPTY": "שם המשתמש לא יכול להיות ריק",
+    "DISPLAY_NAME": "שם לתצוגה",
+    "DISPLAY_NAME_REQUIRED": "נדרש להזין שם לתצוגה",
+    "DISPLAY_NAME_EMPTY": "שם התצוגה לא יכול להיות ריק",
+    "CREATE_ERROR": "יצירת המשתמש נכשלה: {{message}}",
+    "CREATED": "המשתמש נוצר בהצלחה.",
+    "SUBMITTING": "יוצר משתמש...",
+    "SUBMIT": "יצירת משתמש"
+  },
+  "PLACEHOLDER_PAGE": {
+    "MESSAGE": "הדף הזה יפותח בהמשך."
+  }
+}
