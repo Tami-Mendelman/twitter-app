@@ -36,7 +36,7 @@ const postSchema = new Schema<Post>(
     },
     {
         versionKey: false,
-        timestamps: true,
+        timestamps: { createdAt: true, updatedAt: false },
     },
 );
 
