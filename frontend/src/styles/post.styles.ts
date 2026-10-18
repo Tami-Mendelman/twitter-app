@@ -1,0 +1,103 @@
+import { createUseStyles } from 'react-jss';
+
+export const usePostStyles = createUseStyles({
+  Card: {
+    padding: '24px',
+    backgroundColor: '#fff',
+    border: '1px solid #dfe3e8',
+    borderRadius: '12px',
+    overflowWrap: 'anywhere',
+  },
+  Author: {
+    margin: 0,
+    color: '#17202a',
+    fontSize: '16px',
+    fontWeight: 700,
+  },
+  Username: {
+    marginTop: '4px',
+    color: '#657786',
+    fontSize: '14px',
+  },
+  Name: {
+    margin: '16px 0 8px',
+    fontSize: '18px',
+    fontWeight: 700,
+  },
+  Text: {
+    margin: 0,
+    color: '#35434f',
+    lineHeight: 1.6,
+    whiteSpace: 'pre-wrap',
+  },
+  Media: {
+    display: 'inline-block',
+    marginTop: '16px',
+    color: '#1769aa',
+    overflowWrap: 'anywhere',
+  },
+  Footer: {
+    display: 'flex',
+    flexWrap: 'wrap',
+    gap: '8px',
+    marginTop: '16px',
+    paddingTop: '12px',
+    borderTop: '1px solid #edf0f2',
+    color: '#657786',
+    fontSize: '14px',
+  },
+
+  Form: {
+    display: 'flex',
+    flexDirection: 'column',
+    gap: '16px',
+    width: '100%',
+    maxWidth: '720px',
+    margin: '0 auto',
+    padding: '24px',
+    backgroundColor: '#fff',
+    border: '1px solid #dfe3e8',
+    borderRadius: '12px',
+  },
+  Field: {
+    display: 'flex',
+    flexDirection: 'column',
+    gap: '8px',
+    color: '#17202a',
+    fontWeight: 600,
+  },
+  Input: {
+    width: '100%',
+    padding: '12px',
+    border: '1px solid #cbd2d9',
+    borderRadius: '6px',
+    font: 'inherit',
+  },
+  Textarea: {
+    width: '100%',
+    minHeight: '120px',
+    padding: '12px',
+    border: '1px solid #cbd2d9',
+    borderRadius: '6px',
+    font: 'inherit',
+    resize: 'vertical',
+  },
+  Button: {
+    padding: '12px 16px',
+    border: 0,
+    borderRadius: '6px',
+    backgroundColor: '#1769aa',
+    color: '#fff',
+    cursor: 'pointer',
+    '&:disabled': {
+      opacity: 0.6,
+      cursor: 'not-allowed',
+    },
+  },
+  ValidationError: {
+    margin: 0,
+    color: '#b42318',
+    fontSize: '14px',
+    fontWeight: 400,
+  },
+});

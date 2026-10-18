@@ -1,0 +1,89 @@
+import { createUseStyles } from 'react-jss';
+import { down } from './breakpoints';
+
+export const useFeedStyles = createUseStyles({
+  '@global': {
+    '*': {
+      boxSizing: 'border-box',
+    },
+    body: {
+      margin: 0,
+      backgroundColor: '#f5f7fa',
+      color: '#17202a',
+      fontFamily: 'Arial, sans-serif',
+    },
+    button: {
+      font: 'inherit',
+    },
+  },
+  Page: {
+    width: '100%',
+    padding: '24px 32px',
+  },
+  Header: {
+    width: '100%',
+    maxWidth: '720px',
+    margin: '0 auto 32px',
+    paddingBottom: '16px',
+    borderBottom: '1px solid #dfe3e8',
+  },
+  Title: {
+    margin: 0,
+    fontSize: '32px',
+    fontWeight: 700,
+    color: '#17202a',
+  },
+  Subtitle: {
+    marginTop: '8px',
+    color: '#657786',
+    fontSize: '16px',
+  },
+  SearchInput: {
+    display: 'block',
+    width: '100%',
+    maxWidth: '720px',
+    margin: '0 auto 24px',
+    padding: '14px 20px',
+    border: '1px solid #dfe3e8',
+    borderRadius: '999px',
+    outline: 'none',
+    backgroundColor: '#fff',
+    color: '#17202a',
+    font: 'inherit',
+    boxShadow: '0 2px 8px rgba(23, 32, 42, 0.06)',
+    transition: 'border-color 150ms ease, box-shadow 150ms ease',
+    '&::placeholder': {
+      color: '#8996a3',
+    },
+    '&:focus': {
+      borderColor: '#1769aa',
+      boxShadow: '0 0 0 3px rgba(23, 105, 170, 0.14)',
+    },
+  },
+  Feed: {
+    display: 'flex',
+    flexDirection: 'column',
+    gap: '16px',
+    width: '100%',
+    maxWidth: '720px',
+    margin: '0 auto',
+  },
+  Message: {
+    padding: '24px',
+    backgroundColor: '#fff',
+    border: '1px solid #dfe3e8',
+    borderRadius: '12px',
+    color: '#657786',
+  },
+  Error: {
+    color: '#b42318',
+  },
+  [down('phone')]: {
+    Page: {
+      padding: '20px 16px',
+    },
+    Title: {
+      fontSize: '26px',
+    },
+  },
+});
