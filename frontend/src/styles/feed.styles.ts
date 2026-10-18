@@ -1,4 +1,5 @@
 import { createUseStyles } from 'react-jss';
+import { down } from './breakpoints';
 
 export const useFeedStyles = createUseStyles({
   '@global': {
@@ -11,42 +12,38 @@ export const useFeedStyles = createUseStyles({
       color: '#17202a',
       fontFamily: 'Arial, sans-serif',
     },
-    '#root': {
-      minHeight: '100vh',
-    },
     button: {
       font: 'inherit',
     },
   },
   Page: {
     width: '100%',
-    minHeight: '100vh',
-    padding: '2vw 4%',
+    padding: '24px 32px',
   },
   Header: {
     width: '100%',
     maxWidth: '720px',
-    margin: '0 auto 2rem',
-    paddingBottom: '1rem',
+    margin: '0 auto 32px',
+    paddingBottom: '16px',
     borderBottom: '1px solid #dfe3e8',
   },
   Title: {
     margin: 0,
-    fontSize: '2rem',
+    fontSize: '32px',
     fontWeight: 700,
     color: '#17202a',
   },
   Subtitle: {
-    marginTop: '0.5rem',
+    marginTop: '8px',
     color: '#657786',
-    fontSize: '1rem',
+    fontSize: '16px',
   },
   SearchInput: {
     display: 'block',
     width: '100%',
     maxWidth: '720px',
-    margin: '0 auto 1.5rem',
-    padding: '0.85rem 1.25rem',
+    margin: '0 auto 24px',
+    padding: '14px 20px',
     border: '1px solid #dfe3e8',
     borderRadius: '999px',
     outline: 'none',
@@ -66,13 +63,13 @@ export const useFeedStyles = createUseStyles({
   Feed: {
     display: 'flex',
     flexDirection: 'column',
-    gap: '1rem',
+    gap: '16px',
     width: '100%',
     maxWidth: '720px',
     margin: '0 auto',
   },
   Message: {
-    padding: '1.5rem',
+    padding: '24px',
     backgroundColor: '#fff',
     border: '1px solid #dfe3e8',
     borderRadius: '12px',
@@ -81,12 +78,12 @@ export const useFeedStyles = createUseStyles({
   Error: {
     color: '#b42318',
   },
-  '@media (max-width: 600px)': {
+  [down('phone')]: {
     Page: {
-      padding: '4vw',
+      padding: '20px 16px',
     },
     Title: {
-      fontSize: '1.6rem',
+      fontSize: '26px',
     },
   },
 });
