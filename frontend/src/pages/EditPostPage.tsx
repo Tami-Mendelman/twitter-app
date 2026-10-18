@@ -1,5 +1,4 @@
-import { useEffect } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link, Navigate, useParams } from "react-router-dom";
 import { useEditPostForm } from "../functions/edit-post-form.functions";
 import { useFeedStyles } from "../styles/feed.styles";
 import { usePostStyles } from "../styles/post.styles";
@@ -20,18 +19,17 @@ const EditPostPage = () => {
     isPending,
     isPostError,
     error,
-    watch,
+    textLength,
     isSuccess,
-    populateForm,
+    isOwner,
+    deleteError,
+    isDeletePending,
+    submitDelete,
   } = useEditPostForm(postId);
 
-  const textLength = watch("text")?.length ?? 0;
-
-  useEffect(() => {
-    if (post) {
-      populateForm(post);
-    }
-  }, [post, populateForm]);
+  if (post && !isOwner) {
+    return <Navigate to="/posts" replace />;
+  }
 
   return (
     <main className={pageClasses.Page}>
@@ -97,10 +95,29 @@ const EditPostPage = () => {
             </p>
           ) : null}
 
+          {deleteError ? (
+            <p className={pageClasses.Error}>
+              {t("DELETE_ERROR", { message: deleteError })}
+            </p>
+          ) : null}
+
           {isSuccess ? <p role="status">{t("UPDATED")}</p> : null}
 
-          <button className={classes.Button} type="submit" disabled={isPending}>
+          <button
+            className={classes.Button}
+            type="submit"
+            disabled={isPending || isDeletePending}
+          >
             {isPending ? t("SAVING") : t("SAVE")}
+          </button>
+
+          <button
+            className={classes.DeleteButton}
+            type="button"
+            disabled={isPending || isDeletePending}
+            onClick={submitDelete}
+          >
+            {isDeletePending ? t("DELETING") : t("DELETE")}
           </button>
 
           <Link to="/posts">{t("CANCEL")}</Link>

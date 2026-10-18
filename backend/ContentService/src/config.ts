@@ -13,11 +13,16 @@ loadEnvironment({
 
 const {
     MONGODB_URI,
+    JWT_SECRET,
     USER_SERVICE_HOST = "localhost",
 } = process.env;
 
 if (!MONGODB_URI) {
     throw new Error("MONGODB_URI is not defined");
+}
+
+if (!JWT_SECRET || JWT_SECRET.length < 32) {
+    throw new Error("JWT_SECRET must contain at least 32 characters");
 }
 
 const getPort = (
@@ -41,6 +46,7 @@ const userServicePort = getPort(
 
 export const config = {
     mongodbUri: MONGODB_URI,
+    jwtSecret: JWT_SECRET,
     port: getPort("CONTENT_SERVICE_PORT", DEFAULT_CONTENT_SERVICE_PORT),
     userServiceHost: USER_SERVICE_HOST,
     userServicePort,

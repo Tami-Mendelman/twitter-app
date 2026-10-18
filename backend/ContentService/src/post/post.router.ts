@@ -1,4 +1,5 @@
 import { Router } from "express";
+import { requireAuthentication } from "../auth/auth.middleware.js";
 import { postController } from "./post.controller.js";
 import { validateRequest } from "@twitter-app/shared/validation.middleware.js";
 import {
@@ -22,12 +23,14 @@ postRouter.get(
 
 postRouter.post(
     "/",
+    requireAuthentication,
     validateRequest(canCreate, "body"),
     postController.create,
 );
 
 postRouter.patch(
     "/:id",
+    requireAuthentication,
     validateRequest(canUpdateParams, "params"),
     validateRequest(canUpdate, "body"),
     postController.update,
@@ -35,6 +38,7 @@ postRouter.patch(
 
 postRouter.delete(
     "/:id",
+    requireAuthentication,
     validateRequest(canDelete, "params"),
     postController.delete,
 );

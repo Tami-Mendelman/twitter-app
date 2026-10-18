@@ -1,28 +1,29 @@
 import { createUseStyles } from 'react-jss';
+import { down } from './breakpoints';
 
 export const useProfileStyles = createUseStyles({
   Page: {
     width: '100%',
     minHeight: '100vh',
-    padding: '2vw 4%',
+    padding: '24px 48px',
   },
   Header: {
     width: '100%',
     maxWidth: '720px',
-    margin: '0 auto 2vw',
-    paddingBottom: '1vw',
+    margin: '0 auto 24px',
+    paddingBottom: '12px',
     borderBottom: '1px solid #dfe3e8',
   },
   Title: {
     margin: 0,
     color: '#17202a',
-    fontSize: '2rem',
+    fontSize: '32px',
   },
   Card: {
     width: '100%',
     maxWidth: '720px',
     margin: '0 auto',
-    padding: '2vw',
+    padding: '24px',
     backgroundColor: '#fff',
     border: '1px solid #dfe3e8',
     borderRadius: '12px',
@@ -30,19 +31,22 @@ export const useProfileStyles = createUseStyles({
   DisplayName: {
     margin: 0,
     color: '#17202a',
-    fontSize: '1.5rem',
+    fontSize: '24px',
   },
   Username: {
-    margin: '1vw 0 0',
+    margin: '16px 0 0',
     color: '#657786',
-    fontSize: '1rem',
+    fontSize: '16px',
   },
-  '@media (max-width: 600px)': {
+  [down('phone')]: {
     Page: {
-      padding: '4vw',
+      padding: '20px',
     },
     Card: {
-      padding: '4vw',
+      padding: '16px',
+    },
+    Title: {
+      fontSize: '28px',
     },
   },
 });

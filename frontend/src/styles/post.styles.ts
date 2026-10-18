@@ -1,8 +1,9 @@
 import { createUseStyles } from 'react-jss';
+import { down } from './breakpoints';
 
 export const usePostStyles = createUseStyles({
   Card: {
-    padding: '1.5rem',
+    padding: '24px',
     backgroundColor: '#fff',
     border: '1px solid #dfe3e8',
     borderRadius: '12px',
@@ -11,17 +12,17 @@ export const usePostStyles = createUseStyles({
   Author: {
     margin: 0,
     color: '#17202a',
-    fontSize: '1rem',
+    fontSize: '16px',
     fontWeight: 700,
   },
   Username: {
-    marginTop: '0.25rem',
+    marginTop: '4px',
     color: '#657786',
-    fontSize: '0.875rem',
+    fontSize: '14px',
   },
   Name: {
-    margin: '1rem 0 0.5rem',
-    fontSize: '1.125rem',
+    margin: '16px 0 8px',
+    fontSize: '18px',
     fontWeight: 700,
   },
   Text: {
@@ -32,29 +33,29 @@ export const usePostStyles = createUseStyles({
   },
   Media: {
     display: 'inline-block',
-    marginTop: '1rem',
+    marginTop: '16px',
     color: '#1769aa',
     overflowWrap: 'anywhere',
   },
   Footer: {
     display: 'flex',
     flexWrap: 'wrap',
-    gap: '0.5rem',
-    marginTop: '1rem',
-    paddingTop: '0.75rem',
+    gap: '8px',
+    marginTop: '16px',
+    paddingTop: '12px',
     borderTop: '1px solid #edf0f2',
     color: '#657786',
-    fontSize: '0.875rem',
+    fontSize: '14px',
   },
   
   Form: {
     display: 'flex',
     flexDirection: 'column',
-    gap: '1rem',
+    gap: '16px',
     width: '100%',
     maxWidth: '720px',
     margin: '0 auto',
-    padding: '1.5rem',
+    padding: '24px',
     backgroundColor: '#fff',
     border: '1px solid #dfe3e8',
     borderRadius: '12px',
@@ -62,13 +63,13 @@ export const usePostStyles = createUseStyles({
   Field: {
     display: 'flex',
     flexDirection: 'column',
-    gap: '0.5rem',
+    gap: '8px',
     color: '#17202a',
     fontWeight: 600,
   },
   Input: {
     width: '100%',
-    padding: '0.75rem',
+    padding: '12px',
     border: '1px solid #cbd2d9',
     borderRadius: '6px',
     font: 'inherit',
@@ -76,14 +77,14 @@ export const usePostStyles = createUseStyles({
   Textarea: {
     width: '100%',
     minHeight: '120px',
-    padding: '0.75rem',
+    padding: '12px',
     border: '1px solid #cbd2d9',
     borderRadius: '6px',
     font: 'inherit',
     resize: 'vertical',
   },
   Button: {
-    padding: '0.75rem 1rem',
+    padding: '12px 16px',
     border: 0,
     borderRadius: '6px',
     backgroundColor: '#1769aa',
@@ -94,10 +95,30 @@ export const usePostStyles = createUseStyles({
       cursor: 'not-allowed',
     },
   },
+  DeleteButton: {
+    padding: '12px 16px',
+    border: 0,
+    borderRadius: '6px',
+    backgroundColor: '#b42318',
+    color: '#fff',
+    cursor: 'pointer',
+    '&:disabled': {
+      opacity: 0.6,
+      cursor: 'not-allowed',
+    },
+  },
   ValidationError: {
     margin: 0,
     color: '#b42318',
-    fontSize: '0.875rem',
+    fontSize: '14px',
     fontWeight: 400,
+  },
+  [down('phone')]: {
+    Card: {
+      padding: '16px',
+    },
+    Form: {
+      padding: '16px',
+    },
   },
 });

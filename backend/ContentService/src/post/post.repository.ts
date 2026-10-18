@@ -1,6 +1,7 @@
 import mongoose, { type HydratedDocument } from "mongoose";
 import { createPostModel } from "@twitter-app/shared/models/post.model.js";
 import type {
+    CreatePostDocument,
     CreatePostPayload,
     Post,
     UpdatePostPayload,
@@ -21,17 +22,18 @@ export const postRepository = {
         await PostModel.find().sort({ createdAt: -1 }).lean(),
     getById: async (postId: string): Promise<LeanPost> =>
         await PostModel.findById(postId).lean(),
-    create: async (post: CreatePostPayload): Promise<CreatedPost> =>
+    create: async (post: CreatePostDocument): Promise<CreatedPost> =>
         await PostModel.create(post),
     update: async (
         postId: string,
+        userId: string,
         changes: UpdatePostPayload,
     ): Promise<LeanPost> =>
-        await PostModel.findByIdAndUpdate(
-            postId,
+        await PostModel.findOneAndUpdate(
+            { _id: postId, userId },
             { $set: changes },
             { returnDocument: "after", runValidators: true },
         ).lean(),
-    delete: async (postId: string): Promise<LeanPost> =>
-        await PostModel.findByIdAndDelete(postId).lean(),
+    delete: async (postId: string, userId: string): Promise<LeanPost> =>
+        await PostModel.findOneAndDelete({ _id: postId, userId }).lean(),
 };

@@ -1,4 +1,5 @@
 import { createUseStyles } from 'react-jss';
+import { down } from './breakpoints';
 
 export const useAuthStyles = createUseStyles({
   Page: {
@@ -7,37 +8,37 @@ export const useAuthStyles = createUseStyles({
     justifyContent: 'center',
     width: '100%',
     minHeight: '100vh',
-    padding: '4vw',
+    padding: '32px',
   },
   Card: {
-    width: '36vw',
+    width: '460px',
     maxWidth: '100%',
-    padding: '2vw',
+    padding: '32px',
     backgroundColor: '#fff',
     border: '1px solid #dfe3e8',
     borderRadius: '12px',
     boxShadow: '0 8px 24px rgba(23, 32, 42, 0.08)',
   },
   Title: {
-    margin: '0 0 1.5rem',
+    margin: '0 0 24px',
     color: '#17202a',
-    fontSize: '1.75rem',
+    fontSize: '28px',
   },
   Form: {
     display: 'flex',
     flexDirection: 'column',
-    gap: '1rem',
+    gap: '16px',
   },
   Field: {
     display: 'flex',
     flexDirection: 'column',
-    gap: '0.5rem',
+    gap: '8px',
     color: '#17202a',
     fontWeight: 600,
   },
   Input: {
     width: '100%',
-    padding: '0.75rem',
+    padding: '12px',
     border: '1px solid #cbd2d9',
     borderRadius: '6px',
     font: 'inherit',
@@ -47,7 +48,7 @@ export const useAuthStyles = createUseStyles({
     },
   },
   Button: {
-    padding: '0.75rem 1rem',
+    padding: '12px 16px',
     border: 0,
     borderRadius: '6px',
     backgroundColor: '#1769aa',
@@ -62,20 +63,23 @@ export const useAuthStyles = createUseStyles({
   Error: {
     margin: 0,
     color: '#b42318',
-    fontSize: '0.875rem',
+    fontSize: '14px',
     fontWeight: 400,
   },
   Footer: {
-    margin: '1.5rem 0 0',
+    margin: '24px 0 0',
     color: '#657786',
     '& a': {
       color: '#1769aa',
     },
   },
-  '@media (max-width: 600px)': {
+  [down('phone')]: {
     Card: {
       width: '100%',
-      padding: '6vw',
+      padding: '20px',
+    },
+    Page: {
+      padding: '20px',
     },
   },
 });

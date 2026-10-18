@@ -2,6 +2,7 @@ import type { Post, User } from '../types/models.types';
 import { usePostStyles } from '../styles/post.styles';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
+import { useAuth } from './auth-context';
 
 type PostCardProps = {
   post: Post;
@@ -11,6 +12,7 @@ type PostCardProps = {
 const PostCard = ({ post, author }: PostCardProps) => {
   const { t } = useTranslation('translation', { keyPrefix: 'POST_CARD' });
   const classes = usePostStyles();
+  const { user } = useAuth();
 
   return (
     <article className={classes.Card}>
@@ -44,7 +46,9 @@ const PostCard = ({ post, author }: PostCardProps) => {
             : t('DATE_UNAVAILABLE')}
         </span>
         <span>{t('LIKES', { count: post.likes ?? 0 })}</span>
-        <Link to={`/posts/${post._id}/edit`}>{t('EDIT')}</Link>
+        {user?._id === post.userId ? (
+          <Link to={`/posts/${post._id}/edit`}>{t('EDIT')}</Link>
+        ) : null}
       </div>
     </article>
   );

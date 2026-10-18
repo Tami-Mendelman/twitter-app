@@ -20,7 +20,6 @@ export type Post = {
 };
 
 export type CreatePostPayload = {
-  userId: string;
   name: string;
   text: string;
   media?: string;

@@ -51,8 +51,11 @@
     "LOADING": "הפוסט נטען...",
     "LOAD_ERROR": "טעינת הפוסט נכשלה: {{message}}",
     "UPDATE_ERROR": "עדכון הפוסט נכשל: {{message}}",
+    "DELETE_ERROR": "מחיקת הפוסט נכשלה: {{message}}",
     "UPDATED": "הפוסט עודכן בהצלחה.",
     "SAVING": "שומר...",
+    "DELETE": "מחיקת הפוסט",
+    "DELETING": "מוחק...",
     "SAVE": "שמירת השינויים",
     "CANCEL": "ביטול"
   },

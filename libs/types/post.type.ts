@@ -10,8 +10,11 @@ export type Post = {
 };
 
 export type CreatePostPayload = Pick<Post, "name" | "text"> & {
-    userId: string;
     media?: string;
+};
+
+export type CreatePostDocument = CreatePostPayload & {
+    userId: string;
 };
 
 export type UpdatePostPayload = Partial<Pick<Post, "name" | "text" | "media">>;

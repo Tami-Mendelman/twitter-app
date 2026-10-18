@@ -1,9 +1,12 @@
 import type { Request, Response } from "express";
 import { postManager } from "./post.manager.js";
+import type { AuthenticatedLocals } from "../auth/auth.middleware.js";
 import type {
     CreatePostPayload,
     UpdatePostPayload,
 } from "@twitter-app/shared/types/post.type.js";
+
+type AuthenticatedPostResponse = Response<unknown, AuthenticatedLocals>;
 
 export const postController = {
     sendPostResponse: (
@@ -33,28 +36,34 @@ export const postController = {
 
     create: async (
         req: Request<Record<string, string>, unknown, CreatePostPayload>,
-        res: Response,
+        res: AuthenticatedPostResponse,
     ): Promise<void> => {
-        res.status(201).json(await postManager.create(req.body));
+        res.status(201).json(
+            await postManager.create(req.body, res.locals.userId),
+        );
     },
 
     update: async (
         req: Request<{ id: string }, unknown, UpdatePostPayload>,
-        res: Response,
+        res: AuthenticatedPostResponse,
     ): Promise<void> => {
         postController.sendPostResponse(
             res,
-            await postManager.update(req.params.id, req.body),
+            await postManager.update(
+                req.params.id,
+                res.locals.userId,
+                req.body,
+            ),
         );
     },
 
     delete: async (
         req: Request<{ id: string }>,
-        res: Response,
+        res: AuthenticatedPostResponse,
     ): Promise<void> => {
         postController.sendPostResponse(
             res,
-            await postManager.delete(req.params.id),
+            await postManager.delete(req.params.id, res.locals.userId),
         );
     },
 };

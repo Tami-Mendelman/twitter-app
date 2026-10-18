@@ -20,17 +20,22 @@ export const postManager = {
 
     getById: postRepository.getById,
 
-    create: async (post: CreatePostPayload) => {
-        const user = await userService.getUserById(post.userId);
+    create: async (post: CreatePostPayload, userId: string) => {
+        const user = await userService.getUserById(userId);
 
         if (isNil(user)) {
             throw new NotFoundError("User not found");
         }
 
-        return await postRepository.create(post);
+        return await postRepository.create({ ...post, userId });
     },
 
-    update: postRepository.update,
+    update: (
+        postId: string,
+        userId: string,
+        changes: UpdatePostPayload,
+    ) => postRepository.update(postId, userId, changes),
 
-    delete: postRepository.delete,
+    delete: (postId: string, userId: string) =>
+        postRepository.delete(postId, userId),
 };
