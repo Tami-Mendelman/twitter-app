@@ -12,5 +12,7 @@ export const userRepository = {
         UserModel.find().lean(),
     getById: async (userId: string) =>
         UserModel.findById(userId).lean(),
+    getByUsername: async (username: string) =>
+        UserModel.findOne({ username }).lean(),
 };
 

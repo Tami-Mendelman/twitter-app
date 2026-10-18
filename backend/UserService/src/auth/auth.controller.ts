@@ -1,5 +1,5 @@
 import type { RequestHandler } from "express";
-import type { User } from "@twitter-app/shared/type/user.types.js";
+import type { User } from "@twitter-app/shared/types/user.type.js";
 import {
     loginManager,
     registerManager,

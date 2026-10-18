@@ -6,6 +6,7 @@ import { authRouter } from "./auth/auth.router.js";
 export const appRouter = Router();
 
 appRouter.use("/api/users", userRouter);
+appRouter.use("/api/auth", authRouter);
 appRouter.use("/rpc", rpcServer.middleware());
 appRouter.use((_req, res): void => {
     res.status(404).json({ message: "Route not found" });

@@ -1,9 +1,10 @@
 import express, { type Router } from "express";
-import mongoose from "mongoose";
+import type { Mongoose } from "mongoose";
 
 type InitAppOptions = {
     appRouter: Router;
     mongodbUri: string;
+    mongoose: Mongoose;
     port: number;
     serviceName: string;
 };
@@ -11,6 +12,7 @@ type InitAppOptions = {
 export const initApp = async ({
     appRouter,
     mongodbUri,
+    mongoose,
     port,
     serviceName,
 }: InitAppOptions): Promise<void> => {

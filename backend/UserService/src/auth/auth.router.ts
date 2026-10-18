@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { validateRequest } from "../validation.middleware.js";
+import { validateRequest } from "@twitter-app/shared/validation.middleware.js";
 import {
     getCurrentUserController,
     loginController,

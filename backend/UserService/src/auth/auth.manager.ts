@@ -6,7 +6,7 @@ import {
     createUserManager,
     getUserByUsernameManager,
 } from "../user/user.manager.js";
-import type { User } from "@twitter-app/shared/type/user.types.js";
+import type { User } from "@twitter-app/shared/types/user.type.js";
 
 type RegistrationPayload = User;
 type LoginPayload = Pick<User, "username">;
