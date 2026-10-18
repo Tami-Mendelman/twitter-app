@@ -1,13 +1,11 @@
-import express from "express";
-import { errorController } from "./error.controller.js";
-import { notFoundController } from "./not-found.controller.js";
+import { Router } from "express";
 import { rpcServer } from "./rpc.server.js";
 import { userRouter } from "./user/user.router.js";
 
-export const app = express();
+export const appRouter = Router();
 
-app.use(express.json());
-app.use("/api/users", userRouter);
-app.use("/rpc", rpcServer.middleware());
-app.use(notFoundController);
-app.use(errorController);
+appRouter.use("/api/users", userRouter);
+appRouter.use("/rpc", rpcServer.middleware());
+appRouter.use((_req, res): void => {
+    res.status(404).json({ message: "Route not found" });
+});

@@ -1,19 +1,8 @@
-import {
-    createUser,
-    getAllUsers,
-    getUserById,
-} from "./user.repository.js";
-import type { User } from "@twitter-app/shared/type/user.types.js";
+import { userRepository } from "./user.repository.js";
+import type { User } from "@twitter-app/shared/types/user.type.js";
 
-export const createUserManager = async (user: User) =>
-    createUser(user);
-
-export const getAllUsersManager = async () =>
-    getAllUsers();
-
-export const getUserByIdManager = async (userId: string) =>
-    getUserById(userId);
-
-export const getUserByIdRpcManager = async (
-    params: { userId: string },
-) => getUserByIdManager(params.userId);
+export const userManager = {
+    create: userRepository.create,
+    getAll: userRepository.getAll,
+    getById: userRepository.getById,
+};

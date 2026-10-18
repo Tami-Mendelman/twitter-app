@@ -1,11 +1,9 @@
-import express from "express";
-import { errorController } from "./error.controller.js";
-import { notFoundController } from "./not-found.controller.js";
+import { Router } from "express";
 import { postRouter } from "./post/post.router.js";
 
-export const app = express();
+export const appRouter = Router();
 
-app.use(express.json());
-app.use("/api/posts", postRouter);
-app.use(notFoundController);
-app.use(errorController);
+appRouter.use("/api/content-service/posts", postRouter);
+appRouter.use((_req, res): void => {
+    res.status(404).json({ message: "Route not found" });
+});

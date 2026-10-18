@@ -4,13 +4,30 @@
   "private": true,
   "type": "module",
   "exports": {
+    "./app.js": "./app.ts",
     "./rpc.functions.js": "./rpc.functions.ts",
-    "./user.RPCservice.js": "./user.RPCservice.ts",
-    "./type/user.types.js": "./type/user.types.ts",
-    "./type/post.types.js": "./type/post.types.ts"
+    "./rpc/rpc.type.js": "./rpc/rpc.type.ts",
+    "./rpc/services/user.type.js": "./rpc/services/user.type.ts",
+    "./validation.middleware.js": "./validation.middleware.ts",
+    "./validation/joi.helpers.js": "./validation/joi.helpers.ts",
+    "./rpc/services/user.RPCservice.js": "./rpc/services/user.RPCservice.ts",
+    "./models/post.model.js": "./models/post.model.ts",
+    "./models/user.model.js": "./models/user.model.ts",
+    "./constants/network.constants.js": "./constants/network.constants.ts",
+    "./constants/post.constants.js": "./constants/post.constants.ts",
+    "./types/user.type.js": "./types/user.type.ts",
+    "./types/post.type.js": "./types/post.type.ts"
   },
   "dependencies": {
+    "express": "^5.3.0",
+    "express-mongo-sanitize": "^2.2.0",
     "jayson": "^5.0.0",
+    "joi": "18.2.9",
+    "lodash": "^4.18.1",
     "mongoose": "^9.11.2"
+  },
+  "devDependencies": {
+    "@types/express": "^5.0.6",
+    "@types/lodash": "^4.17.26"
   }
 }
