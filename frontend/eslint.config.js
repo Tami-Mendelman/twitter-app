@@ -24,9 +24,9 @@ export default defineConfig([
       'src/App.tsx',
       'src/api/index.ts',
       'src/components/{AuthProvider,ProtectedLayout,auth-context,Navbar}.{ts,tsx}',
-      'src/functions/{auth,auth-form,auth-session,auth-token,protected-layout}.functions.ts',
-      'src/pages/{LoginPage,RegisterPage}.tsx',
-      'src/styles/{auth,navbar}.styles.ts',
+      'src/functions/{auth,auth-form,auth-session,auth-token,profile,protected-layout}.functions.ts',
+      'src/pages/{LoginPage,ProfilePage,RegisterPage}.tsx',
+      'src/styles/{auth,navbar,profile}.styles.ts',
       'src/types/auth.types.ts',
     ],
     rules: {

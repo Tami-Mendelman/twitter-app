@@ -1,9 +1,10 @@
 {
   "NAVBAR": {
-    "POSTS": "פוסטים",
+    "FEED": "פיד",
     "USERS": "משתמשים",
     "CREATE_USER": "יצירת משתמש",
     "CREATE_POST": "יצירת פוסט",
+    "MY_PROFILE": "הפרופיל שלי",
     "SIGNED_IN_AS": "מחובר בתור {{displayName}}",
     "LOGOUT": "התנתקות"
   },
@@ -107,5 +108,9 @@
     "LOGIN_LINK": "להתחברות",
     "SESSION_LOADING": "בודק את ההתחברות...",
     "SESSION_ERROR": "לא ניתן לאמת את ההתחברות: {{message}}"
+  },
+  "PROFILE_PAGE": {
+    "TITLE": "הפרופיל שלי",
+    "PROFILE_LABEL": "פרטי המשתמש המחובר"
   }
 }
