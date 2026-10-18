@@ -1,0 +1,3 @@
+export const MAX_PORT = 65535;
+export const DEFAULT_USER_SERVICE_PORT = 3001;
+export const DEFAULT_CONTENT_SERVICE_PORT = 3002;
