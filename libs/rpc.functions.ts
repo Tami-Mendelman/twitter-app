@@ -2,11 +2,7 @@ import type {
     Client as HttpClient,
     RequestParamsLike,
 } from "jayson/promise/index.js";
-
-type RpcResponse = {
-    result?: unknown;
-    error?: unknown;
-};
+import type { RpcResponse } from "./rpc/rpc.type.js";
 
 const isRpcResponse = (value: unknown): value is RpcResponse =>
     typeof value === "object" && value !== null;

@@ -1,11 +1,17 @@
 import Joi from "joi";
-import { OBJECT_ID_PATTERN } from "./user.consts.js";
+import { joiMongoId } from "@twitter-app/shared/validation/joi.helpers.js";
 
-export const createUserSchema = Joi.object({
+export const canGetAll = Joi.object({
+    body: {},
+    query: {},
+    params: {},
+});
+
+export const canCreate = Joi.object({
     username: Joi.string().trim().min(1).required(),
     displayName: Joi.string().trim().min(1).required(),
 });
 
-export const userIdSchema = Joi.object({
-    userId: Joi.string().pattern(OBJECT_ID_PATTERN).required(),
+export const canGetById = Joi.object({
+    userId: joiMongoId().required(),
 });

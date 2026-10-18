@@ -4,21 +4,21 @@ import {
     getAllUsersController,
     getUserByIdController,
 } from "./user.controller.js";
-import { validateRequest } from "../validation.middleware.js";
-import { createUserSchema, userIdSchema } from "./user.validator.js";
+import { validateRequest } from "@twitter-app/shared/validation.middleware.js";
+import { canCreate, canGetAll, canGetById } from "./user.validator.js";
 
 export const userRouter = Router();
 
 userRouter.post(
     "/",
-    validateRequest(createUserSchema, "body"),
+    validateRequest(canCreate, "body"),
     createUserController,
 );
 
-userRouter.get("/", getAllUsersController);
+userRouter.get("/", validateRequest(canGetAll), getAllUsersController);
 
 userRouter.get(
-    "/:userId",
-    validateRequest(userIdSchema, "params"),
+    "/:id",
+    validateRequest(canGetById, "params"),
     getUserByIdController,
 );
