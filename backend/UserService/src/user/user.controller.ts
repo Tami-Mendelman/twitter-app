@@ -1,3 +1,4 @@
+import mongoose from "mongoose";
 import type { RequestHandler } from "express";
 import { userManager } from "./user.manager.js";
 import type { User } from "@twitter-app/shared/types/user.type.js";
@@ -9,8 +10,23 @@ type CreateUserHandler = RequestHandler<
 >;
 
 const createUser: CreateUserHandler = async (req, res): Promise<void> => {
-    const user = await userManager.create(req.body);
-    res.status(201).json(user);
+    try {
+        const user = await userManager.create(req.body);
+        res.status(201).json(user);
+    } catch (error) {
+        if (
+            error instanceof mongoose.mongo.MongoServerError &&
+            error.code === 11000
+        ) {
+            res.status(409).json({
+                code: "USERNAME_ALREADY_EXISTS",
+                message: "A user with this username already exists",
+            });
+            return;
+        }
+
+        throw error;
+    }
 };
 
 const getAllUsers: RequestHandler = async (_req, res): Promise<void> => {

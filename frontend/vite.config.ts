@@ -11,6 +11,8 @@ export default defineConfig(({ mode }) => {
         '/api/posts': {
           target: env.VITE_CONTENT_SERVICE_URL || 'http://localhost:3002',
           changeOrigin: true,
+          rewrite: (path) =>
+            path.replace(/^\/api\/posts/, '/api/content-service/posts'),
         },
         '/api/users': {
           target: env.VITE_USER_SERVICE_URL || 'http://localhost:3001',

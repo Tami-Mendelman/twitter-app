@@ -73,6 +73,7 @@
     "USERNAME": "שם משתמש",
     "USERNAME_REQUIRED": "נדרש להזין שם משתמש",
     "USERNAME_EMPTY": "שם המשתמש לא יכול להיות ריק",
+    "USERNAME_EXISTS": "שם המשתמש הזה כבר קיים. לא ניתן ליצור משתמש נוסף בשם זה.",
     "DISPLAY_NAME": "שם לתצוגה",
     "DISPLAY_NAME_REQUIRED": "נדרש להזין שם לתצוגה",
     "DISPLAY_NAME_EMPTY": "שם התצוגה לא יכול להיות ריק",

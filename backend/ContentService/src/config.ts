@@ -1,10 +1,15 @@
-import "dotenv/config";
+import { config as loadEnvironment } from "dotenv";
+import { fileURLToPath } from "node:url";
 import {
     DEFAULT_CONTENT_SERVICE_PORT,
     DEFAULT_USER_SERVICE_PORT,
     MAX_PORT,
 } from "@twitter-app/shared/constants/network.constants.js";
 import isInteger from "lodash/fp/isInteger.js";
+
+loadEnvironment({
+    path: fileURLToPath(new URL("../../.env", import.meta.url)),
+});
 
 const {
     MONGODB_URI,
