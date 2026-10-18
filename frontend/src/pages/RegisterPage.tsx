@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { useAuthForm } from '../functions/auth-form.functions';
+import ThemeToggleButton from '../components/ThemeToggleButton';
 import { useAuthStyles } from '../styles/auth.styles';
 
 const RegisterPage = () => {
@@ -18,6 +19,7 @@ const RegisterPage = () => {
 
   return (
     <main className={classes.Page}>
+      <ThemeToggleButton isAuthPage />
       <section className={classes.Card}>
         <h1 className={classes.Title}>{t('REGISTER_TITLE')}</h1>
         <form className={classes.Form} onSubmit={handleFormSubmit}>

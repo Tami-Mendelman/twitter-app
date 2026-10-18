@@ -4,7 +4,7 @@ import { down } from './breakpoints';
 export const useProfileStyles = createUseStyles({
   Page: {
     width: '100%',
-    minHeight: '100vh',
+    minHeight: '100%',
     padding: '24px 48px',
   },
   Header: {
@@ -12,11 +12,11 @@ export const useProfileStyles = createUseStyles({
     maxWidth: '720px',
     margin: '0 auto 24px',
     paddingBottom: '12px',
-    borderBottom: '1px solid #dfe3e8',
+    borderBottom: '1px solid var(--surface-border)',
   },
   Title: {
     margin: 0,
-    color: '#17202a',
+    color: 'var(--text-primary)',
     fontSize: '32px',
   },
   Card: {
@@ -24,18 +24,18 @@ export const useProfileStyles = createUseStyles({
     maxWidth: '720px',
     margin: '0 auto',
     padding: '24px',
-    backgroundColor: '#fff',
-    border: '1px solid #dfe3e8',
+    backgroundColor: 'var(--surface-background)',
+    border: '1px solid var(--surface-border)',
     borderRadius: '12px',
   },
   DisplayName: {
     margin: 0,
-    color: '#17202a',
+    color: 'var(--text-primary)',
     fontSize: '24px',
   },
   Username: {
     margin: '16px 0 0',
-    color: '#657786',
+    color: 'var(--text-secondary)',
     fontSize: '16px',
   },
   [down('phone')]: {

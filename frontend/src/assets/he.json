@@ -6,6 +6,8 @@
     "CREATE_POST": "יצירת פוסט",
     "MY_PROFILE": "הפרופיל שלי",
     "SIGNED_IN_AS": "מחובר בתור {{displayName}}",
+    "DARK_THEME": "מצב כהה",
+    "LIGHT_THEME": "מצב בהיר",
     "LOGOUT": "התנתקות"
   },
   "FEED_PAGE": {

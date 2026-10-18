@@ -1,0 +1,73 @@
+import { createUseStyles } from 'react-jss';
+
+export const useThemeStyles = createUseStyles({
+  '@global': {
+    ':root': {
+      '--app-background': '#f5f7fa',
+      '--surface-background': '#ffffff',
+      '--surface-border': '#dfe3e8',
+      '--input-border': '#cbd2d9',
+      '--text-primary': '#17202a',
+      '--text-secondary': '#657786',
+      '--text-body': '#35434f',
+      '--text-muted': '#8996a3',
+      '--link-color': '#1769aa',
+      '--link-hover': '#0f4f82',
+      '--danger-color': '#b42318',
+      '--nav-background': '#17202a',
+      '--nav-active-background': '#35434f',
+      '--nav-border': '#8996a3',
+      '--nav-text': '#ffffff',
+      '--button-background': '#1769aa',
+      '--focus-shadow': 'rgba(23, 105, 170, 0.14)',
+      '--card-shadow': 'rgba(23, 32, 42, 0.08)',
+      colorScheme: 'light',
+    },
+    ':root[data-theme="dark"]': {
+      '--app-background': '#121820',
+      '--surface-background': '#1d2733',
+      '--surface-border': '#354454',
+      '--input-border': '#4a5b6d',
+      '--text-primary': '#f1f5f9',
+      '--text-secondary': '#b0becb',
+      '--text-body': '#d5dee7',
+      '--text-muted': '#a0afbd',
+      '--link-color': '#78baff',
+      '--link-hover': '#a8d2ff',
+      '--danger-color': '#ff8b82',
+      '--nav-background': '#0c1117',
+      '--nav-active-background': '#263443',
+      '--nav-border': '#66788a',
+      '--nav-text': '#f1f5f9',
+      '--button-background': '#2677b8',
+      '--focus-shadow': 'rgba(120, 186, 255, 0.24)',
+      '--card-shadow': 'rgba(0, 0, 0, 0.28)',
+      colorScheme: 'dark',
+    },
+    '*': {
+      boxSizing: 'border-box',
+    },
+    html: {
+      height: '100%',
+    },
+    body: {
+      height: '100%',
+      margin: 0,
+      backgroundColor: 'var(--app-background)',
+      color: 'var(--text-primary)',
+      fontFamily: 'Arial, sans-serif',
+      transition: 'background-color 150ms ease, color 150ms ease',
+    },
+    '#root': {
+      height: '100%',
+      minHeight: '100%',
+    },
+    button: {
+      font: 'inherit',
+    },
+    'input, textarea, select': {
+      backgroundColor: 'var(--surface-background)',
+      color: 'var(--text-primary)',
+    },
+  },
+});

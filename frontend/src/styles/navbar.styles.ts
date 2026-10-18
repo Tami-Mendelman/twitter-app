@@ -8,15 +8,15 @@ export const useNavbarStyles = createUseStyles({
     gap: '24px',
     alignItems: 'center',
     padding: '16px 32px',
-    backgroundColor: '#17202a',
+    backgroundColor: 'var(--nav-background)',
     '& a': {
-      color: '#fff',
+      color: 'var(--nav-text)',
       textDecoration: 'none',
       padding: '12px 16px',
       borderRadius: '6px',
     },
     '& a.active': {
-      backgroundColor: '#35434f',
+      backgroundColor: 'var(--nav-active-background)',
     },
     [down('phone')]: {
       gap: '8px',
@@ -27,15 +27,15 @@ export const useNavbarStyles = createUseStyles({
     },
   },
   Identity: {
-    color: '#fff',
+    color: 'var(--nav-text)',
     padding: '12px 16px',
   },
   Logout: {
     padding: '12px 16px',
-    border: '1px solid #8996a3',
+    border: '1px solid var(--nav-border)',
     borderRadius: '6px',
     backgroundColor: 'transparent',
-    color: '#fff',
+    color: 'var(--nav-text)',
     cursor: 'pointer',
     font: 'inherit',
   },

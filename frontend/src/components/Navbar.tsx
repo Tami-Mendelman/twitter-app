@@ -1,6 +1,7 @@
 import { NavLink } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { useAuth } from './auth-context';
+import ThemeToggleButton from './ThemeToggleButton';
 import { useNavbarStyles } from '../styles/navbar.styles';
 
 const Navbar = () => {
@@ -18,6 +19,7 @@ const Navbar = () => {
           {t('SIGNED_IN_AS', { displayName: user.displayName })}
         </span>
       ) : null}
+      <ThemeToggleButton />
       <button className={classes.Logout} type="button" onClick={signOut}>
         {t('LOGOUT')}
       </button>

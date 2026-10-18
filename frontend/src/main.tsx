@@ -5,8 +5,9 @@ import { BrowserRouter } from 'react-router-dom';
 import './i18n';
 import App from './App';
 import { AuthProvider } from './components/AuthProvider';
+import { ThemeProvider } from './components/ThemeProvider';
 
 const queryClient = new QueryClient();
 
-createRoot(document.getElementById('root')!).render( <StrictMode> <QueryClientProvider client={queryClient}> <BrowserRouter> <AuthProvider> <App /> </AuthProvider> </BrowserRouter> </QueryClientProvider> </StrictMode>,
+createRoot(document.getElementById('root')!).render( <StrictMode> <QueryClientProvider client={queryClient}> <BrowserRouter> <ThemeProvider> <AuthProvider> <App /> </AuthProvider> </ThemeProvider> </BrowserRouter> </QueryClientProvider> </StrictMode>,
 );
