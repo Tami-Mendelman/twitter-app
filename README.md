@@ -14,9 +14,10 @@ by default; ContentService listens on port `3002`. Configure the ContentService
 RPC target using `USER_SERVICE_HOST` and `USER_SERVICE_PORT` when needed.
 
 ContentService validates post authors through the Jayson JSON-RPC method
-`users.getById`, served by UserService at `/rpc`. The shared client factory and
+`getById`, served by UserService at `/rpc`. The shared client factory and
 RPC wrappers are in `backend/libs`.
 
-Post endpoints are `POST /api/posts`, `GET /api/posts`,
-`GET /api/posts/:postId`, `PATCH /api/posts/:postId`, and
-`DELETE /api/posts/:postId`.
+Post endpoints are `POST /api/content-service/posts`,
+`GET /api/content-service/posts`, `GET /api/content-service/posts/:postId`,
+`PATCH /api/content-service/posts/:postId`, and
+`DELETE /api/content-service/posts/:postId`.

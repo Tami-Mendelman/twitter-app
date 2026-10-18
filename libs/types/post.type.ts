@@ -9,9 +9,9 @@ export type Post = {
     createdAt: Date;
 };
 
-export type CreatePost = Pick<Post, "name" | "text"> & {
+export type CreatePostPayload = Pick<Post, "name" | "text"> & {
     userId: string;
     media?: string;
 };
 
-export type PostChanges = Partial<Pick<Post, "name" | "text" | "media">>;
+export type UpdatePostPayload = Partial<Pick<Post, "name" | "text" | "media">>;

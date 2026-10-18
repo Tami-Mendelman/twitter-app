@@ -1,43 +1,40 @@
 import { Router } from "express";
+import { postController } from "./post.controller.js";
+import { validateRequest } from "@twitter-app/shared/validation.middleware.js";
 import {
-    createPostController,
-    deletePostController,
-    getAllPostsController,
-    getPostByIdController,
-    updatePostController,
-} from "./post.controller.js";
-import { validateRequest } from "../validation.middleware.js";
-import {
-    createPostSchema,
-    postIdParamsSchema,
-    updatePostSchema,
+    canCreate,
+    canDelete,
+    canGetAll,
+    canGetById,
+    canUpdate,
+    canUpdateParams,
 } from "./post.validator.js";
 
 export const postRouter = Router();
 
-postRouter.post(
-    "/",
-    validateRequest(createPostSchema, "body"),
-    createPostController,
-);
-
-postRouter.get("/", getAllPostsController);
+postRouter.get("/", validateRequest(canGetAll), postController.getAll);
 
 postRouter.get(
-    "/:postId",
-    validateRequest(postIdParamsSchema, "params"),
-    getPostByIdController,
+    "/:id",
+    validateRequest(canGetById, "params"),
+    postController.getById,
+);
+
+postRouter.post(
+    "/",
+    validateRequest(canCreate, "body"),
+    postController.create,
 );
 
 postRouter.patch(
-    "/:postId",
-    validateRequest(postIdParamsSchema, "params"),
-    validateRequest(updatePostSchema, "body"),
-    updatePostController,
+    "/:id",
+    validateRequest(canUpdateParams, "params"),
+    validateRequest(canUpdate, "body"),
+    postController.update,
 );
 
 postRouter.delete(
-    "/:postId",
-    validateRequest(postIdParamsSchema, "params"),
-    deletePostController,
+    "/:id",
+    validateRequest(canDelete, "params"),
+    postController.delete,
 );

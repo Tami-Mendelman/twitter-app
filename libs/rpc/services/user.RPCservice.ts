@@ -1,9 +1,6 @@
 import jayson from "jayson/promise/index.js";
-import { rpcClientRequest } from "./rpc.functions.js";
-
-export type UserRpcResult = {
-    _id: string;
-} | null;
+import { rpcClientRequest } from "../../rpc.functions.js";
+import type { UserRpcResult } from "./user.type.js";
 
 const parseUserRpcResult = (result: unknown): UserRpcResult => {
     if (result === null) {
@@ -29,13 +26,13 @@ export const userRPCService = (hostname: string, port: number) => {
         path: "/rpc",
     });
 
-    const getUserById = (userId: string) =>
+    const getUserById = (userId: string): Promise<UserRpcResult> =>
         rpcClientRequest(
             rpcClient,
-            "users.getById",
+            "getById",
             { userId },
             parseUserRpcResult,
         );
 
-    return { getUserById };
+    return { getUserById: getUserById };
 };

@@ -1,67 +1,60 @@
-import type { RequestHandler, Response } from "express";
-import {
-    createPostManager,
-    deletePostManager,
-    getAllPostsManager,
-    getPostByIdManager,
-    updatePostManager,
-} from "./post.manager.js";
-import type { CreatePost, PostChanges } from "@twitter-app/shared/type/post.types.js";
+import type { Request, Response } from "express";
+import { postManager } from "./post.manager.js";
+import type {
+    CreatePostPayload,
+    UpdatePostPayload,
+} from "@twitter-app/shared/types/post.type.js";
 
-type CreatePostHandler = RequestHandler<
-    Record<string, string>,
-    unknown,
-    CreatePost
->;
+export const postController = {
+    sendPostResponse: (
+        res: Response,
+        post: Awaited<ReturnType<typeof postManager.getById>>,
+    ): void =>
+        post
+            ? void res.status(200).json(post)
+            : void res.status(404).json({ message: "Post not found" }),
 
-type UpdatePostHandler = RequestHandler<
-    { postId: string },
-    unknown,
-    PostChanges
->;
+    getAll: async (
+        _req: Request,
+        res: Response,
+    ): Promise<void> => {
+        res.status(200).json(await postManager.getAll());
+    },
 
-type PostIdHandler = RequestHandler<{ postId: string }>;
+    getById: async (
+        req: Request<{ id: string }>,
+        res: Response,
+    ): Promise<void> => {
+        postController.sendPostResponse(
+            res,
+            await postManager.getById(req.params.id),
+        );
+    },
 
-type PostResult = Awaited<ReturnType<typeof getPostByIdManager>>;
+    create: async (
+        req: Request<Record<string, string>, unknown, CreatePostPayload>,
+        res: Response,
+    ): Promise<void> => {
+        res.status(201).json(await postManager.create(req.body));
+    },
 
-const sendPostResponse = (
-    res: Response,
-    post: PostResult,
-): void =>
-    post
-        ? void res.status(200).json(post)
-        : void res.status(404).json({ message: "Post not found" });
+    update: async (
+        req: Request<{ id: string }, unknown, UpdatePostPayload>,
+        res: Response,
+    ): Promise<void> => {
+        postController.sendPostResponse(
+            res,
+            await postManager.update(req.params.id, req.body),
+        );
+    },
 
-const createPost: CreatePostHandler = async (req, res): Promise<void> => {
-    const post = await createPostManager(req.body);
-
-    post
-        ? void res.status(201).json(post)
-        : void res.status(404).json({ message: "User not found" });
+    delete: async (
+        req: Request<{ id: string }>,
+        res: Response,
+    ): Promise<void> => {
+        postController.sendPostResponse(
+            res,
+            await postManager.delete(req.params.id),
+        );
+    },
 };
-
-const getAllPosts: RequestHandler = async (_req, res): Promise<void> => {
-    const posts = await getAllPostsManager();
-    res.status(200).json(posts);
-};
-
-const getPostById: PostIdHandler = async (req, res): Promise<void> => {
-    const post = await getPostByIdManager(req.params.postId);
-    sendPostResponse(res, post);
-};
-
-const updatePost: UpdatePostHandler = async (req, res): Promise<void> => {
-    const post = await updatePostManager(req.params.postId, req.body);
-    sendPostResponse(res, post);
-};
-
-const deletePost: PostIdHandler = async (req, res): Promise<void> => {
-    const post = await deletePostManager(req.params.postId);
-    sendPostResponse(res, post);
-};
-
-export const createPostController = createPost;
-export const getAllPostsController = getAllPosts;
-export const getPostByIdController = getPostById;
-export const updatePostController = updatePost;
-export const deletePostController = deletePost;

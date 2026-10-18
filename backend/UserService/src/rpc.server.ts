@@ -1,33 +1,29 @@
 import jayson from "jayson/promise/index.js";
 import { rpcServerRequest } from "@twitter-app/shared/rpc.functions.js";
-import { getUserByIdRpcManager } from "./user/user.manager.js";
-import { OBJECT_ID_PATTERN } from "./user/user.consts.js";
+import { joiMongoId } from "@twitter-app/shared/validation/joi.helpers.js";
+import { userManager } from "./user/user.manager.js";
 import type { RequestParamsLike } from "jayson/promise/index.js";
-
-type GetUserByIdParams = {
-    userId: string;
-};
 
 const parseGetUserByIdParams = (
     params: RequestParamsLike,
-): [GetUserByIdParams] => {
+): [string] => {
     if (
         typeof params === "object" &&
         params !== null &&
         !Array.isArray(params) &&
         "userId" in params &&
         typeof params.userId === "string" &&
-        OBJECT_ID_PATTERN.test(params.userId)
+        !joiMongoId().validate(params.userId).error
     ) {
-        return [{ userId: params.userId }];
+        return [params.userId];
     }
 
-    throw new Error("Invalid users.getById RPC parameters");
+    throw new Error("Invalid getById RPC parameters");
 };
 
 export const rpcServer = new jayson.Server({
-    "users.getById": rpcServerRequest(
-        getUserByIdRpcManager,
+    getById: rpcServerRequest(
+        userManager.getById,
         parseGetUserByIdParams,
     ),
 });

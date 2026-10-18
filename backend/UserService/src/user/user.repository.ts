@@ -1,14 +1,16 @@
-import { UserModel } from "../models.js";
-import type { User } from "@twitter-app/shared/type/user.types.js";
+import mongoose from "mongoose";
+import { createUserModel } from "@twitter-app/shared/models/user.model.js";
+import type { User } from "@twitter-app/shared/types/user.type.js";
 
-export const createUser = async (user: User) =>
-    UserModel.create(user);
+const UserModel = createUserModel(mongoose);
 
-export const getAllUsers = async () =>
-    UserModel.find().lean();
 
-export const getUserById = async (userId: string) =>
-    UserModel.findById(userId).lean();
+export const userRepository = {
+    create: async (user: User) =>
+        UserModel.create(user),
+    getAll: async () =>
+        UserModel.find().lean(),
+    getById: async (userId: string) =>
+        UserModel.findById(userId).lean(),
+};
 
-export const getUserByUsername = async (username: string) =>
-    UserModel.findOne({ username }).lean();

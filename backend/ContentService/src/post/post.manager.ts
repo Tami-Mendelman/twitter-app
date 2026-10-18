@@ -1,29 +1,36 @@
-import {
-    createPost,
-    deletePost,
-    getAllPosts,
-    getPostById,
-    updatePost,
-} from "./post.repository.js";
-import { getUserByIdRpc } from "../rpc.client.js";
-import type { CreatePost, PostChanges } from "@twitter-app/shared/type/post.types.js";
+import isNil from "lodash/fp/isNil.js";
+import { postRepository } from "./post.repository.js";
+import { userService } from "../rpc.client.js";
+import type {
+    CreatePostPayload,
+    UpdatePostPayload,
+} from "@twitter-app/shared/types/post.type.js";
 
-export const createPostManager = async (post: CreatePost) => {
-    const userExists = await getUserByIdRpc(post.userId);
+class NotFoundError extends Error {
+    readonly status = 404;
 
-    return userExists ? createPost(post) : null;
+    constructor(message: string) {
+        super(message);
+        this.name = "NotFoundError";
+    }
+}
+
+export const postManager = {
+    getAll: postRepository.getAll,
+
+    getById: postRepository.getById,
+
+    create: async (post: CreatePostPayload) => {
+        const user = await userService.getUserById(post.userId);
+
+        if (isNil(user)) {
+            throw new NotFoundError("User not found");
+        }
+
+        return await postRepository.create(post);
+    },
+
+    update: postRepository.update,
+
+    delete: postRepository.delete,
 };
-
-export const getAllPostsManager = async () =>
-    getAllPosts();
-
-export const getPostByIdManager = async (postId: string) =>
-    getPostById(postId);
-
-export const updatePostManager = async (
-    postId: string,
-    changes: PostChanges,
-) => updatePost(postId, changes);
-
-export const deletePostManager = async (postId: string) =>
-    deletePost(postId);
