@@ -1,17 +1,27 @@
 import Joi from "joi";
-import { joiMongoId } from "@twitter-app/shared/validation/joi.helpers.js";
+import { joiMongoId } from "@libs/validation/joi.helpers.js";
+
+const emptyObjectSchema = Joi.object({}).required();
 
 export const canGetAll = Joi.object({
-    body: {},
-    query: {},
-    params: {},
+    body: emptyObjectSchema,
+    params: emptyObjectSchema,
+    query: emptyObjectSchema,
 });
 
 export const canCreate = Joi.object({
-    username: Joi.string().trim().min(1).required(),
-    displayName: Joi.string().trim().min(1).required(),
+    body: Joi.object({
+        username: Joi.string().trim().min(1).required(),
+        displayName: Joi.string().trim().min(1).required(),
+    }).required(),
+    params: emptyObjectSchema,
+    query: emptyObjectSchema,
 });
 
 export const canGetById = Joi.object({
-    userId: joiMongoId().required(),
+    body: emptyObjectSchema,
+    params: Joi.object({
+        id: joiMongoId().required(),
+    }).required(),
+    query: emptyObjectSchema,
 });

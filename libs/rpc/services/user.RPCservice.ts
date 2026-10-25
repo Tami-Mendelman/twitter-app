@@ -1,5 +1,5 @@
 import jayson from "jayson/promise/index.js";
-import { rpcClientRequest } from "../../rpc.functions.js";
+import { rpcClientRequest } from "../rpc.functions.js";
 import type { UserRpcResult } from "./user.type.js";
 
 const parseUserRpcResult = (result: unknown): UserRpcResult => {
@@ -26,13 +26,13 @@ export const userRPCService = (hostname: string, port: number) => {
         path: "/rpc",
     });
 
-    const getUserById = (userId: string): Promise<UserRpcResult> =>
-        rpcClientRequest(
-            rpcClient,
-            "getById",
-            { userId },
-            parseUserRpcResult,
-        );
-
-    return { getUserById: getUserById };
+    return {
+        getUserById: (userId: string): Promise<UserRpcResult> =>
+            rpcClientRequest(
+                rpcClient,
+                "getById",
+                { userId },
+                parseUserRpcResult,
+            ),
+    };
 };

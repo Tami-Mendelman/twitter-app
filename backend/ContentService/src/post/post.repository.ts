@@ -1,37 +1,27 @@
-import mongoose, { type HydratedDocument } from "mongoose";
-import { createPostModel } from "@twitter-app/shared/models/post.model.js";
-import type {
-    CreatePostPayload,
-    Post,
-    UpdatePostPayload,
-} from "@twitter-app/shared/types/post.type.js";
-
-const PostModel = createPostModel(mongoose);
-
-type CreatedPost = HydratedDocument<Post>;
-type LeanPost = Awaited<
-    ReturnType<ReturnType<typeof PostModel.findById>["lean"]>
->;
-type LeanPosts = Awaited<
-    ReturnType<ReturnType<typeof PostModel.find>["lean"]>
->;
+import { postModel } from "@libs/models/post.model.js";
+import type { Post } from "@libs/types/post.type.js";
+import type { CreatePostPayload, UpdatePostPayload } from "./post.types.js";
 
 export const postRepository = {
-    getAll: async (): Promise<LeanPosts> =>
-        await PostModel.find().sort({ createdAt: -1 }).lean(),
-    getById: async (postId: string): Promise<LeanPost> =>
-        await PostModel.findById(postId).lean(),
-    create: async (post: CreatePostPayload): Promise<CreatedPost> =>
-        await PostModel.create(post),
+    getAll: async (): Promise<Post[]> =>
+        await postModel.find().sort({ createdAt: -1 }).lean(),
+
+    getById: async (id: string): Promise<Post> =>
+        await postModel.findById(id).orFail().lean(),
+
+    create: async (post: CreatePostPayload): Promise<Post> =>
+        await postModel.create(post),
+
     update: async (
-        postId: string,
-        changes: UpdatePostPayload,
-    ): Promise<LeanPost> =>
-        await PostModel.findByIdAndUpdate(
-            postId,
-            { $set: changes },
+        id: string,
+        post: UpdatePostPayload,
+    ): Promise<Post> =>
+        await postModel.findByIdAndUpdate(
+            id,
+            { $set: post },
             { returnDocument: "after", runValidators: true },
-        ).lean(),
-    delete: async (postId: string): Promise<LeanPost> =>
-        await PostModel.findByIdAndDelete(postId).lean(),
+        ).orFail().lean(),
+
+    delete: async (id: string): Promise<Post> =>
+        await postModel.findByIdAndDelete(id).orFail().lean(),
 };

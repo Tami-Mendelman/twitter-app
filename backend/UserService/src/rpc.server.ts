@@ -1,6 +1,6 @@
 import jayson from "jayson/promise/index.js";
-import { rpcServerRequest } from "@twitter-app/shared/rpc.functions.js";
-import { joiMongoId } from "@twitter-app/shared/validation/joi.helpers.js";
+import { rpcServerRequest } from "@libs/rpc/rpc.functions.js";
+import { joiMongoId } from "@libs/validation/joi.helpers.js";
 import { userManager } from "./user/user.manager.js";
 import type { RequestParamsLike } from "jayson/promise/index.js";
 

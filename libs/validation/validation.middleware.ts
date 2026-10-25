@@ -29,7 +29,7 @@ export const validateRequest = (
             },
             { allowDots: false },
         );
-        const { error } = schema.validate(sanitizedRequest, {
+        const { error, value } = schema.validate(sanitizedRequest, {
             abortEarly: false,
             convert: true,
         });
@@ -42,6 +42,9 @@ export const validateRequest = (
             return;
         }
 
+        req.body = value.body;
+        req.params = value.params;
+        req.query = value.query;
         next();
         return;
     }

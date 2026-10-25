@@ -9,7 +9,10 @@
     "isolatedModules": true,
     "noUncheckedSideEffectImports": true,
     "moduleDetection": "force",
-    "skipLibCheck": true
+    "skipLibCheck": true,
+    "paths": {
+      "@libs/*": ["../../libs/*"]
+    }
   },
   "include": ["src/**/*.ts"]
 }

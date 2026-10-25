@@ -1,12 +1,11 @@
-import mongoose from "mongoose";
-import { initApp } from "@twitter-app/shared/app.js";
+import { initApp } from "@libs/server/init.js";
+import { serviceInfo } from "@libs/server/serviceInfo.js";
 import { config } from "./config.js";
 import { appRouter } from "./router.js";
 
-void initApp({
+initApp({
     appRouter,
-    mongodbUri: config.mongodbUri,
-    mongoose,
-    port: config.port,
-    serviceName: "ContentService",
+    mongodbUri: config.db.mongoUri,
+    port: config.server.port,
+    serviceName: serviceInfo.content.name,
 });
