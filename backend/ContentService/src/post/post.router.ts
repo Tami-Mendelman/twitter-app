@@ -1,13 +1,12 @@
 import { Router } from "express";
 import { postController } from "./post.controller.js";
-import { validateRequest } from "@twitter-app/shared/validation.middleware.js";
+import { validateRequest } from "@libs/validation/validation.middleware.js";
 import {
     canCreate,
     canDelete,
     canGetAll,
     canGetById,
     canUpdate,
-    canUpdateParams,
 } from "./post.validator.js";
 
 export const postRouter = Router();
@@ -16,25 +15,24 @@ postRouter.get("/", validateRequest(canGetAll), postController.getAll);
 
 postRouter.get(
     "/:id",
-    validateRequest(canGetById, "params"),
+    validateRequest(canGetById),
     postController.getById,
 );
 
 postRouter.post(
     "/",
-    validateRequest(canCreate, "body"),
+    validateRequest(canCreate),
     postController.create,
 );
 
 postRouter.patch(
     "/:id",
-    validateRequest(canUpdateParams, "params"),
-    validateRequest(canUpdate, "body"),
+    validateRequest(canUpdate),
     postController.update,
 );
 
 postRouter.delete(
     "/:id",
-    validateRequest(canDelete, "params"),
+    validateRequest(canDelete),
     postController.delete,
 );

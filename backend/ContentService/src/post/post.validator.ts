@@ -1,40 +1,56 @@
 import Joi from "joi";
-import { MAX_TEXT_LENGTH } from "@twitter-app/shared/constants/post.constants.js";
-import { joiMongoId } from "@twitter-app/shared/validation/joi.helpers.js";
+import { MAX_TEXT_LENGTH } from "@libs/constants/post.constants.js";
+import { joiMongoId } from "@libs/validation/joi.helpers.js";
 
 const mediaSchema = Joi.string().uri({
     scheme: ["http", "https"],
 });
 
+const emptyObjectSchema = Joi.object({}).required();
+
 export const canGetAll = Joi.object({
-    body: {},
-    query: {},
-    params: {},
+    body: emptyObjectSchema,
+    params: emptyObjectSchema,
+    query: emptyObjectSchema,
 });
 
 export const canCreate = Joi.object({
-    userId: joiMongoId().required(),
-    name: Joi.string().trim().min(1).required(),
-    text: Joi.string().max(MAX_TEXT_LENGTH).required(),
-    media: mediaSchema.optional(),
+    body: Joi.object({
+        userId: joiMongoId().required(),
+        name: Joi.string().trim().min(1).required(),
+        text: Joi.string().max(MAX_TEXT_LENGTH).required(),
+        media: mediaSchema.optional(),
+    }).required(),
+    params: emptyObjectSchema,
+    query: emptyObjectSchema,
 });
 
 export const canUpdate = Joi.object({
-    name: Joi.string().trim().min(1),
-    text: Joi.string().max(MAX_TEXT_LENGTH),
-    media: mediaSchema,
-})
-    .min(1)
-    .required();
-
-export const canGetById = Joi.object({
-    id: joiMongoId().required(),
+    body: Joi.object({
+        name: Joi.string().trim().min(1),
+        text: Joi.string().max(MAX_TEXT_LENGTH),
+        media: mediaSchema,
+    })
+        .min(1)
+        .required(),
+    params: Joi.object({
+        id: joiMongoId().required(),
+    }).required(),
+    query: emptyObjectSchema,
 });
 
-export const canUpdateParams = Joi.object({
-    id: joiMongoId().required(),
+export const canGetById = Joi.object({
+    body: emptyObjectSchema,
+    params: Joi.object({
+        id: joiMongoId().required(),
+    }).required(),
+    query: emptyObjectSchema,
 });
 
 export const canDelete = Joi.object({
-    id: joiMongoId().required(),
+    body: emptyObjectSchema,
+    params: Joi.object({
+        id: joiMongoId().required(),
+    }).required(),
+    query: emptyObjectSchema,
 });

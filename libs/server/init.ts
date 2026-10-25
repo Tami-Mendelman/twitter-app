@@ -1,25 +1,19 @@
-import express, { type Router } from "express";
-import mongoose from "mongoose";
-
-type InitAppOptions = {
-    appRouter: Router;
-    mongodbUri: string;
-    port: number;
-    serviceName: string;
-};
+import express from "express";
+import { connect } from "mongoose";
+import type { InitAppOptions } from "../types/app.type.js";
 
 export const initApp = async ({
     appRouter,
     mongodbUri,
     port,
     serviceName,
-}: InitAppOptions): Promise<void> => {
+}: InitAppOptions): Promise<boolean> => {
     try {
-        await mongoose.connect(mongodbUri);
+        await connect(mongodbUri);
     } catch (error) {
         console.error(`${serviceName} startup failed:`, error);
         process.exitCode = 1;
-        return;
+        return false;
     }
 
     const app = express();
@@ -33,4 +27,6 @@ export const initApp = async ({
         console.error(`${serviceName} failed to start:`, error);
         process.exitCode = 1;
     });
+
+    return true;
 };

@@ -1,30 +1,21 @@
 import isNil from "lodash/fp/isNil.js";
+import { throwNotFoundError } from "@libs/errors/error.helpers.js";
 import { postRepository } from "./post.repository.js";
 import { userService } from "../rpc.client.js";
-import type {
-    CreatePostPayload,
-    UpdatePostPayload,
-} from "@twitter-app/shared/types/post.type.js";
-
-class NotFoundError extends Error {
-    readonly status = 404;
-
-    constructor(message: string) {
-        super(message);
-        this.name = "NotFoundError";
-    }
-}
+import type { CreatePostPayload } from "./post.types.js";
 
 export const postManager = {
     getAll: postRepository.getAll,
 
     getById: postRepository.getById,
 
-    create: async (post: CreatePostPayload) => {
+    create: async (
+        post: CreatePostPayload,
+    ): Promise<Awaited<ReturnType<typeof postRepository.create>>> => {
         const user = await userService.getUserById(post.userId);
 
         if (isNil(user)) {
-            throw new NotFoundError("User not found");
+            throwNotFoundError("User");
         }
 
         return await postRepository.create(post);
