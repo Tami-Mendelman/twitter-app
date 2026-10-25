@@ -1,5 +1,5 @@
 import Joi from "joi";
-import { MAX_TEXT_LENGTH } from "@libs/constants/post.constants.js";
+import { MAX_TEXT_LENGTH } from "@libs/consts/post.consts.js";
 import { joiMongoId } from "@libs/validation/joi.helpers.js";
 
 const mediaSchema = Joi.string().uri({

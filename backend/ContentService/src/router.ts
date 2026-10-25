@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { serviceInfo } from "@libs/serviceInfo.js";
+import { serviceInfo } from "@libs/server/serviceInfo.js";
 import { postRouter } from "./post/post.router.js";
 
 export const appRouter = Router();

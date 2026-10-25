@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { serviceInfo } from "@libs/serviceInfo.js";
+import { serviceInfo } from "@libs/server/serviceInfo.js";
 import { userRouter } from "./user/user.router.js";
 
 export const appRouter = Router();

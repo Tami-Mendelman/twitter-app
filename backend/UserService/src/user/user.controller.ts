@@ -10,7 +10,10 @@ export const userController = {
         res.json(await userManager.getAll());
     },
 
-    getById: async (req: Request, res: Response): Promise<void> => {
-        res.json(await userManager.getById(req.params.id as string));
+    getById: async (
+        req: Request<{ id: string }>,
+        res: Response,
+    ): Promise<void> => {
+        res.json(await userManager.getById(req.params.id));
     },
 };

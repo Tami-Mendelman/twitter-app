@@ -1,12 +1,6 @@
 import type { Request, Response } from "express";
+import type { UpdatePostPayload } from "./post.types.js";
 import { postManager } from "./post.manager.js";
-
-type PostResult = Awaited<ReturnType<typeof postManager.getById>>;
-
-const sendPostResponse = (res: Response, post: PostResult): void =>
-    post
-        ? void res.status(200).json(post)
-        : void res.status(404).json({ message: "Post not found" });
 
 export const postController = {
     getAll: async (
@@ -17,10 +11,10 @@ export const postController = {
     },
 
     getById: async (
-        req: Request,
+        req: Request<{ id: string }>,
         res: Response,
     ): Promise<void> => {
-        sendPostResponse(res, await postManager.getById(req.params.id as string));
+        res.status(200).json(await postManager.getById(req.params.id));
     },
 
     create: async (
@@ -31,19 +25,18 @@ export const postController = {
     },
 
     update: async (
-        req: Request,
+        req: Request<{ id: string }, unknown, UpdatePostPayload>,
         res: Response,
     ): Promise<void> => {
-        sendPostResponse(
-            res,
-            await postManager.update(req.params.id as string, req.body),
+        res.status(200).json(
+            await postManager.update(req.params.id, req.body),
         );
     },
 
     delete: async (
-        req: Request,
+        req: Request<{ id: string }>,
         res: Response,
     ): Promise<void> => {
-        sendPostResponse(res, await postManager.delete(req.params.id as string));
+        res.status(200).json(await postManager.delete(req.params.id));
     },
 };

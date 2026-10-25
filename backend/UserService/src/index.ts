@@ -1,5 +1,5 @@
 import { initApp } from "@libs/server/init.js";
-import { serviceInfo } from "@libs/serviceInfo.js";
+import { serviceInfo } from "@libs/server/serviceInfo.js";
 import { config } from "./config.js";
 import { appRouter } from "./router.js";
 import { rpcServer } from "./rpc.server.js";
