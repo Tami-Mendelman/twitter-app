@@ -16,29 +16,29 @@ export const useFeedStyles = createUseStyles({
       font: 'inherit',
     },
   },
-  Page: {
+  page: {
     width: '100%',
     padding: '24px 32px',
   },
-  Header: {
+  header: {
     width: '100%',
     maxWidth: '720px',
     margin: '0 auto 32px',
     paddingBottom: '16px',
     borderBottom: '1px solid #dfe3e8',
   },
-  Title: {
+  title: {
     margin: 0,
     fontSize: '32px',
     fontWeight: 700,
     color: '#17202a',
   },
-  Subtitle: {
+  subtitle: {
     marginTop: '8px',
     color: '#657786',
     fontSize: '16px',
   },
-  SearchInput: {
+  searchInput: {
     display: 'block',
     width: '100%',
     maxWidth: '720px',
@@ -60,7 +60,7 @@ export const useFeedStyles = createUseStyles({
       boxShadow: '0 0 0 3px rgba(23, 105, 170, 0.14)',
     },
   },
-  Feed: {
+  feed: {
     display: 'flex',
     flexDirection: 'column',
     gap: '16px',
@@ -68,21 +68,21 @@ export const useFeedStyles = createUseStyles({
     maxWidth: '720px',
     margin: '0 auto',
   },
-  Message: {
+  message: {
     padding: '24px',
     backgroundColor: '#fff',
     border: '1px solid #dfe3e8',
     borderRadius: '12px',
     color: '#657786',
   },
-  Error: {
+  error: {
     color: '#b42318',
   },
   [down('phone')]: {
-    Page: {
+    page: {
       padding: '20px 16px',
     },
-    Title: {
+    title: {
       fontSize: '26px',
     },
   },

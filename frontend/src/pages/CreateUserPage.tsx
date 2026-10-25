@@ -1,36 +1,65 @@
-import { useCreateUserForm } from '../functions/user-form.functions';
+import type { FC } from 'react';
+import { isAxiosError } from 'axios';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { useForm } from 'react-hook-form';
+import { trim } from 'lodash/fp';
+import userService from '../services/user';
 import { useUsersStyles } from '../styles/users.styles';
 import { useFeedStyles } from '../styles/feed.styles';
 import { useTranslation } from 'react-i18next';
+import type { CreateUserPayload } from '../../../libs/types/user.type.js';
+import { QUERY_KEYS } from '../utils/queryKeys';
 
-const CreateUserPage = () => {
+const CreateUserPage: FC = () => {
   const { t } = useTranslation('translation', { keyPrefix: 'CREATE_USER_PAGE' });
   const classes = useUsersStyles();
   const pageClasses = useFeedStyles();
-
+  const queryClient = useQueryClient();
   const {
     register,
-    handleFormSubmit,
-    errors,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<CreateUserPayload>();
+
+  const {
+    mutate: create,
     isPending,
     error,
     isSuccess,
-  } = useCreateUserForm();
+  } = useMutation({
+    mutationFn: userService.createUser,
+    onSuccess: async () => {
+      await queryClient.invalidateQueries({ queryKey: QUERY_KEYS.USERS });
+    },
+  });
+
+  const handleFormSubmit = handleSubmit((payload: CreateUserPayload) => {
+    create(payload);
+  });
+
+  const getCreateUserError = (error: Error): string =>
+    !isAxiosError<{ code?: string; message?: string }>(error)
+      ? error.message
+      : error.response?.data?.code === 'USERNAME_ALREADY_EXISTS'
+        ? t('USERNAME_EXISTS')
+        : trim(error.response?.data?.message ?? '') || error.message;
+
+  const createUserError = error ? getCreateUserError(error) : null;
 
   return (
-    <main className={pageClasses.Page}>
-      <header className={pageClasses.Header}>
-        <h1 className={pageClasses.Title}>{t('TITLE')}</h1>
-        <p className={pageClasses.Subtitle}>
+    <main className={pageClasses.page}>
+      <header className={pageClasses.header}>
+        <h1 className={pageClasses.title}>{t('TITLE')}</h1>
+        <p className={pageClasses.subtitle}>
           {t('SUBTITLE')}
         </p>
       </header>
 
-      <form className={classes.Form} onSubmit={handleFormSubmit}>
-        <label className={classes.Field}>
+      <form className={classes.form} onSubmit={handleFormSubmit}>
+        <label className={classes.field}>
           {t('USERNAME')}
           <input
-            className={classes.Input}
+            className={classes.input}
             {...register('username', {
               required: t('USERNAME_REQUIRED'),
               minLength: {
@@ -39,17 +68,17 @@ const CreateUserPage = () => {
               },
             })}
           />
-          {errors.username ? (
-            <span className={classes.ValidationError}>
+          {errors.username && (
+            <span className={classes.validationError}>
               {errors.username.message}
             </span>
-          ) : null}
+          )}
         </label>
 
-        <label className={classes.Field}>
+        <label className={classes.field}>
           {t('DISPLAY_NAME')}
           <input
-            className={classes.Input}
+            className={classes.input}
             {...register('displayName', {
               required: t('DISPLAY_NAME_REQUIRED'),
               minLength: {
@@ -58,25 +87,23 @@ const CreateUserPage = () => {
               },
             })}
           />
-          {errors.displayName ? (
-            <span className={classes.ValidationError}>
+          {errors.displayName && (
+            <span className={classes.validationError}>
               {errors.displayName.message}
             </span>
-          ) : null}
+          )}
         </label>
 
-        {error ? (
-          <p className={pageClasses.Error}>
-            {t('CREATE_ERROR', { message: error })}
+        {createUserError && (
+          <p className={pageClasses.error}>
+            {t('CREATE_ERROR', { message: createUserError })}
           </p>
-        ) : null}
+        )}
 
-        {isSuccess ? (
-          <p role="status">{t('CREATED')}</p>
-        ) : null}
+        {isSuccess && <p role="status">{t('CREATED')}</p>}
 
         <button
-          className={classes.Button}
+          className={classes.button}
           type="submit"
           disabled={isPending}
         >

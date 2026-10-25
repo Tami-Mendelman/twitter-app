@@ -14,6 +14,3 @@ void i18n.use(initReactI18next).init({
     escapeValue: false,
   },
 });
-
-document.documentElement.lang = 'he';
-document.documentElement.dir = 'rtl';

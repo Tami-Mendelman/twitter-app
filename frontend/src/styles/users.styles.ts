@@ -1,25 +1,25 @@
 import { createUseStyles } from 'react-jss';
 
 export const useUsersStyles = createUseStyles({
-  Card: {
+  card: {
     padding: '24px',
     backgroundColor: '#fff',
     border: '1px solid #dfe3e8',
     borderRadius: '12px',
   },
-  DisplayName: {
+  displayName: {
     margin: 0,
     color: '#17202a',
     fontSize: '18px',
     fontWeight: 700,
   },
-  Username: {
+  username: {
     margin: '8px 0 0',
     color: '#657786',
     fontSize: '14px',
   },
 
-  Form: {
+  form: {
     display: 'flex',
     flexDirection: 'column',
     gap: '16px',
@@ -31,14 +31,14 @@ export const useUsersStyles = createUseStyles({
     border: '1px solid #dfe3e8',
     borderRadius: '12px',
   },
-  Field: {
+  field: {
     display: 'flex',
     flexDirection: 'column',
     gap: '8px',
     color: '#17202a',
     fontWeight: 600,
   },
-  Input: {
+  input: {
     width: '100%',
     padding: '12px',
     border: '1px solid #cbd2d9',
@@ -49,7 +49,7 @@ export const useUsersStyles = createUseStyles({
       outlineOffset: '1px',
     },
   },
-  Button: {
+  button: {
     padding: '12px 16px',
     border: 0,
     borderRadius: '6px',
@@ -61,7 +61,7 @@ export const useUsersStyles = createUseStyles({
       cursor: 'not-allowed',
     },
   },
-  ValidationError: {
+  validationError: {
     margin: 0,
     color: '#b42318',
     fontSize: '14px',

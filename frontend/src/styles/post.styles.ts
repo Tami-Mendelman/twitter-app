@@ -1,42 +1,42 @@
 import { createUseStyles } from 'react-jss';
 
 export const usePostStyles = createUseStyles({
-  Card: {
+  card: {
     padding: '24px',
     backgroundColor: '#fff',
     border: '1px solid #dfe3e8',
     borderRadius: '12px',
     overflowWrap: 'anywhere',
   },
-  Author: {
+  author: {
     margin: 0,
     color: '#17202a',
     fontSize: '16px',
     fontWeight: 700,
   },
-  Username: {
+  username: {
     marginTop: '4px',
     color: '#657786',
     fontSize: '14px',
   },
-  Name: {
+  name: {
     margin: '16px 0 8px',
     fontSize: '18px',
     fontWeight: 700,
   },
-  Text: {
+  text: {
     margin: 0,
     color: '#35434f',
     lineHeight: 1.6,
     whiteSpace: 'pre-wrap',
   },
-  Media: {
+  media: {
     display: 'inline-block',
     marginTop: '16px',
     color: '#1769aa',
     overflowWrap: 'anywhere',
   },
-  Footer: {
+  footer: {
     display: 'flex',
     flexWrap: 'wrap',
     gap: '8px',
@@ -47,7 +47,7 @@ export const usePostStyles = createUseStyles({
     fontSize: '14px',
   },
 
-  Form: {
+  form: {
     display: 'flex',
     flexDirection: 'column',
     gap: '16px',
@@ -59,21 +59,21 @@ export const usePostStyles = createUseStyles({
     border: '1px solid #dfe3e8',
     borderRadius: '12px',
   },
-  Field: {
+  field: {
     display: 'flex',
     flexDirection: 'column',
     gap: '8px',
     color: '#17202a',
     fontWeight: 600,
   },
-  Input: {
+  input: {
     width: '100%',
     padding: '12px',
     border: '1px solid #cbd2d9',
     borderRadius: '6px',
     font: 'inherit',
   },
-  Textarea: {
+  textarea: {
     width: '100%',
     minHeight: '120px',
     padding: '12px',
@@ -82,7 +82,7 @@ export const usePostStyles = createUseStyles({
     font: 'inherit',
     resize: 'vertical',
   },
-  Button: {
+  button: {
     padding: '12px 16px',
     border: 0,
     borderRadius: '6px',
@@ -94,7 +94,7 @@ export const usePostStyles = createUseStyles({
       cursor: 'not-allowed',
     },
   },
-  ValidationError: {
+  validationError: {
     margin: 0,
     color: '#b42318',
     fontSize: '14px',

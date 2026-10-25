@@ -1,13 +1,14 @@
+import type { FC } from 'react';
 import { NavLink } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { useNavbarStyles } from '../styles/navbar.styles';
 
-const Navbar = () => {
+const Navbar: FC = () => {
   const { t } = useTranslation('translation', { keyPrefix: 'NAVBAR' });
   const classes = useNavbarStyles();
 
   return (
-    <nav className={classes.Navbar}>
+    <nav className={classes.navbar}>
       <NavLink to="/posts" end>{t('POSTS')}</NavLink>
       <NavLink to="/users" end>{t('USERS')}</NavLink>
       <NavLink to="/users/new">{t('CREATE_USER')}</NavLink>

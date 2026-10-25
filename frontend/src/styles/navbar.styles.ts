@@ -2,7 +2,7 @@ import { createUseStyles } from 'react-jss';
 import { down } from './breakpoints';
 
 export const useNavbarStyles = createUseStyles({
-  Navbar: {
+  navbar: {
     display: 'flex',
     flexWrap: 'wrap',
     gap: '16px',

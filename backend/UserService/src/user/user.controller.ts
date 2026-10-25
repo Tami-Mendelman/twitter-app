@@ -1,12 +1,12 @@
 import mongoose from "mongoose";
 import type { RequestHandler } from "express";
 import { userManager } from "./user.manager.js";
-import type { User } from "@twitter-app/shared/types/user.type.js";
+import type { CreateUserPayload } from "@twitter-app/shared/types/user.type.js";
 
 type CreateUserHandler = RequestHandler<
     Record<string, string>,
     unknown,
-    User
+    CreateUserPayload
 >;
 
 const createUser: CreateUserHandler = async (req, res): Promise<void> => {
