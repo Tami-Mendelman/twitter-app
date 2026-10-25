@@ -15,6 +15,19 @@ export const usePostStyles = createUseStyles({
     fontSize: '16px',
     fontWeight: 700,
   },
+  AuthorLink: {
+    display: 'inline-block',
+    color: 'inherit',
+    textDecoration: 'none',
+    '&:hover $Author': {
+      color: 'var(--link-color)',
+      textDecoration: 'underline',
+    },
+    '&:focus-visible': {
+      outline: '2px solid var(--link-color)',
+      outlineOffset: '4px',
+    },
+  },
   Username: {
     marginTop: '4px',
     color: 'var(--text-secondary)',
@@ -36,6 +49,26 @@ export const usePostStyles = createUseStyles({
     marginTop: '16px',
     color: 'var(--link-color)',
     overflowWrap: 'anywhere',
+  },
+  Image: {
+    display: 'block',
+    width: '100%',
+    maxHeight: '60vw',
+    marginTop: '16px',
+    objectFit: 'contain',
+    objectPosition: 'left center',
+  },
+  Pdf: {
+    width: '100%',
+    marginTop: '16px',
+  },
+  PdfViewer: {
+    display: 'block',
+    width: '100%',
+    height: '60vw',
+    maxHeight: '720px',
+    border: '1px solid var(--surface-border)',
+    borderRadius: '8px',
   },
   Footer: {
     display: 'flex',

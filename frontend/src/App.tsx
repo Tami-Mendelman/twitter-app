@@ -3,6 +3,7 @@ import ProtectedLayout from './components/ProtectedLayout';
 import LoginPage from './pages/LoginPage';
 import ProfilePage from './pages/ProfilePage';
 import RegisterPage from './pages/RegisterPage';
+import UserProfilePage from './pages/UserProfilePage';
 import {
   CreatePostPage,
   CreateUserPage,
@@ -21,6 +22,7 @@ const App = () => (
       <Route path="/" element={<Navigate to="/posts" replace />} />
       <Route path="/posts" element={<FeedPage />} />
       <Route path="/profile" element={<ProfilePage />} />
+      <Route path="/users/:userId" element={<UserProfilePage />} />
       <Route path="/users" element={<UsersPage />} />
       <Route path="/users/new" element={<CreateUserPage />} />
       <Route path="/posts/new" element={<CreatePostPage />} />

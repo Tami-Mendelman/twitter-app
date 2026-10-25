@@ -38,6 +38,15 @@ export const useProfileStyles = createUseStyles({
     color: 'var(--text-secondary)',
     fontSize: '16px',
   },
+  Message: {
+    width: '100%',
+    maxWidth: '720px',
+    margin: '0 auto',
+    color: 'var(--text-secondary)',
+  },
+  Error: {
+    color: 'var(--danger-color)',
+  },
   [down('phone')]: {
     Page: {
       padding: '20px',

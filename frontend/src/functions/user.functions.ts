@@ -8,6 +8,12 @@ export const getAllUsers = async (): Promise<User[]> => {
   return data;
 };
 
+export const getUserProfileById = async (userId: string): Promise<User> => {
+  const { data } = await api.get<User>(`/users/${userId}`);
+
+  return data;
+};
+
 export const createUser = async (
   payload: CreateUserPayload,
 ): Promise<User> => {

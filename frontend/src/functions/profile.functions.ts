@@ -1,5 +1,7 @@
+import { useQuery } from '@tanstack/react-query';
 import { useAuth } from '../components/auth-context';
 import type { User } from '../types/models.types';
+import { getUserProfileById } from './user.functions';
 
 export type CurrentUserProfile = Pick<User, '_id' | 'username' | 'displayName'>;
 
@@ -20,3 +22,17 @@ export const useCurrentUserProfile = (): CurrentUserProfile => {
 
   return requireCurrentUserProfile(user);
 };
+
+const createUserProfileQuery = (userId: string) => {
+  const getUserProfile = async (): Promise<User> =>
+    getUserProfileById(userId);
+
+  return getUserProfile;
+};
+
+export const useUserProfile = (userId: string) =>
+  useQuery({
+    queryKey: ['users', userId],
+    queryFn: createUserProfileQuery(userId),
+    enabled: Boolean(userId),
+  });

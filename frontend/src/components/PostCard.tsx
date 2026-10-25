@@ -3,6 +3,7 @@ import { usePostStyles } from '../styles/post.styles';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { useAuth } from './auth-context';
+import PostMedia from './PostMedia';
 
 type PostCardProps = {
   post: Post;
@@ -16,28 +17,23 @@ const PostCard = ({ post, author }: PostCardProps) => {
 
   return (
     <article className={classes.Card}>
-      <p className={classes.Author}>
-        {author?.displayName ?? t('UNKNOWN_USER')}
-      </p>
-
-      <p className={classes.Username}>
-        {author ? `@${author.username}` : t('USER_UNAVAILABLE')}
-      </p>
+      {author ? (
+        <Link className={classes.AuthorLink} to={`/users/${author._id}`}>
+          <p className={classes.Author}>{author.displayName}</p>
+          <p className={classes.Username}>@{author.username}</p>
+        </Link>
+      ) : (
+        <>
+          <p className={classes.Author}>{t('UNKNOWN_USER')}</p>
+          <p className={classes.Username}>{t('USER_UNAVAILABLE')}</p>
+        </>
+      )}
 
       <h2 className={classes.Name}>{post.name}</h2>
 
       <p className={classes.Text}>{post.text}</p>
 
-      {post.media ? (
-        <a
-          className={classes.Media}
-          href={post.media}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          {t('VIEW_MEDIA')}
-        </a>
-      ) : null}
+      {post.media ? <PostMedia media={post.media} postName={post.name} /> : null}
 
       <div className={classes.Footer}>
         <span>

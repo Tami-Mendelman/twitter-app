@@ -27,6 +27,9 @@
     "UNKNOWN_USER": "משתמש לא ידוע",
     "USER_UNAVAILABLE": "המשתמש אינו זמין",
     "VIEW_MEDIA": "הצגת מדיה",
+    "IMAGE_ALT": "תמונה עבור {{name}}",
+    "PDF_TITLE": "מסמך PDF: {{name}}",
+    "OPEN_PDF": "פתיחת קובץ PDF בחלון חדש",
     "DATE_UNAVAILABLE": "התאריך אינו זמין",
     "LIKES": "{{count}} לייקים",
     "EDIT": "עריכה"
@@ -73,7 +76,7 @@
     "CONTENT_REQUIRED": "נדרש להזין תוכן לפוסט",
     "CONTENT_MAX_LENGTH": "תוכן הפוסט לא יכול לעלות על 200 תווים",
     "CHARACTER_COUNT": "{{count}}/200 תווים",
-    "MEDIA_URL": "כתובת מדיה (אופציונלי)"
+    "MEDIA_URL": "קישור לתמונה או לקובץ PDF (אופציונלי)"
   },
   "CREATE_USER_PAGE": {
     "TITLE": "יצירת משתמש",
@@ -116,6 +119,9 @@
   },
   "PROFILE_PAGE": {
     "TITLE": "הפרופיל שלי",
-    "PROFILE_LABEL": "פרטי המשתמש המחובר"
+    "USER_TITLE": "פרופיל משתמש",
+    "PROFILE_LABEL": "פרטי המשתמש המחובר",
+    "LOADING": "פרטי המשתמש נטענים...",
+    "LOAD_ERROR": "טעינת פרטי המשתמש נכשלה: {{message}}"
   }
 }
