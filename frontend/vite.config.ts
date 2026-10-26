@@ -9,14 +9,16 @@ export default defineConfig(({ mode }) => {
     server: {
       proxy: {
         '/api/posts': {
-          target: env.VITE_CONTENT_SERVICE_URL || 'http://localhost:3002',
+          target: env.VITE_CONTENT_SERVICE_URL || 'http://localhost:3001',
           changeOrigin: true,
           rewrite: (path) =>
             path.replace(/^\/api\/posts/, '/api/content-service/posts'),
         },
         '/api/users': {
-          target: env.VITE_USER_SERVICE_URL || 'http://localhost:3001',
+          target: env.VITE_USER_SERVICE_URL || 'http://localhost:3000',
           changeOrigin: true,
+          rewrite: (path) =>
+            path.replace(/^\/api\/users/, '/api/user-service/users'),
         },
       },
     },

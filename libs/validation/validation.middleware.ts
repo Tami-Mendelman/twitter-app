@@ -44,7 +44,7 @@ export const validateRequest = (
 
         req.body = value.body;
         req.params = value.params;
-        req.query = value.query;
+        Object.assign(req.query, value.query ?? {});
         next();
         return;
     }
