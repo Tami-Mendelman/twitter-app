@@ -1,13 +1,10 @@
 import type { FC } from "react";
-import type { User } from "../../../../../libs/types/user.type.js";
-import { useUserCardStyles } from "./styles";
-
-export type UserCardProps = {
-  user: User;
-};
+import { useStyles } from "./styles";
+import type { UserCardProps } from "./types";
 
 const UserCard: FC<UserCardProps> = ({ user }) => {
-  const classes = useUserCardStyles();
+  const classes = useStyles();
+  
   return (
     <article className={classes.card}>
       <h2 className={classes.displayName}>{user?.displayName}</h2>

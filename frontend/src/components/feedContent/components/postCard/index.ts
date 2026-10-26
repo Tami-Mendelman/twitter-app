@@ -1,2 +1,4 @@
-export { default } from './PostCard';
-export type { PostCardProps } from './PostCard';
+import { PostCard } from "./PostCard";
+
+export default PostCard;
+

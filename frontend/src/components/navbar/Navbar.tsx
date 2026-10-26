@@ -1,11 +1,11 @@
 import type { FC } from 'react';
 import { NavLink } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import { useNavbarStyles } from './styles';
+import { useStyles } from './styles';
 
-const Navbar: FC = () => {
+export const Navbar: FC = () => {
   const { t } = useTranslation('translation', { keyPrefix: 'NAVBAR' });
-  const classes = useNavbarStyles();
+  const classes = useStyles();
 
   return (
     <nav className={classes.navbar}>
@@ -16,5 +16,3 @@ const Navbar: FC = () => {
     </nav>
   );
 };
-
-export default Navbar;

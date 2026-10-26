@@ -1,6 +1,6 @@
 import { createUseStyles } from "react-jss";
 
-export const usePostCardStyles = createUseStyles({
+export const useStyles = createUseStyles({
   card: {
     padding: "24px",
     backgroundColor: "#fff",

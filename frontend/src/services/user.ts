@@ -1,8 +1,8 @@
-import { api } from "../../config";
+import { api } from "../config";
 import type {
   CreateUserPayload,
   User,
-} from "../../../libs/types/user.type.js";
+} from "@libs/types/user.type.js";
 
 const userService = {
   getAllUsers: async (): Promise<User[]> =>

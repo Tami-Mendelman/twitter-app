@@ -3,15 +3,14 @@ import { isEmpty, isNil, map, trim } from "lodash/fp";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
-import { useFeedStyles } from "../../styles/feed.styles";
-import { usePostStyles } from "../../styles/post.styles";
-import type { CreatePostPayload } from "../../../../libs/types/post.type.js";
-import type { User } from "../../../../libs/types/user.type.js";
+import { useStyles } from "./styles";
+import type { CreatePostPayload } from "@libs/types/post.type.js";
+import type { User } from "@libs/types/user.type.js";
 import contentService from "../../services/content";
 import userService from "../../services/user";
 import { QUERY_KEYS } from "../../utils/queryKeys";
-import { MAX_TEXT_LENGTH } from "../../../../libs/consts/post.consts.js";
-import { getAxiosErrorMessage } from "../../../../libs/utils/getAxiosErrorMessage.js";
+import { MAX_TEXT_LENGTH } from "@libs/consts/post.consts.js";
+import { getAxiosErrorMessage } from "@libs/utils/getAxiosErrorMessage.js";
 
 export const CreatePostPage: FC = () => {
   const { t } = useTranslation("translation", {
@@ -20,8 +19,7 @@ export const CreatePostPage: FC = () => {
   const { t: tForm } = useTranslation("translation", {
     keyPrefix: "POST_FORM",
   });
-  const pageClasses = useFeedStyles();
-  const classes = usePostStyles();
+  const classes = useStyles();
   const queryClient = useQueryClient();
 
   const {
@@ -71,10 +69,10 @@ export const CreatePostPage: FC = () => {
     : null;
 
   return (
-    <div className={pageClasses.page}>
-      <header className={pageClasses.header}>
-        <h1 className={pageClasses.title}>{t("TITLE")}</h1>
-        <p className={pageClasses.subtitle}>{t("SUBTITLE")}</p>
+    <div>
+      <header>
+        <h1>{t("TITLE")}</h1>
+        <p>{t("SUBTITLE")}</p>
       </header>
 
       <form className={classes.form} onSubmit={handleFormSubmit}>
@@ -87,7 +85,7 @@ export const CreatePostPage: FC = () => {
             })}
             disabled={isPendingUsers || !isNil(usersError)}
           >
-            <option value="">{tForm("SELECT_USER")}</option>
+            <option >{tForm("SELECT_USER")}</option>
             {map(({ _id, username, displayName }: User) => (
               <option key={_id} value={_id}>
                 {displayName} (@{username})
@@ -141,7 +139,7 @@ export const CreatePostPage: FC = () => {
               maxLength: {
                 value: MAX_TEXT_LENGTH,
                 message: tForm("CONTENT_MAX_LENGTH", {
-                  MAX_LENGTH: MAX_TEXT_LENGTH,
+                  maxLength: MAX_TEXT_LENGTH,
                 }),
               },
             })}
@@ -163,9 +161,7 @@ export const CreatePostPage: FC = () => {
         </label>
 
         {createPostError && (
-          <p className={pageClasses.error}>
-            {t("CREATE_ERROR", { message: createPostError })}
-          </p>
+          <p>{t("CREATE_ERROR", { message: createPostError })}</p>
         )}
 
         {isSuccessCreatePost && <p role="status">{t("CREATED")}</p>}

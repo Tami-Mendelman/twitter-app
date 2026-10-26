@@ -6,10 +6,10 @@ const mediaSchema = Joi.string().uri({
     scheme: ["http", "https"],
 });
 
-const emptyObjectSchema = Joi.object({}).required();
+const emptyObjectSchema = Joi.object({});
 
 export const canGetAll = Joi.object({
-    body: emptyObjectSchema.optional(),
+    body: emptyObjectSchema,
     params: emptyObjectSchema,
     query: emptyObjectSchema,
 });
@@ -40,7 +40,7 @@ export const canUpdate = Joi.object({
 });
 
 export const canGetById = Joi.object({
-    body: emptyObjectSchema.optional(),
+    body: emptyObjectSchema,
     params: Joi.object({
         id: joiMongoId().required(),
     }).required(),
@@ -48,7 +48,7 @@ export const canGetById = Joi.object({
 });
 
 export const canDelete = Joi.object({
-    body: emptyObjectSchema.optional(),
+    body: emptyObjectSchema,
     params: Joi.object({
         id: joiMongoId().required(),
     }).required(),

@@ -1,6 +1,6 @@
 import { createUseStyles } from 'react-jss';
 
-export const useCreateUserStyles = createUseStyles({
+export const useStyles = createUseStyles({
   form: {
     display: 'flex',
     flexDirection: 'column',
@@ -26,10 +26,15 @@ export const useCreateUserStyles = createUseStyles({
     border: '1px solid #cbd2d9',
     borderRadius: '6px',
     font: 'inherit',
-    '&:focus': {
-      outline: '2px solid #1769aa',
-      outlineOffset: '1px',
-    },
+  },
+  textarea: {
+    width: '100%',
+    minHeight: '120px',
+    padding: '12px',
+    border: '1px solid #cbd2d9',
+    borderRadius: '6px',
+    font: 'inherit',
+    resize: 'vertical',
   },
   button: {
     padding: '12px 16px',

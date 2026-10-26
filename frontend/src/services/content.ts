@@ -1,7 +1,7 @@
-import { api } from "../../config";
-import type { CreatePostPayload } from "../../../libs/types/post.type.js";
-import type { UpdatePostPayload } from "../../../libs/types/post.type.js";
-import type { Post } from "../../../libs/types/post.type.js";
+import { api } from "../config";
+import type { CreatePostPayload } from "@libs/types/post.type.js";
+import type { UpdatePostPayload } from "@libs/types/post.type.js";
+import type { Post } from "@libs/types/post.type.js";
 
 const contentService = {
   getAllPosts: async (): Promise<Post[]> =>

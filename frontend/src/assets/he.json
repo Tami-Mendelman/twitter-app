@@ -63,8 +63,8 @@
     "NAME_REQUIRED": "נדרש להזין שם לפוסט",
     "CONTENT": "תוכן",
     "CONTENT_REQUIRED": "נדרש להזין תוכן לפוסט",
-    "CONTENT_MAX_LENGTH": "תוכן הפוסט לא יכול לעלות על {{MAX_LENGTH}} תווים",
-    "CHARACTER_COUNT": "{{count}}/{{MAX_LENGTH}} תווים",
+    "CONTENT_MAX_LENGTH": "תוכן הפוסט לא יכול לעלות על {{maxLength}} תווים",
+    "CHARACTER_COUNT": "{{count}}/{{maxLength}} תווים",
     "MEDIA_URL": "כתובת מדיה (אופציונלי)"
   },
   "CREATE_USER_PAGE": {

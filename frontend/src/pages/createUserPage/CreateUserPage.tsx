@@ -1,19 +1,16 @@
 import type { FC } from 'react';
-import { isAxiosError } from 'axios';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useForm } from 'react-hook-form';
-import { trim } from 'lodash/fp';
 import userService from '../../services/user';
-import { useCreateUserStyles } from './styles';
-import { useFeedStyles } from '../../styles/feed.styles';
+import { useStyles } from './styles';
+import { getuserError } from './functions';
 import { useTranslation } from 'react-i18next';
 import type { CreateUserPayload } from '../../../../libs/types/user.type.js';
 import { QUERY_KEYS } from '../../utils/queryKeys';
 
 const CreateUserPage: FC = () => {
   const { t } = useTranslation('translation', { keyPrefix: 'CREATE_USER_PAGE' });
-  const classes = useCreateUserStyles();
-  const pageClasses = useFeedStyles();
+  const classes = useStyles();
   const queryClient = useQueryClient();
   const {
     register,
@@ -37,22 +34,13 @@ const CreateUserPage: FC = () => {
     create(payload);
   });
 
-  const getCreateUserError = (error: Error): string =>
-    !isAxiosError(error)
-      ? error.message
-      : error.response?.data?.code === 'USERNAME_ALREADY_EXISTS'
-        ? t('USERNAME_EXISTS')
-        : trim(error.response?.data?.message ?? '') || error.message;
-
-  const createUserError = error ? getCreateUserError(error) : null;
+  const userError = error ? getuserError(t, error) : null;
 
   return (
-    <div className={pageClasses.page}>
-      <header className={pageClasses.header}>
-        <h1 className={pageClasses.title}>{t('TITLE')}</h1>
-        <p className={pageClasses.subtitle}>
-          {t('SUBTITLE')}
-        </p>
+    <div>
+      <header>
+        <h1>{t('TITLE')}</h1>
+        <p>{t('SUBTITLE')}</p>
       </header>
 
       <form className={classes.form} onSubmit={handleFormSubmit}>
@@ -94,9 +82,9 @@ const CreateUserPage: FC = () => {
           )}
         </label>
 
-        {createUserError && (
-          <p className={pageClasses.error}>
-            {t('CREATE_ERROR', { message: createUserError })}
+        {userError && (
+          <p>
+            {t('CREATE_ERROR', { message: userError })}
           </p>
         )}
 

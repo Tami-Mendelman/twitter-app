@@ -1,10 +1,10 @@
 import Joi from "joi";
 import { joiMongoId } from "@libs/validation/joi.helpers.js";
 
-const emptyObjectSchema = Joi.object({}).required();
+const emptyObjectSchema = Joi.object({});
 
 export const canGetAll = Joi.object({
-    body: emptyObjectSchema.optional(),
+    body: emptyObjectSchema,
     params: emptyObjectSchema,
     query: emptyObjectSchema,
 });
@@ -19,7 +19,7 @@ export const canCreate = Joi.object({
 });
 
 export const canGetById = Joi.object({
-    body: emptyObjectSchema.optional(),
+    body: emptyObjectSchema,
     params: Joi.object({
         id: joiMongoId().required(),
     }).required(),

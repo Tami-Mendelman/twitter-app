@@ -1,21 +1,63 @@
 import type { FC } from "react";
-import type { Post } from "../../../../libs/types/post.type.js";
-import type { User } from "../../../../libs/types/user.type.js";
-import { find, isEmpty, map, trim } from "lodash/fp";
-import { useFeedContentStyles } from "./styles";
+import { useQuery } from "@tanstack/react-query";
+import type { Post } from "@libs/types/post.type.js";
+import { filter, includes, toLower, trim } from "lodash/fp";
+import { useStyles } from "./styles";
 import PostCard from "./components/postCard";
-import { useTranslation } from "react-i18next";
 import type { FeedContentProps } from "./types";
+import { useTranslation } from "react-i18next";
+import contentService from "../../services/content";
+import userService from "../../services/user";
 
-const FeedContent: FC<FeedContentProps> = ({
-  posts,
-  users,
-  isPending,
-  error,
-  searchTerm,
-}: FeedContentProps) => {
+const searchPostsByName = (searchTerm: string, posts: Post[]): Post[] => {
+  const matchesPostName = (term: string) => (post: Post): boolean => {
+    const normalizedSearchTerm = toLower(trim(term));
+    const normalizedName = toLower(post.name);
+    const nameSubstrings: Record<string, string> = Object.fromEntries(
+      Array.from(
+        {
+          length: Math.max(
+            0,
+            normalizedName.length - normalizedSearchTerm.length + 1,
+          ),
+        },
+        (_, index) => [
+          index,
+          normalizedName.slice(index, index + normalizedSearchTerm.length),
+        ],
+      ),
+    );
+    return includes<string>(normalizedSearchTerm)(nameSubstrings);
+  };
+  return trim(searchTerm)
+    ? filter(matchesPostName(searchTerm))(posts)
+    : posts;
+};
+
+export const FeedContent: FC<FeedContentProps> = ({ searchTerm }) => {
   const { t } = useTranslation("translation", { keyPrefix: "FEED_CONTENT" });
-  const classes = useFeedContentStyles();
+  const classes = useStyles();
+
+  const {
+    data: posts,
+    isPending: isPendingPosts,
+    error: postsError,
+  } = useQuery({
+    queryKey: ["posts"],
+    queryFn: contentService.getAllPosts,
+  });
+
+  const {
+    isPending: isPendingUsers,
+    error: usersError,
+  } = useQuery({
+    queryKey: ["users"],
+    queryFn: userService.getAllUsers,
+  });
+
+  const filteredPosts = searchPostsByName(searchTerm, posts ?? []);
+  const isPending = isPendingPosts || isPendingUsers;
+  const error = postsError ?? usersError;
 
   return (
     <>
@@ -25,23 +67,19 @@ const FeedContent: FC<FeedContentProps> = ({
         <p className={`${classes.message} ${classes.error}`}>
           {t("LOAD_ERROR", { message: error.message })}
         </p>
-      ) : isEmpty(posts) ? (
+      ) : filteredPosts.length === 0 ? (
         <p className={classes.message}>
           {trim(searchTerm) ? t("NO_SEARCH_RESULTS") : t("NO_POSTS")}
         </p>
       ) : (
         <div className={classes.feed}>
-          {map((post: Post) => (
-            <PostCard
-              key={post._id}
-              post={post}
-              author={find((user: User) => user._id === String(post.userId))(users ?? [])}
-            />
-          ))(posts ?? [])}
+          {filteredPosts.map((post: Post) => (
+            <PostCard key={post._id} post={post} />
+          ))}
         </div>
       )}
     </>
   );
 };
 
-export default FeedContent;
+

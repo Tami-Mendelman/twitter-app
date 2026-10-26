@@ -1,3 +1,4 @@
+import path from 'path'
 import react from '@vitejs/plugin-react'
 import { defineConfig, loadEnv } from 'vite'
 
@@ -6,6 +7,11 @@ export default defineConfig(({ mode }) => {
 
   return {
     plugins: [react()],
+    resolve: {
+      alias: {
+        '@libs': path.resolve(__dirname, '../libs'),
+      },
+    },
     server: {
       proxy: {
         '/api/posts': {

@@ -1,1 +1,4 @@
-export { default } from './FeedPage';
+import { FeedPage } from "./FeedPage";
+
+export default FeedPage;
+

@@ -1,2 +1,4 @@
-export { default } from "./FeedContent";
-export type { FeedContentProps } from "./types";
+import { FeedContent } from "./FeedContent";
+
+export default FeedContent;
+

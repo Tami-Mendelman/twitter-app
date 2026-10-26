@@ -3,8 +3,7 @@ import { isNil, trim } from "lodash/fp";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useForm, useWatch } from "react-hook-form";
 import { Link, Navigate, useParams } from "react-router-dom";
-import { useFeedStyles } from "../../styles/feed.styles";
-import { usePostStyles } from "../../styles/post.styles";
+import { useStyles } from "./styles";
 import { useTranslation } from "react-i18next";
 import contentService from "../../services/content";
 import { QUERY_KEYS } from "../../utils/queryKeys";
@@ -20,8 +19,7 @@ const EditPostPage: FC = () => {
   const { t: tForm } = useTranslation("translation", {
     keyPrefix: "POST_FORM",
   });
-  const pageClasses = useFeedStyles();
-  const classes = usePostStyles();
+  const classes = useStyles();
   const queryClient = useQueryClient();
 
   const {
@@ -87,18 +85,16 @@ const EditPostPage: FC = () => {
       {isNil(postId) ? (
         <Navigate to="/posts" replace />
       ) : (
-        <div className={pageClasses.page}>
-          <header className={pageClasses.header}>
-            <h1 className={pageClasses.title}>{t("TITLE")}</h1>
-            <p className={pageClasses.subtitle}>{t("SUBTITLE")}</p>
+        <div>
+          <header>
+            <h1>{t("TITLE")}</h1>
+            <p>{t("SUBTITLE")}</p>
           </header>
 
           {isPendingPost && isNil(post) ? (
-            <p className={pageClasses.message}>{t("LOADING")}</p>
+            <p>{t("LOADING")}</p>
           ) : !isNil(postError) ? (
-            <p
-              className={`${pageClasses.message} ${pageClasses.error}`}
-            >
+            <p>
               {t("LOAD_ERROR", { message: postError.message })}
             </p>
           ) : !isNil(post) ? (
@@ -121,7 +117,7 @@ const EditPostPage: FC = () => {
               <p>
                 {tForm("CHARACTER_COUNT", {
                   count: textLength,
-                  MAX_LENGTH: MAX_TEXT_LENGTH,
+                  maxLength: MAX_TEXT_LENGTH,
                 })}
               </p>
 
@@ -134,9 +130,9 @@ const EditPostPage: FC = () => {
                     required: tForm("CONTENT_REQUIRED"),
                     maxLength: {
                       value: MAX_TEXT_LENGTH,
-                      message: tForm("CONTENT_MAX_LENGTH", {
-                        MAX_LENGTH: MAX_TEXT_LENGTH,
-                      }),
+                    message: tForm("CONTENT_MAX_LENGTH", {
+                      maxLength: MAX_TEXT_LENGTH,
+                    }),
                     },
                   })}
                 />
@@ -157,9 +153,7 @@ const EditPostPage: FC = () => {
               </label>
 
               {error && (
-                <p className={pageClasses.error}>
-                  {t("UPDATE_ERROR", { message: error })}
-                </p>
+                <p>{t("UPDATE_ERROR", { message: error })}</p>
               )}
 
               {isUpdated && <p role="status">{t("UPDATED")}</p>}
@@ -175,7 +169,7 @@ const EditPostPage: FC = () => {
               <Link to="/posts">{t("CANCEL")}</Link>
             </form>
           ) : (
-            <p className={pageClasses.message}>{t("LOADING")}</p>
+            <p>{t("LOADING")}</p>
           )}
         </div>
       )}
