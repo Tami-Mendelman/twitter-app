@@ -3,16 +3,16 @@ import { isAxiosError } from 'axios';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useForm } from 'react-hook-form';
 import { trim } from 'lodash/fp';
-import userService from '../services/user';
-import { useUsersStyles } from '../styles/users.styles';
-import { useFeedStyles } from '../styles/feed.styles';
+import userService from '../../services/user';
+import { useCreateUserStyles } from './styles';
+import { useFeedStyles } from '../../styles/feed.styles';
 import { useTranslation } from 'react-i18next';
-import type { CreateUserPayload } from '../../../libs/types/user.type.js';
-import { QUERY_KEYS } from '../utils/queryKeys';
+import type { CreateUserPayload } from '../../../../libs/types/user.type.js';
+import { QUERY_KEYS } from '../../utils/queryKeys';
 
 const CreateUserPage: FC = () => {
   const { t } = useTranslation('translation', { keyPrefix: 'CREATE_USER_PAGE' });
-  const classes = useUsersStyles();
+  const classes = useCreateUserStyles();
   const pageClasses = useFeedStyles();
   const queryClient = useQueryClient();
   const {
@@ -38,7 +38,7 @@ const CreateUserPage: FC = () => {
   });
 
   const getCreateUserError = (error: Error): string =>
-    !isAxiosError<{ code?: string; message?: string }>(error)
+    !isAxiosError(error)
       ? error.message
       : error.response?.data?.code === 'USERNAME_ALREADY_EXISTS'
         ? t('USERNAME_EXISTS')
@@ -47,7 +47,7 @@ const CreateUserPage: FC = () => {
   const createUserError = error ? getCreateUserError(error) : null;
 
   return (
-    <main className={pageClasses.page}>
+    <div className={pageClasses.page}>
       <header className={pageClasses.header}>
         <h1 className={pageClasses.title}>{t('TITLE')}</h1>
         <p className={pageClasses.subtitle}>
@@ -110,7 +110,7 @@ const CreateUserPage: FC = () => {
           {isPending ? t('SUBMITTING') : t('SUBMIT')}
         </button>
       </form>
-    </main>
+    </div>
   );
 };
 

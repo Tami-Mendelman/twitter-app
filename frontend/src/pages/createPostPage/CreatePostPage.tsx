@@ -1,31 +1,63 @@
 import type { FC } from "react";
-import { isEmpty, map, trim } from "lodash/fp";
+import { isEmpty, isNil, map, trim } from "lodash/fp";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
-import { useCreatePostForm } from "./functions";
 import { useFeedStyles } from "../../styles/feed.styles";
 import { usePostStyles } from "../../styles/post.styles";
 import type { CreatePostPayload } from "../../../../libs/types/post.type.js";
 import type { User } from "../../../../libs/types/user.type.js";
-import { MAX_TEXT_LENGTH } from "../../../../libs/constants/post.constants.js";
+import contentService from "../../services/content";
+import userService from "../../services/user";
+import { QUERY_KEYS } from "../../utils/queryKeys";
+import { MAX_TEXT_LENGTH } from "../../../../libs/consts/post.consts.js";
+import { getAxiosErrorMessage } from "../../../../libs/utils/getAxiosErrorMessage.js";
 
-const CreatePostPage: FC = () => {
-  const { t } = useTranslation("translation", { keyPrefix: "CREATE_POST_PAGE" });
-  const { t: tForm } = useTranslation("translation", { keyPrefix: "POST_FORM" });
+export const CreatePostPage: FC = () => {
+  const { t } = useTranslation("translation", {
+    keyPrefix: "CREATE_POST_PAGE",
+  });
+  const { t: tForm } = useTranslation("translation", {
+    keyPrefix: "POST_FORM",
+  });
   const pageClasses = useFeedStyles();
   const classes = usePostStyles();
+  const queryClient = useQueryClient();
+
+  const {
+    data: users = [],
+    isPending: isPendingUsers,
+    error: usersError,
+  } = useQuery({
+    queryKey: QUERY_KEYS.USERS,
+    queryFn: userService.getAllUsers,
+  });
 
   const {
     register,
     handleSubmit,
-    submitPost,
-    errors,
-    users,
-    isPendingUsers,
-    usersError,
-    isPendingCreatePost,
-    createPostError,
-    isSuccessCreatePost,
-  } = useCreatePostForm();
+    reset,
+    formState: { errors },
+  } = useForm<CreatePostPayload>();
+
+  const {
+    mutate: create,
+    isPending: isPendingCreatePost,
+    error: createPostErrorRaw,
+    isSuccess: isSuccessCreatePost,
+  } = useMutation({
+    mutationFn: contentService.createPost,
+    onSuccess: async () => {
+      reset();
+      await queryClient.invalidateQueries({
+        queryKey: QUERY_KEYS.POSTS,
+      });
+    },
+  });
+
+  const submitPost = (payload: CreatePostPayload): void => {
+    create(payload);
+  };
 
   const handleFormSubmit = handleSubmit((payload: CreatePostPayload) => {
     submitPost({
@@ -33,6 +65,10 @@ const CreatePostPage: FC = () => {
       media: trim(payload.media ?? "") || undefined,
     });
   });
+
+  const createPostError = createPostErrorRaw
+    ? getAxiosErrorMessage(createPostErrorRaw)
+    : null;
 
   return (
     <div className={pageClasses.page}>
@@ -46,28 +82,36 @@ const CreatePostPage: FC = () => {
           {tForm("USER")}
           <select
             className={classes.input}
-            {...register("userId", { required: tForm("SELECT_USER") })}
-            disabled={isPendingUsers || Boolean(usersError)}
+            {...register("userId", {
+              required: tForm("SELECT_USER"),
+            })}
+            disabled={isPendingUsers || !isNil(usersError)}
           >
-            <option>{tForm("SELECT_USER")}</option>
+            <option value="">{tForm("SELECT_USER")}</option>
             {map(({ _id, username, displayName }: User) => (
               <option key={_id} value={_id}>
                 {displayName} (@{username})
               </option>
             ))(users)}
           </select>
+
           {errors.userId && (
             <span className={classes.validationError}>
               {errors.userId.message}
             </span>
           )}
+
           {isPendingUsers && <span>{tForm("LOADING_USERS")}</span>}
-          {usersError && (
+
+          {!isNil(usersError) && (
             <span className={classes.validationError}>
-              {tForm("LOAD_USERS_ERROR", { message: usersError.message })}
+              {tForm("LOAD_USERS_ERROR", {
+                message: usersError.message,
+              })}
             </span>
           )}
-          {!isPendingUsers && !usersError && isEmpty(users) && (
+
+          {!isPendingUsers && isNil(usersError) && isEmpty(users) && (
             <span>{tForm("NO_USERS")}</span>
           )}
         </label>
@@ -76,7 +120,9 @@ const CreatePostPage: FC = () => {
           {tForm("NAME")}
           <input
             className={classes.input}
-            {...register("name", { required: tForm("NAME_REQUIRED") })}
+            {...register("name", {
+              required: tForm("NAME_REQUIRED"),
+            })}
           />
           {errors.name && (
             <span className={classes.validationError}>
@@ -94,7 +140,9 @@ const CreatePostPage: FC = () => {
               required: tForm("CONTENT_REQUIRED"),
               maxLength: {
                 value: MAX_TEXT_LENGTH,
-                message: tForm("CONTENT_MAX_LENGTH"),
+                message: tForm("CONTENT_MAX_LENGTH", {
+                  MAX_LENGTH: MAX_TEXT_LENGTH,
+                }),
               },
             })}
           />
@@ -107,7 +155,11 @@ const CreatePostPage: FC = () => {
 
         <label className={classes.field}>
           {tForm("MEDIA_URL")}
-          <input className={classes.input} type="url" {...register("media")} />
+          <input
+            className={classes.input}
+            type="url"
+            {...register("media")}
+          />
         </label>
 
         {createPostError && (
@@ -124,8 +176,8 @@ const CreatePostPage: FC = () => {
           disabled={
             isPendingCreatePost ||
             isPendingUsers ||
-            Boolean(usersError) ||
-            !users.length
+            !isNil(usersError) ||
+            isEmpty(users)
           }
         >
           {isPendingCreatePost ? t("SUBMITTING") : t("SUBMIT")}
@@ -135,4 +187,4 @@ const CreatePostPage: FC = () => {
   );
 };
 
-export default CreatePostPage;
+

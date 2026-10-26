@@ -1,7 +1,7 @@
 import type { FC } from 'react';
 import { NavLink } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import { useNavbarStyles } from '../styles/navbar.styles';
+import { useNavbarStyles } from './styles';
 
 const Navbar: FC = () => {
   const { t } = useTranslation('translation', { keyPrefix: 'NAVBAR' });

@@ -60,24 +60,6 @@ export const useFeedStyles = createUseStyles({
       boxShadow: '0 0 0 3px rgba(23, 105, 170, 0.14)',
     },
   },
-  feed: {
-    display: 'flex',
-    flexDirection: 'column',
-    gap: '16px',
-    width: '100%',
-    maxWidth: '720px',
-    margin: '0 auto',
-  },
-  message: {
-    padding: '24px',
-    backgroundColor: '#fff',
-    border: '1px solid #dfe3e8',
-    borderRadius: '12px',
-    color: '#657786',
-  },
-  error: {
-    color: '#b42318',
-  },
   [down('phone')]: {
     page: {
       padding: '20px 16px',

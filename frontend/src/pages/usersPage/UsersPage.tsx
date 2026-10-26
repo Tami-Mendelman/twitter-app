@@ -1,27 +1,21 @@
 import type { FC } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { map } from 'lodash/fp';
-import userService from '../services/user';
-import { useFeedStyles } from '../styles/feed.styles';
-import { useUsersStyles } from '../styles/users.styles';
 import { useTranslation } from 'react-i18next';
-import type { User } from '../../../libs/types/user.type.js';
+import userService from '../../services/user';
+import { useFeedStyles } from '../../styles/feed.styles';
+import { QUERY_KEYS } from '../../utils/queryKeys';
+import type { User } from '../../../../libs/types/user.type.js';
+import UserCard from './components/userCard';
 
 const UsersPage: FC = () => {
   const { t } = useTranslation('translation', { keyPrefix: 'USERS_PAGE' });
   const classes = useFeedStyles();
+
   const { data: users, isPending, error } = useQuery({
-    queryKey: ['user-service', 'user', 'all'],
+    queryKey: QUERY_KEYS.USERS,
     queryFn: userService.getAllUsers,
   });
-  const userClasses = useUsersStyles();
-
-  const UserCard: FC<{ user: User }> = ({ user }) => (
-    <article className={userClasses.card}>
-      <h2 className={userClasses.displayName}>{user.displayName}</h2>
-      <p className={userClasses.username}>@{user.username}</p>
-    </article>
-  );
 
   return (
     <div className={classes.page}>

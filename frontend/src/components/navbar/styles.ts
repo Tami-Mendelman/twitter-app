@@ -1,5 +1,5 @@
 import { createUseStyles } from 'react-jss';
-import { down } from './breakpoints';
+import { down } from '../../styles/breakpoints';
 
 export const useNavbarStyles = createUseStyles({
   navbar: {

@@ -1,0 +1,67 @@
+import { createUseStyles } from "react-jss";
+
+export const useFeedContentStyles = createUseStyles({
+  feed: {
+    display: "flex",
+    flexDirection: "column",
+    gap: "16px",
+    width: "100%",
+    maxWidth: "720px",
+    margin: "0 auto",
+  },
+  message: {
+    padding: "24px",
+    backgroundColor: "#fff",
+    border: "1px solid #dfe3e8",
+    borderRadius: "12px",
+    color: "#657786",
+  },
+  error: {
+    color: "#b42318",
+  },
+  card: {
+    padding: "24px",
+    backgroundColor: "#fff",
+    border: "1px solid #dfe3e8",
+    borderRadius: "12px",
+    overflowWrap: "anywhere",
+  },
+  author: {
+    margin: 0,
+    color: "#17202a",
+    fontSize: "16px",
+    fontWeight: 700,
+  },
+  username: {
+    marginTop: "4px",
+    color: "#657786",
+    fontSize: "14px",
+  },
+  name: {
+    margin: "16px 0 8px",
+    fontSize: "18px",
+    fontWeight: 700,
+  },
+  text: {
+    margin: 0,
+    color: "#35434f",
+    lineHeight: 1.6,
+    whiteSpace: "pre-wrap",
+  },
+  media: {
+    display: "inline-block",
+    marginTop: "16px",
+    color: "#1769aa",
+    overflowWrap: "anywhere",
+  },
+  footer: {
+    display: "flex",
+    flexWrap: "wrap",
+    gap: "8px",
+    marginTop: "16px",
+    paddingTop: "12px",
+    borderTop: "1px solid #edf0f2",
+    color: "#657786",
+    fontSize: "14px",
+  },
+});
