@@ -6,7 +6,7 @@ const mediaSchema = Joi.string().uri({
     scheme: ["http", "https"],
 });
 
-const emptyObjectSchema = Joi.object({}).required();
+const emptyObjectSchema = Joi.object({});
 
 export const canGetAll = Joi.object({
     body: emptyObjectSchema,

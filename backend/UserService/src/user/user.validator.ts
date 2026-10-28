@@ -1,7 +1,7 @@
 import Joi from "joi";
 import { joiMongoId } from "@libs/validation/joi.helpers.js";
 
-const emptyObjectSchema = Joi.object({}).required();
+const emptyObjectSchema = Joi.object({});
 
 export const canGetAll = Joi.object({
     body: emptyObjectSchema,

@@ -1,6 +1,6 @@
 import { postModel } from "@libs/models/post.model.js";
 import type { Post } from "@libs/types/post.type.js";
-import type { CreatePostPayload, UpdatePostPayload } from "./post.types.js";
+import type { CreatePostPayload, UpdatePostPayload } from "@libs/types/post.type.js";
 
 export const postRepository = {
     getAll: async (): Promise<Post[]> =>
