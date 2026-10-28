@@ -1,7 +1,7 @@
 import type { FC } from 'react';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import FeedContent from '../feedContent';
+import FeedContent from '../../components/feedContent';
 
 export const FeedPage: FC = () => {
   const { t } = useTranslation('translation', { keyPrefix: 'FEED_PAGE' });
