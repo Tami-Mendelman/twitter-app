@@ -15,8 +15,7 @@
     "LOADING": "הפוסטים נטענים...",
     "LOAD_ERROR": "טעינת הפיד נכשלה: {{message}}",
     "NO_SEARCH_RESULTS": "לא נמצאו פוסטים התואמים לחיפוש.",
-    "NO_POSTS": "עדיין אין פוסטים.",
-    "POSTS_FEED_LABEL": "פיד הפוסטים"
+    "NO_POSTS": "עדיין אין פוסטים."
   },
   "POST_CARD": {
     "UNKNOWN_USER": "משתמש לא ידוע",
@@ -81,8 +80,5 @@
     "CREATED": "המשתמש נוצר בהצלחה.",
     "SUBMITTING": "יוצר משתמש...",
     "SUBMIT": "יצירת משתמש"
-  },
-  "PLACEHOLDER_PAGE": {
-    "MESSAGE": "הדף הזה יפותח בהמשך."
   }
 }

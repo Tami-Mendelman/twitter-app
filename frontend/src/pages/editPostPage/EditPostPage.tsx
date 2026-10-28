@@ -11,7 +11,7 @@ import { getAxiosErrorMessage } from "@libs/utils/getAxiosErrorMessage.js";
 import type { UpdatePostPayload } from "@libs/types/post.type.js";
 import { MAX_TEXT_LENGTH } from "@libs/consts/post.consts.js";
 
-const EditPostPage: FC = () => {
+export const EditPostPage: FC = () => {
   const { postId } = useParams();
   const { t } = useTranslation("translation", {
     keyPrefix: "EDIT_POST_PAGE",
@@ -85,7 +85,7 @@ const EditPostPage: FC = () => {
       {isNil(postId) ? (
         <Navigate to="/posts" replace />
       ) : (
-        <div>
+        <>
           <header>
             <h1>{t("TITLE")}</h1>
             <p>{t("SUBTITLE")}</p>
@@ -171,10 +171,10 @@ const EditPostPage: FC = () => {
           ) : (
             <p>{t("LOADING")}</p>
           )}
-        </div>
+        </>
       )}
     </>
   );
 };
 
-export default EditPostPage;
+

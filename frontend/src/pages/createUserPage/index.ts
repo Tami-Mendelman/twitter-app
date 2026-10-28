@@ -1,1 +1,3 @@
-export { default } from './CreateUserPage';
+import { CreateUserPage } from './CreateUserPage';
+
+export default CreateUserPage;

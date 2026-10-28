@@ -8,7 +8,7 @@ import { useTranslation } from 'react-i18next';
 import type { CreateUserPayload } from '@libs/types/user.type.js';
 import { QUERY_KEYS } from '../../utils/queryKeys';
 
-const CreateUserPage: FC = () => {
+export const CreateUserPage: FC = () => {
   const { t } = useTranslation('translation', { keyPrefix: 'CREATE_USER_PAGE' });
   const classes = useStyles();
   const queryClient = useQueryClient();
@@ -34,7 +34,9 @@ const CreateUserPage: FC = () => {
     create(payload);
   });
 
-  const userError = error ? getUserError(t, error) : null;
+  const userError = error
+    ? getUserError(error, t('USERNAME_EXISTS'), t('CREATE_ERROR'))
+    : null;
 
   return (
     <>
@@ -98,4 +100,4 @@ const CreateUserPage: FC = () => {
   );
 };
 
-export default CreateUserPage;
+

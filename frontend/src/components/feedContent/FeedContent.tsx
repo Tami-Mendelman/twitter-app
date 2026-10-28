@@ -16,16 +16,14 @@ export const FeedContent: FC<FeedContentProps> = ({ searchTerm }) => {
 
   const {
     data: posts,
-    isPending: isPendingPosts,
-    error: postsError,
+    isPending,
+    error,
   } = useQuery({
     queryKey: QUERY_KEYS.POSTS,
     queryFn: contentService.getAllPosts,
   });
 
-  const filteredPosts = searchPostsByName(searchTerm, posts ?? []);
-  const isPending = isPendingPosts;
-  const error = postsError;
+const filteredPosts = searchPostsByName(searchTerm, posts ?? []);
 
   return (
     <>
@@ -41,9 +39,9 @@ export const FeedContent: FC<FeedContentProps> = ({ searchTerm }) => {
         </p>
       ) : (
         <div className={classes.feed}>
-          {map((post) => (
-            <PostCard key={(post as Post)._id} post={post as Post} />
-          ))(filteredPosts)}
+          {map((post: Post) => <PostCard key={post._id} post={post} />)(
+            filteredPosts,
+          )}
         </div>
       )}
     </>

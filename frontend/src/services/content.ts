@@ -5,21 +5,21 @@ import type { Post } from "@libs/types/post.type.js";
 
 const contentService = {
   getAllPosts: async (): Promise<Post[]> =>
-    (await api.get<Post[]>("/posts")).data,
+    (await api.get("/posts")).data,
 
   getPostById: async (postId: string): Promise<Post> =>
-    (await api.get<Post>(`/posts/${postId}`)).data,
+    (await api.get(`/posts/${postId}`)).data,
 
   createPost: async (payload: CreatePostPayload): Promise<Post> =>
-    (await api.post<Post>("/posts", payload)).data,
+    (await api.post("/posts", payload)).data,
 
   updatePost: async (
     postId: string,
     payload: UpdatePostPayload,
-  ): Promise<Post> => (await api.patch<Post>(`/posts/${postId}`, payload)).data,
+  ): Promise<Post> => (await api.patch(`/posts/${postId}`, payload)).data,
 
   deletePost: async (postId: string): Promise<Post> =>
-    (await api.delete<Post>(`/posts/${postId}`)).data,
+    (await api.delete(`/posts/${postId}`)).data,
 };
 
 export default contentService;

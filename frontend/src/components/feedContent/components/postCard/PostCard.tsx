@@ -7,7 +7,9 @@ import { useQuery } from "@tanstack/react-query";
 import userService from "../../../../services/user";
 import { QUERY_KEYS } from "../../../../utils/queryKeys";
 
-export const PostCard: FC<PostCardProps> = ({ post }) => {
+export const PostCard: FC<PostCardProps> = ({
+  post: { _id, text, name, userId, media, likes, createdAt },
+}) => {
   const { t } = useTranslation("translation", { keyPrefix: "POST_CARD" });
   const classes = useStyles();
 
@@ -17,7 +19,7 @@ export const PostCard: FC<PostCardProps> = ({ post }) => {
   });
 
   const author = users?.find(
-    (user) => String(user._id) === String(post.userId)
+    (user) => String(user._id) === String(userId)
   );
 
   return (
@@ -27,16 +29,16 @@ export const PostCard: FC<PostCardProps> = ({ post }) => {
       </p>
 
       <p className={classes.username}>
-        {author ? `@${String(author.username)}` : t("USER_UNAVAILABLE")}
+        {author ? `@${author.username}` : t("USER_UNAVAILABLE")}
       </p>
 
-      <h2 className={classes.name}>{post.name}</h2>
-      <p className={classes.text}>{post.text}</p>
+      <h2 className={classes.name}>{name}</h2>
+      <p className={classes.text}>{text}</p>
 
-      {post.media && (
+      {media && (
         <a
           className={classes.media}
-          href={post.media}
+          href={media}
           target="_blank"
           rel="noopener noreferrer"
         >
@@ -45,11 +47,11 @@ export const PostCard: FC<PostCardProps> = ({ post }) => {
       )}
 
       <div className={classes.footer}>
-        {post.createdAt
-          ? new Date(post.createdAt).toLocaleString("he-IL")
+        {createdAt
+          ? new Date(createdAt).toLocaleString("he-IL")
           : t("DATE_UNAVAILABLE")}
-        <span>{t("LIKES", { count: post.likes ?? 0 })}</span>
-        <Link to={`/posts/${post._id}/edit`}>{t("EDIT")}</Link>
+        <span>{t("LIKES", { count: likes ?? 0 })}</span>
+        <Link to={`/posts/${_id}/edit`}>{t("EDIT")}</Link>
       </div>
     </article>
   );

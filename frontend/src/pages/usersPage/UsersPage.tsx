@@ -7,7 +7,7 @@ import { QUERY_KEYS } from '../../utils/queryKeys';
 import UserCard from './components/userCard';
 import type { User } from '@libs/types/user.type.js';
 
-const UsersPage: FC = () => {
+export const UsersPage: FC = () => {
   const { t } = useTranslation('translation', { keyPrefix: 'USERS_PAGE' });
 
   const { data: users, isPending, error } = useQuery({
@@ -26,17 +26,17 @@ const UsersPage: FC = () => {
         <p>{t('LOADING')}</p>
       ) : error ? (
         <p>{t('LOAD_ERROR', { message: error.message })}</p>
-      ) : isEmpty(users ?? []) ? (
+      ) : isEmpty(users) ? (
         <p>{t('EMPTY')}</p>
       ) : (
         <section aria-label={t('USERS_LIST_LABEL')}>
-          {map((user) => (
-            <UserCard key={(user as User)._id} user={user as User} />
-          ))(users ?? [])}
+          {map((user: User) => <UserCard key={user._id} user={user} />)(
+            users ?? [],
+          )}
         </section>
       )}
     </>
   );
 };
 
-export default UsersPage;
+
