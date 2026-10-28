@@ -3,10 +3,22 @@ import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { useStyles } from "./styles";
 import type { PostCardProps } from "./types";
+import { useQuery } from "@tanstack/react-query";
+import userService from "../../../../services/user";
+import { QUERY_KEYS } from "../../../../utils/queryKeys";
 
-export const PostCard: FC<PostCardProps> = ({ post, author }) => {
+export const PostCard: FC<PostCardProps> = ({ post }) => {
   const { t } = useTranslation("translation", { keyPrefix: "POST_CARD" });
   const classes = useStyles();
+
+  const { data: users } = useQuery({
+    queryKey: QUERY_KEYS.USERS,
+    queryFn: userService.getAllUsers,
+  });
+
+  const author = users?.find(
+    (user) => String(user._id) === String(post.userId)
+  );
 
   return (
     <article className={classes.card}>
@@ -15,7 +27,7 @@ export const PostCard: FC<PostCardProps> = ({ post, author }) => {
       </p>
 
       <p className={classes.username}>
-        {author ? `@${author.username}` : t("USER_UNAVAILABLE")}
+        {author ? `@${String(author.username)}` : t("USER_UNAVAILABLE")}
       </p>
 
       <h2 className={classes.name}>{post.name}</h2>
@@ -33,14 +45,12 @@ export const PostCard: FC<PostCardProps> = ({ post, author }) => {
       )}
 
       <div className={classes.footer}>
-          {post.createdAt
-            ? new Date(post.createdAt).toLocaleString("he-IL")
-            : t("DATE_UNAVAILABLE")}
+        {post.createdAt
+          ? new Date(post.createdAt).toLocaleString("he-IL")
+          : t("DATE_UNAVAILABLE")}
         <span>{t("LIKES", { count: post.likes ?? 0 })}</span>
         <Link to={`/posts/${post._id}/edit`}>{t("EDIT")}</Link>
       </div>
     </article>
   );
 };
-
-

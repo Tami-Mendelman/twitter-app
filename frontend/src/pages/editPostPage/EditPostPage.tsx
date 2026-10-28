@@ -7,9 +7,9 @@ import { useStyles } from "./styles";
 import { useTranslation } from "react-i18next";
 import contentService from "../../services/content";
 import { QUERY_KEYS } from "../../utils/queryKeys";
-import { getAxiosErrorMessage } from "../../../../libs/utils/getAxiosErrorMessage.js";
-import type { UpdatePostPayload } from "../../../../libs/types/post.type.js";
-import { MAX_TEXT_LENGTH } from "../../../../libs/consts/post.consts.js";
+import { getAxiosErrorMessage } from "@libs/utils/getAxiosErrorMessage.js";
+import type { UpdatePostPayload } from "@libs/types/post.type.js";
+import { MAX_TEXT_LENGTH } from "@libs/consts/post.consts.js";
 
 const EditPostPage: FC = () => {
   const { postId } = useParams();

@@ -3,9 +3,9 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useForm } from 'react-hook-form';
 import userService from '../../services/user';
 import { useStyles } from './styles';
-import { getuserError } from './functions';
+import { getUserError } from './functions';
 import { useTranslation } from 'react-i18next';
-import type { CreateUserPayload } from '../../../../libs/types/user.type.js';
+import type { CreateUserPayload } from '@libs/types/user.type.js';
 import { QUERY_KEYS } from '../../utils/queryKeys';
 
 const CreateUserPage: FC = () => {
@@ -34,10 +34,10 @@ const CreateUserPage: FC = () => {
     create(payload);
   });
 
-  const userError = error ? getuserError(t, error) : null;
+  const userError = error ? getUserError(t, error) : null;
 
   return (
-    <div>
+    <>
       <header>
         <h1>{t('TITLE')}</h1>
         <p>{t('SUBTITLE')}</p>
@@ -82,11 +82,7 @@ const CreateUserPage: FC = () => {
           )}
         </label>
 
-        {userError && (
-          <p>
-            {t('CREATE_ERROR', { message: userError })}
-          </p>
-        )}
+        {userError && <p>{userError}</p>}
 
         {isSuccess && <p role="status">{t('CREATED')}</p>}
 
@@ -98,7 +94,7 @@ const CreateUserPage: FC = () => {
           {isPending ? t('SUBMITTING') : t('SUBMIT')}
         </button>
       </form>
-    </div>
+    </>
   );
 };
 

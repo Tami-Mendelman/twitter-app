@@ -8,7 +8,7 @@ export const FeedPage: FC = () => {
   const [searchTerm, setSearchTerm] = useState('');
 
   return (
-    <div>
+    <>
       <header>
         <h1>{t('TITLE')}</h1>
         <p>{t('SUBTITLE')}</p>
@@ -23,6 +23,6 @@ export const FeedPage: FC = () => {
       />
 
       <FeedContent searchTerm={searchTerm} />
-    </div>
+    </>
   );
 };

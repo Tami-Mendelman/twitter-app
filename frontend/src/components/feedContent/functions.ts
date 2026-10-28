@@ -1,5 +1,5 @@
-import { filter, includes, toLower, trim } from 'lodash/fp';
-import type { Post } from '@libs/types/post.type.js';
+import { filter, includes, toLower, trim } from "lodash/fp";
+import type { Post } from "@libs/types/post.type.js";
 
 export const searchPostsByName = (
   searchTerm: string,
@@ -11,3 +11,4 @@ export const searchPostsByName = (
           includes<string>(toLower(trim(searchTerm)))(toLower(post.name)),
       )(posts)
     : posts;
+
