@@ -35,6 +35,7 @@ export const CreatePostPage: FC = () => {
     register,
     handleSubmit,
     reset,
+    setValue,
     formState: { errors },
   } = useForm<CreatePostPayload>();
 
@@ -157,6 +158,22 @@ export const CreatePostPage: FC = () => {
             className={classes.input}
             type="url"
             {...register("media")}
+          />
+        </label>
+
+        <label className={classes.field}>
+          {tForm("MEDIA_UPLOAD")}
+          <input
+            className={classes.input}
+            type="file"
+            accept="image/*,application/pdf"
+            onChange={(event) => {
+              const file = event.target.files?.[0];
+              if (!file) return;
+              const reader = new FileReader();
+              reader.onload = () => setValue("media", String(reader.result));
+              reader.readAsDataURL(file);
+            }}
           />
         </label>
 

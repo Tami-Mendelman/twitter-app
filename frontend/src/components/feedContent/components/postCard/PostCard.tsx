@@ -2,6 +2,7 @@ import type { FC } from "react";
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { useStyles } from "./styles";
+import { openPdf } from './functions/openPdf';
 import type { PostCardProps } from "./types";
 import { useQuery } from "@tanstack/react-query";
 import userService from "../../../../services/user";
@@ -22,11 +23,20 @@ export const PostCard: FC<PostCardProps> = ({
     (user) => String(user._id) === String(userId)
   );
 
+  const isPdf = media
+    ? media.toLowerCase().startsWith('data:application/pdf') ||
+      media.toLowerCase().includes('application/pdf')
+    : false;
+  const isImage = media
+    ? media.toLowerCase().startsWith('data:image') ||
+      /\.(png|jpe?g|gif|webp|svg)$/i.test(media)
+    : false;
+
   return (
     <article className={classes.card}>
-      <p className={classes.author}>
+      <Link className={classes.author} to={`/users/${userId}`}>
         {author?.displayName ?? t("UNKNOWN_USER")}
-      </p>
+      </Link>
 
       <p className={classes.username}>
         {author ? `@${author.username}` : t("USER_UNAVAILABLE")}
@@ -36,14 +46,30 @@ export const PostCard: FC<PostCardProps> = ({
       <p className={classes.text}>{text}</p>
 
       {media && (
-        <a
-          className={classes.media}
-          href={media}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          {t("VIEW_MEDIA")}
-        </a>
+        isPdf ? (
+          <button
+            type="button"
+            className={classes.mediaAttachment}
+            onClick={(event) => {
+              event.stopPropagation();
+              openPdf(media);
+            }}
+          >
+            <span className={classes.pdfIcon}>PDF</span>
+            <span className={classes.mediaName}>{name}.pdf</span>
+          </button>
+        ) : isImage ? (
+          <img className={classes.mediaImage} src={media} alt={name} />
+        ) : (
+          <a
+            className={classes.media}
+            href={media}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            {t("VIEW_MEDIA")}
+          </a>
+        )
       )}
 
       <div className={classes.footer}>
