@@ -1,7 +1,12 @@
 import { Router } from "express";
 import { userController } from "./user.controller.js";
 import { validateRequest } from "@libs/validation/validation.middleware.js";
-import { canCreate, canGetAll, canGetById } from "./user.validator.js";
+import {
+    canCreate,
+    canDeleteUserPosts,
+    canGetAll,
+    canGetById,
+} from "./user.validator.js";
 
 export const userRouter = Router();
 
@@ -17,4 +22,10 @@ userRouter.get(
     "/:id",
     validateRequest(canGetById),
     userController.getById,
+);
+
+userRouter.delete(
+    "/:username/posts",
+    validateRequest(canDeleteUserPosts),
+    userController.deleteUserPosts,
 );
