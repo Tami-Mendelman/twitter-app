@@ -15,6 +15,7 @@ const postSchema = new Schema<Post>(
             type: Schema.Types.ObjectId,
             ref: "User",
             required: true,
+            index: true,
         },
         text: {
             type: String,
