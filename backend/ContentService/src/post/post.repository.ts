@@ -27,6 +27,7 @@ export const postRepository = {
 
     deleteByUserId: async (userId: string): Promise<number> => {
         const result = await postModel.deleteMany({ userId });
+        
         return result.deletedCount;
     },
 };
