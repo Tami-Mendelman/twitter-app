@@ -26,4 +26,17 @@ export const useStyles = createUseStyles({
       },
     },
   },
+  themeToggle: {
+    marginLeft: 'auto',
+    padding: '8px 16px',
+    borderRadius: '6px',
+    border: '1px solid #35434f',
+    backgroundColor: '#35434f',
+    color: '#fff',
+    cursor: 'pointer',
+    fontSize: '14px',
+    '&:hover': {
+      backgroundColor: '#4a5a6a',
+    },
+  },
 });

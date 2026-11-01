@@ -9,6 +9,7 @@ import type { User } from "@libs/types/user.type.js";
 import contentService from "../../services/content";
 import userService from "../../services/user";
 import { QUERY_KEYS } from "../../utils/queryKeys";
+import { handleMediaChange } from "./functions";
 import { MAX_TEXT_LENGTH } from "@libs/consts/post.consts.js";
 import { getAxiosErrorMessage } from "@libs/utils/getAxiosErrorMessage.js";
 
@@ -35,6 +36,7 @@ export const CreatePostPage: FC = () => {
     register,
     handleSubmit,
     reset,
+    setValue,
     formState: { errors },
   } = useForm<CreatePostPayload>();
 
@@ -157,6 +159,16 @@ export const CreatePostPage: FC = () => {
             className={classes.input}
             type="url"
             {...register("media")}
+          />
+        </label>
+
+        <label className={classes.field}>
+          {tForm("MEDIA_UPLOAD")}
+          <input
+            className={classes.input}
+            type="file"
+            accept="image/*,application/pdf"
+            onChange={(event) => handleMediaChange(event, setValue)}
           />
         </label>
 

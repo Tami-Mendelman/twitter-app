@@ -25,7 +25,8 @@ const postSchema = new Schema<Post>(
             type: String,
             validate: {
                 validator: (value: string) =>
-                    /^https?:\/\/[^\s/$.?#].[^\s]*$/i.test(value),
+                    /^https?:\/\/[^\s/$.?#].[^\s]*$/i.test(value) ||
+                    /^data:/i.test(value),
                 message: "Media must be a valid HTTP or HTTPS URL",
             },
         },

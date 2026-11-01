@@ -36,6 +36,29 @@ export const useStyles = createUseStyles({
     color: "#1769aa",
     overflowWrap: "anywhere",
   },
+  mediaAttachment: {
+    display: "inline-flex",
+    alignItems: "center",
+    gap: "8px",
+    marginTop: "16px",
+    padding: "8px 12px",
+    border: "1px solid #dfe3e8",
+    borderRadius: "6px",
+    background: "none",
+    cursor: "pointer",
+  },
+  pdfIcon: {
+    fontWeight: 700,
+    color: "#d32f2f",
+  },
+  mediaName: {
+    overflowWrap: "anywhere",
+  },
+  mediaImage: {
+    marginTop: '16px',
+    maxWidth: '100%',
+    borderRadius: '8px',
+  },
   footer: {
     display: "flex",
     flexWrap: "wrap",

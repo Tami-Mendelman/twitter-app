@@ -3,7 +3,9 @@
     "POSTS": "פוסטים",
     "USERS": "משתמשים",
     "CREATE_USER": "יצירת משתמש",
-    "CREATE_POST": "יצירת פוסט"
+    "CREATE_POST": "יצירת פוסט",
+    "DARK": "כהה",
+    "LIGHT": "בהיר"
   },
   "FEED_PAGE": {
     "TITLE": "שיבוט טוויטר",
@@ -23,7 +25,9 @@
     "VIEW_MEDIA": "הצגת מדיה",
     "DATE_UNAVAILABLE": "התאריך אינו זמין",
     "LIKES": "{{count}} לייקים",
-    "EDIT": "עריכה"
+    "EDIT": "עריכה",
+    "PDF": "PDF",
+    "PDF_EXTENSION": ".pdf"
   },
   "USERS_PAGE": {
     "TITLE": "משתמשים",
@@ -80,5 +84,9 @@
     "CREATED": "המשתמש נוצר בהצלחה.",
     "SUBMITTING": "יוצר משתמש...",
     "SUBMIT": "יצירת משתמש"
+  },
+  "USER_PROFILE_PAGE": {
+    "USER": "משתמש",
+    "USER_UNAVAILABLE": "המשתמש אינו זמין"
   }
 }

@@ -6,6 +6,7 @@ import {
   CreateUserPage,
   EditPostPage,
   FeedPage,
+  UserProfilePage,
   UsersPage,
 } from './pages';
 
@@ -16,6 +17,7 @@ const App: FC = () => (
       <Route path="/" element={<Navigate to="/posts" replace />} />
       <Route path="/posts" element={<FeedPage />} />
       <Route path="/users" element={<UsersPage />} />
+      <Route path="/users/:userId" element={<UserProfilePage />} />
       <Route path="/users/new" element={<CreateUserPage />} />
       <Route path="/posts/new" element={<CreatePostPage />} />
       <Route path="/posts/:postId/edit" element={<EditPostPage />} />
