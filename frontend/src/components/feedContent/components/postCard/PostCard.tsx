@@ -4,6 +4,8 @@ import { useTranslation } from "react-i18next";
 import { useStyles } from "./styles";
 import { openPdf } from './functions/openPdf';
 import type { PostCardProps } from "./types";
+import type { User } from "@libs/types/user.type.js";
+import { find, includes, startsWith, toLower } from "lodash/fp";
 import { useQuery } from "@tanstack/react-query";
 import userService from "../../../../services/user";
 import { QUERY_KEYS } from "../../../../utils/queryKeys";
@@ -19,17 +21,18 @@ export const PostCard: FC<PostCardProps> = ({
     queryFn: userService.getAllUsers,
   });
 
-  const author = users?.find(
-    (user) => String(user._id) === String(userId)
-  );
+  const author = users
+    ? find((user: User) => String(user._id) === String(userId))(users)
+    : undefined;
 
   const isPdf = media
-    ? media.toLowerCase().startsWith('data:application/pdf') ||
-      media.toLowerCase().includes('application/pdf')
+    ? startsWith('data:application/pdf')(toLower(media)) ||
+      includes<string>('application/pdf')(toLower(media))
     : false;
+  const imageExtensions = ['.png', '.jpg', '.jpeg', '.gif', '.webp', '.svg'];
   const isImage = media
-    ? media.toLowerCase().startsWith('data:image') ||
-      /\.(png|jpe?g|gif|webp|svg)$/i.test(media)
+    ? startsWith('data:image')(toLower(media)) ||
+      imageExtensions.some((ext) => includes<string>(ext)(toLower(media)))
     : false;
 
   return (
@@ -55,8 +58,8 @@ export const PostCard: FC<PostCardProps> = ({
               openPdf(media);
             }}
           >
-            <span className={classes.pdfIcon}>PDF</span>
-            <span className={classes.mediaName}>{name}.pdf</span>
+            <span className={classes.pdfIcon}>{t("PDF")}</span>
+            <span className={classes.mediaName}>{name}{t("PDF_EXTENSION")}</span>
           </button>
         ) : isImage ? (
           <img className={classes.mediaImage} src={media} alt={name} />

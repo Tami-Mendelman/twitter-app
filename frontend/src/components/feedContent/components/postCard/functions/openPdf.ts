@@ -1,5 +1,7 @@
+import { split } from "lodash/fp";
+
 export const openPdf = (dataUrl: string): void => {
-  const [header, base64] = dataUrl.split(',');
+  const [header, base64] = split(',')(dataUrl);
   const mimeType = header.match(/data:(.*?);base64/)?.[1];
 
   if (!base64 || mimeType !== 'application/pdf') {

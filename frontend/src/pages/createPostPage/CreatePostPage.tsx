@@ -9,6 +9,7 @@ import type { User } from "@libs/types/user.type.js";
 import contentService from "../../services/content";
 import userService from "../../services/user";
 import { QUERY_KEYS } from "../../utils/queryKeys";
+import { handleMediaChange } from "./functions";
 import { MAX_TEXT_LENGTH } from "@libs/consts/post.consts.js";
 import { getAxiosErrorMessage } from "@libs/utils/getAxiosErrorMessage.js";
 
@@ -167,13 +168,7 @@ export const CreatePostPage: FC = () => {
             className={classes.input}
             type="file"
             accept="image/*,application/pdf"
-            onChange={(event) => {
-              const file = event.target.files?.[0];
-              if (!file) return;
-              const reader = new FileReader();
-              reader.onload = () => setValue("media", String(reader.result));
-              reader.readAsDataURL(file);
-            }}
+            onChange={(event) => handleMediaChange(event, setValue)}
           />
         </label>
 

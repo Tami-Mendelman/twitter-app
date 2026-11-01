@@ -59,13 +59,6 @@ export const useStyles = createUseStyles({
     maxWidth: '100%',
     borderRadius: '8px',
   },
-  mediaFrame: {
-    marginTop: '16px',
-    width: '100%',
-    height: '400px',
-    border: '1px solid #dfe3e8',
-    borderRadius: '8px',
-  },
   footer: {
     display: "flex",
     flexWrap: "wrap",

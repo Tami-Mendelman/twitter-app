@@ -15,7 +15,7 @@ export const Navbar: FC = () => {
       <NavLink to="/users" end>{t('USERS')}</NavLink>
       <NavLink to="/users/new">{t('CREATE_USER')}</NavLink>
       <NavLink to="/posts/new">{t('CREATE_POST')}</NavLink>
-      <button type="button" className={classes.themeToggle} onClick={toggleTheme}>{theme === 'light' ? 'Dark' : 'Light'}</button>
+      <button type="button" className={classes.themeToggle} onClick={toggleTheme}>{theme === 'light' ? t('DARK') : t('LIGHT')}</button>
     </nav>
   );
 };
