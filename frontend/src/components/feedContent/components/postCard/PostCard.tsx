@@ -5,7 +5,7 @@ import { useStyles } from "./styles";
 import { openPdf } from './functions/openPdf';
 import type { PostCardProps } from "./types";
 import type { User } from "@libs/types/user.type.js";
-import { find, includes, startsWith, toLower } from "lodash/fp";
+import { find, includes, some, startsWith, toLower } from "lodash/fp";
 import { useQuery } from "@tanstack/react-query";
 import userService from "../../../../services/user";
 import { QUERY_KEYS } from "../../../../utils/queryKeys";
@@ -31,8 +31,8 @@ export const PostCard: FC<PostCardProps> = ({
     : false;
   const imageExtensions = ['.png', '.jpg', '.jpeg', '.gif', '.webp', '.svg'];
   const isImage = media
-    ? startsWith('data:image')(toLower(media)) ||
-      imageExtensions.some((ext) => includes<string>(ext)(toLower(media)))
+    ?       startsWith('data:image')(toLower(media)) ||
+      some((ext: string) => includes<string>(ext)(toLower(media)))(imageExtensions)
     : false;
 
   return (

@@ -20,3 +20,5 @@ export const UserProfilePage: FC = () => {
     </>
   );
 };
+
+export default UserProfilePage;

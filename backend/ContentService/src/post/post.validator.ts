@@ -15,7 +15,7 @@ export const canCreate = Joi.object({
         userId: joiMongoId().required(),
         name: Joi.string().trim().min(1).required(),
         text: Joi.string().max(MAX_TEXT_LENGTH).required(),
-        media: Joi.string().optional(),
+        media: Joi.string(),
     }).required(),
     params: emptyObjectSchema,
     query: emptyObjectSchema,
