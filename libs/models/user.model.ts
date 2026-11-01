@@ -25,5 +25,6 @@ userSchema.index(
     { username: 1 },
     { unique: true, name: "username_1_unique" },
 );
+userSchema.index({ displayName: 1 });
 
 export const userModel = model<User>("User", userSchema, "users");
